@@ -1,0 +1,25 @@
+<?php
+	$booksConfig['shelf']['booksBaseURL'] = 'http://localhost/llibres';
+	
+	//database connections for MYSQL 
+	$server = 'localhost';
+	$database = 'llibres'; //in config file it is calculated the database and it is concatenated here
+	$datausername = 'root';
+	$password = '****';
+
+    //send mail configuration
+    $IDAPP = 'PRESTATGE';
+    $REPLYADDRESS = 'prestatgeria-noreply@xtec.cat'; 
+    $SENDER = 'educacio';
+    $ENVIRONMENT = 'INT';
+    $CONTENTTYPE = 'text/html';
+    $LOG = false;
+    $LOGDEBUG = false;
+    $LOGPATH = '/dades/presta/html/prestatgeria/pnTemp/error_logs/mailsender.log';
+	
+	//Others
+    $zikulapath= '/dades/presta/html/prestatgeria';
+	$image_folder = 'http://localhost/llibres/centres/'; //in config file it is concatenated the school code
+	$image_folder_uri = '/centres/' . $_GET['fisbn'];
+	$image_folder_path = '/dades/presta/html' . $image_folder_uri;
+	$images_url_imconfig = "/llibres/centres/";

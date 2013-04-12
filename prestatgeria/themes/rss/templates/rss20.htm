@@ -1,0 +1,20 @@
+<!--[nocache]--><!--[php]-->header("Content-type: application/rss+xml");<!--[/php]--><!--[/nocache]-->
+<?xml version="1.0" encoding="<!--[charset]-->"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<title><!--[pnconfiggetvar name="sitename"]--></title>
+<link><!--[pngetbaseurl]--></link>
+<description><!--[pnconfiggetvar name="backend_title"]--></description>
+<language><!--[pnconfiggetvar name="backend_language"]--></language>
+<pubDate><!--[updated]--></pubDate>
+<lastBuildDate><!--[updated]--></lastBuildDate>
+<image>
+ <title><!--[pnconfiggetvar name="sitename"]--></title>
+ <url><!--[pngetbaseurl]-->images/<!--[pnconfiggetvar name=site_logo]--></url>
+ <link><!--[pngetbaseurl]--></link>
+</image>
+<managingEditor><!--[pnconfiggetvar name="adminmail"]--></managingEditor>
+<webMaster><!--[pnconfiggetvar name="adminmail"]--></webMaster>
+<!--[$maincontent]-->
+</channel>
+</rss>

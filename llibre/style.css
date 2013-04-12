@@ -1,0 +1,44 @@
+
+body{
+	scrollbar-face-color: #84704E;
+	scrollbar-highlight-color: #FDFCE8;
+	scrollbar-shadow-color: #472E18;
+	scrollbar-3dlight-color: #B9A488;
+	scrollbar-arrow-color:  #000033;
+	scrollbar-track-color: #B9A488;
+	scrollbar-darkshadow-color: #000000;
+	scrollbar-base-color: #FFFFF0;
+    font-family : Trebuchet ms, verdana, helvetica, arial;
+    font-size : 13px;
+    font-weight : normal;
+
+}
+
+tbody, table, tfoot, td, tr {
+	font-size: 13px;
+	font-family: Trebuchet ms, Verdana, Arial, Helvetica, Times; 
+	color: #664411;
+}
+
+A  {color: #000099; 
+	text-decoration: underline; 
+	font-weight: normal; 
+}
+
+A:Visited  { 
+	color: #000099; 
+	text-decoration: underline; 
+	font-weight: normal; 
+}
+
+A:Active { 
+	color: darkred; 
+	text-decoration: underline; 
+	font-weight: normal; 
+}
+
+A:Hover  { 
+	color: #CC0000; 
+	text-decoration: underline; 
+	font-weight: normal; 
+}

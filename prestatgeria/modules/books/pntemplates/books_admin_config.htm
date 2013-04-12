@@ -1,0 +1,39 @@
+<!--[include file="books_admin_menu.htm"]-->
+<div class="pn-admincontainer">
+	<div class="pn-adminpageicon"><!--[pnimg modname=core src=package_settings.gif set=icons/large alt=$templatetitle]--></div>
+	<h2><!--[gt text='Configura el mòdul']-->]</h2>
+	<form  class="pn-adminform" method="post" name="configura" id="configura" action="<!--[pnmodurl modname="books" type="admin" func="update_conf"]-->" >
+		<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="books"]-->" />
+		<div style="height:20px;">&nbsp;</div>
+		<div class="pn-adminformrow">
+			<label for="bookSoftwareUrl"><!--[gt text='Adreça relativa del programari de llibres']--></label>
+			<input type="text" name="bookSoftwareUrl" size="50" value="<!--[$bookSoftwareUrl]-->"  />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="bookSoftwareUri"><!--[gt text='URI relativa del programari de llibres']--></label>
+			<input type="text" name="bookSoftwareUri" size="50" value="<!--[$bookSoftwareUri]-->"  />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="canCreateToOthers"><!--[gt text='Els usuaris amb trets de creació de llibres poden crear llibres per a terceres persones']--></label>
+			<input type="checkbox" name="canCreateToOthers"  <!--[if $canCreateToOthers eq 1]-->checked<!--[/if]--> value="1" />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="mailDomServer"><!--[gt text='Domini de correu dels usuaris']--></label>
+			<input type="text" name="mailDomServer" size="10" value="<!--[$mailDomServer]-->"  />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="booksDatabase"><!--[gt text='Nom de la base de dades dels llibres']--></label>
+			<input type="text" name="booksDatabase" size="10" value="<!--[$booksDatabase]-->"  />
+		</div>
+		<div class="pn-adminformrow">
+			<label for="serverImageFolder"><!--[gt text='Directori on es desen les imatges dels llibres.']--></label>
+			<input type="text" name="serverImageFolder" size="50" value="<!--[$serverImageFolder]-->"  />
+		</div>
+		<!--[gt text='Create' assign=alt_create]-->
+		<!--[gt text='Cancel' assign=alt_cancel]-->
+		<div class="formOptions" align="center">
+			<!--[pnbutton src=button_ok.gif set=icons/small alt=$alt_create title=$alt_create]-->
+			<a href="<!--[pnmodurl modname=books type=admin func=main]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt=$alt_cancel title=$alt_cancel]--></a>
+		</div>
+	</form>
+</div>

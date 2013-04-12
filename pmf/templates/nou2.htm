@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Informa de la web dinàmica</title>
+	<link href="css/estils.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="inc/scripts.js"></script>
+
+</head>
+
+<body bgcolor="#FFFFFF">
+	<div class="global">
+		<form action="nou2.php" method="post" enctype="application/x-www-form-urlencoded" name="f">
+		
+		<h3>Nou capítol</h3>
+		
+		<table border="0" cellpadding="5" cellspacing="0" class="paragraf">
+		<tr style="font-weight:bold">
+			<td>Idioma</td>
+			<td>Títol del capítol</td>
+			<td>Validat</td>
+		</tr>
+		{section name=langs loop=$langs}
+		<tr>
+			<td>{$langs[langs].name}</td>
+			<td><input type="text" name="titol_{$langs[langs].lang}" value="{$langs[langs].titol}" size="60"/></td>
+			<td align="center"><input type="checkbox" name="valida_{$langs[langs].lang}" {if $langs[langs].valida eq 1}checked{/if}/></td>
+		</tr>
+		{/section}
+		</table>
+		
+		
+		<!--
+		<span class="paragraf">Idioma:</span>
+		<select name="lang">
+		{section name=langs loop=$langs}
+			<option value="{$langs[langs].lang}"  {if $langs[langs].lang eq $lang}selected{/if}>
+				{$langs[langs].name}
+			</option>
+		{/section}
+		</select>
+		<br />
+		<span class="paragraf">Títol del capítol:</span>
+		<br />
+		<input type="text" name="titol" size="60"/>
+		<br />
+		<br />
+		<span class="paragraf">Activat</span>
+		<input type="checkbox" name="valida"/>
+		<br />
+		<br />
+		-->
+		
+		<input name="submit" type="submit" value="Entra les modificacions"/>
+		</form>
+	</div>
+</body>
+</html>

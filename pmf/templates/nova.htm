@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>Suport en línia</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link href="css/estils.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/styles.css" rel="stylesheet" type="text/css"/>	
+	<script type="text/javascript" src="inc/scripts.js"></script>
+</head>
+<body>
+<div class="page" style="padding-top:20px; ">
+	<div class="header">
+		<div style="padding:20px 0px 0px 30px" id="logo"><img src="imatges/logo.png" alt="Logo" /></div>	
+		<div style="text-align:left; ">
+			<span style="padding: 0px 30px 0px 0px;"><a href="index.php" class="mini">torna</a></span>
+		</div>
+	</div>
+	<div class="global">
+		<div class="section">
+			Des d'aquest espai pots suggerir la incorporporació d'entrades noves al sistema.
+			<br />
+			<br />
+			Cada vegada que rebem un suggeriment el valorem i, si ho creiem oportú, busquem la millor resposta possible i l'incorporem al sistema.
+		</div>
+		<div class="pregunta">
+			<form method="post" action="nova.php" enctype="application/x-www-form-urlencoded" name="nova">
+				<div>
+				Pregunta suggerida:
+				<br />
+				<span class="textmini">(Escriu aquí la pregunta)</span>
+				<br />
+				<input type="text" name="pregunta" size="100" maxlength="250"/>
+				<br />
+				<br />
+				<br />
+				Resposta possible:
+				<br />
+				<span class="textmini">(Escriu aquí la resposta possible)</span>
+				<br />
+				<textarea name="resposta" rows="6" cols="60"></textarea>
+				<br />
+				<br />
+				<br />
+				Enllaços relacionats:
+				<br />
+				<span class="textmini">(Si hi ha enllaços a Internet que poden ajudar a donar la resposta, els pots escriure aquí)</span>
+				<br />
+				<textarea name="altres" rows="6" cols="60"></textarea>
+				<br />
+				<br />
+				</div><div style="text-align:right"><input type="submit" value="Envia el suggeriment"/></div>
+			</form>
+		</div>
+	</div>
+</div>	
+</body>
+</html>

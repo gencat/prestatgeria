@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Informa de la web dinàmica</title>
+	<link href="css/estils.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="inc/scripts.js"></script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<p class="paragraf">
+<table>
+	<tr>
+		<td valign="top" class="paragraf">
+			<p class="paragraf">Estàs validant la informació de: <strong>{$validate.centre}</strong></p>
+		</td>
+	</tr>
+</table>
+<form action="valida.php" method="post" enctype="multipart/form-data" name="f">
+<div>
+	<input type="hidden" name="wid" value="{$validate.wid}"/>
+	<input type="hidden" name="pass" value="{$pass}"/>
+	<input type="hidden" name="enviat" value="1"/>
+	<input type="hidden" name="data" value="{$validate.data}"/>
+	<input type="hidden" name="tipusID" value="{$validate.tipusID}"/>
+	<input type="hidden" name="imatge" value="{$validate.imatge}"/>
+</div>
+	<table width="100%" border="0" bgcolor="#FFFFFF">
+      <tr>
+        <td valign="top" class="paragraf">Nom del centre o entitat educativa: <span class="avis">(necessari)</span></td>
+        <td valign="top" width="10%"><input name="centre" type="text" class="paragraf" size="45" maxlength="100" value="{$validate.centre}"/></td>
+      </tr>
+      <tr>
+        <td valign="top" class="paragraf">Municipi: <span class="avis">(necessari)</span></td>
+        <td valign="top"><input name="localitat" type="text" class="paragraf" size="45" value="{$validate.localitat}"/></td>
+      </tr>
+      <tr>
+        <td valign="top" class="paragraf">URL de la web dinàmica: <span class="avis">(necessari)</span></td>
+        <td valign="top"><input name="url" type="text" class="paragraf" size="45" maxlength="100" value="{$validate.url}"/></td>
+      </tr>
+	  <tr>
+	  <td valign="top" class="paragraf">
+			Tipus de centre
+	  </td>
+	  <td valign="top" class="paragraf">
+	  		<select name="tipusID">
+				{section name=types loop=$types}
+					<option value="{$types[types].tipusID}">{$types[types].nom}</option>
+				{/section}
+			</select>	 
+	  </td>
+	  </tr>
+ 
+      <tr>
+        <td valign="top" class="paragraf">Correu-e de contacte: <span class="avis">(necessari)</span></td>
+        <td valign="top"><input name="contacte" type="text" class="paragraf" size="45" value="{$validate.contacte}"/></td>
+      </tr>
+      <tr>
+        <td valign="top" class="paragraf">Descripció de la web: <span class="avis">(màxim 255 caràcters)</span></td>
+        <td valign="top" class="paragraf"><textarea name="obs" cols="42" rows="5" class="paragraf">{$validate.obs}</textarea></td>
+      </tr>
+      <tr>
+        <td valign="top" class="paragraf">Imatge del portal (jpg): <span class="avis">(no seleccioneu cap fitxer per mantenir la imatge actual. Mida ideal 230x160 px)</span></td>
+        <td valign="top" class="paragraf"><input type="file" name="file" size="30"><br /><div align="center"><img src="inici/{$validate.imatge}.jpg" alt=""/></div></td>
+      </tr>
+      <tr>
+        <td valign="top" class="paragraf">Contrasenya d'edici&oacute;:<p class="avis">(deixeu el camp en blanc per conservar la contrasenya actual. Mínim 6 caràcters)</p></td>
+        <td valign="top"><input name="newPass" type="text" class="paragraf" value="" size="15/"></td>
+      </tr>
+	  <tr>
+	  	<td colspan="2" align="right">
+			<input type="button" onclick="javascript:validar()" value="Envia les dades"/>
+		</td>
+	  </tr>
+	  <tr>
+	  	<td colspan="2" align="right" class="paragraf">
+			<a href="validaNovaURL.php">Cancel·la la validació</a>
+		</td>
+	  </tr>	  
+    </table>
+</form>
+</body>
+</html>

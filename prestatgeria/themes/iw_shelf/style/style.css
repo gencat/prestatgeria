@@ -1,0 +1,293 @@
+body {
+	background-color: #ece8d6;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+td { vertical-align: top; }
+
+/* prevent textareas from forcing horizontal scroll bar */
+textarea { width: 99%; }
+
+/* remove border from linked images */
+a img { border: 0px; }
+
+h1 {
+	font-weight: bold;
+	font-size: 2em;
+	text-align: center;
+	padding-top:10px;
+}
+h2 {
+	font-weight: bold;
+	font-size: 1.6em;
+	text-align: left;
+	color: #30969d;
+	padding-left:50px;
+	padding-top:10px;
+}
+h3 {
+	font-weight: bold;
+	font-size: 1.2em;
+	text-align: left;
+	color: #30969d;
+	border-bottom: 1px solid #d2963c;
+	margin: 15px 0px 0px 0px;;
+}
+h4, h4 a {
+	font-weight: bold;
+	font-size: 1em;
+	border-bottom: 1px solid #d2963c;
+	color: #d2963c;
+}
+ul {
+	margin-left: 1em;
+	padding-left: 0em;
+	text-indent: 0em;
+	list-style-type: square; 
+}
+a {
+	color: #30969d;
+	text-decoration: none;
+}
+
+
+/* Wrapper for the whole page */
+#wrapper {
+	margin: auto;
+	padding: 2px;
+	background: url(../images/fons_cap.png) repeat-x;
+}
+
+/* Header */
+#header {
+	margin: 0px;
+}
+#minilogoleft{
+	position:absolute;
+	top:2px;
+	left:20px;
+}
+#minilogoright {
+	position:absolute;
+	top:8px;
+	right:25px;
+}
+#logoleft {
+	position:absolute;
+	top:50px;
+	left:20px;
+    z-index:20;
+}
+#logoright {
+	position:relative;
+	text-align:right;
+	margin-top:15px;
+	margin-right:10px;
+	z-index:10;
+}
+#menu { 
+	position:absolute;
+	top:190px;
+	left:20px;
+	z-index:20;
+}
+#menubar { 
+	position:absolute;
+	top:215px;
+	left:20px;
+	width:97%;
+	z-index:0;
+	border-bottom: 1px solid #d2963c;
+}
+.menuitems, .menuitems a {
+	font-weight: bold;
+	font-size: 120%;
+}
+
+
+/* Content */
+#contentwrapper {
+	float: left;
+	width: 100%;
+}
+
+#contentcolumn {
+	margin-right: 430px; 
+}
+#contentcolumn .innertube {
+	padding: 0px 15px 0px 15px;
+}
+
+#leftcolumn {
+	float: left;
+	width: 210px; 
+	margin-left: -430px; 
+}
+
+#rightcolumn {
+	float: left;
+	width: 210px; 
+	margin-left: -215px; 
+}
+.innertube {
+	margin: 0px 5px 5px 5px; 
+}
+
+
+/* News */
+.pieceofnews{
+	margin: 10px 10px 20px 10px;
+	min-height: 150px;
+}
+
+/* Pager */
+.pn-pager {
+	text-align:center;
+}
+
+/* Blocs */
+.left_inside {
+	margin: 3px;
+}
+.left_inside ul {
+	margin: 0px;
+}
+.left_inside ul li {
+	background-color: #d0dcd1;
+	list-style-type: none;
+	margin: 0px;
+	padding: 3px 3px 3px 8px;
+	border-bottom: 1px solid #fff;
+}
+.left_inside ul li a {
+	color: #000;
+}
+.left_content {
+    padding-top: 15px;
+	background-color: #d0dcd1;
+}
+
+.right_inside {
+	margin: 3px;
+}
+.right_inside ul {
+	margin: 0px;
+}
+.right_inside ul li {
+	background-color: #e7dbba;
+	list-style-type: none;
+	margin: 0px;
+	padding: 3px 3px 3px 8px;
+	border-bottom: 1px solid #fff;
+}
+.right_inside ul li a {
+	color: #000;
+}
+.right_content {
+	padding-top: 15px;
+    background-color: #e7dbba;
+}
+
+.center_inside {
+	padding: 0px 20px 20px 20px;
+	background-color: #d0dcd1;
+}
+
+/* Footer */
+#themefooter {
+	position:relative;
+	clear:both;
+	background: url(../images/fons_peu.png) repeat-x bottom;
+	color: #fff;
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 7px;
+}
+
+/* Imported from andreas08 for iw_qv */
+.theme_box{
+	margin:0 0 20px 0;
+	padding:10px;
+	border:1px solid #c0c0c0;
+	background-color:#fafbfc;
+	color:#505050;
+	line-height:1.5em;
+}
+
+/* Table styles based on style from the css table gallery 
+   STYLESHEET: CLEAR BLUE, AUTHOR: ROBERT HARTL */
+
+table.pn-datatable {
+	width:100%;
+	line-height:1.2em;
+	background-color:#fff;
+	border-collapse:collapse;
+	text-align:left;
+	letter-spacing:.1em;
+	margin-bottom:1em;
+}
+  
+table.pn-datatable thead th, 
+table.pn-datatable tfoot th, 
+table.pn-datatable tfoot td {
+	border-right: 1px solid #fff;
+	padding-left:5px;
+	font-variant:small-caps;
+	letter-spacing:0.1em;
+	color: #fff;
+	background: #669acc;
+}
+  
+table.pn-datatable tfoot th, 
+table.pn-datatable tfoot td {
+	border-top: 2pt double #009;
+}
+
+table.pn-datatable td, 
+table.pn-datatable th {
+	padding:4px;
+}
+
+table.pn-datatable tbody tr th, 
+table.pn-datatable tbody tr td {
+	border-bottom: 1px dotted #467aa7;
+}
+
+table.pn-datatable tbody tr:hover td, 
+table.pn-datatable tbody tr:hover th {
+	border-bottom: 1px solid #467aa7;
+}
+
+table.pn-datatable tbody td a, 
+table.pn-datatable tbody th a {
+	background: transparent;
+	text-decoration: none;
+	border:none;
+}
+
+table.pn-datatable tbody td a:hover, 
+table.pn-datatable tbody th a:hover {
+	background: transparent;
+}
+
+table.pn-datatable .odd {
+	background: #e3e3f4;
+}
+
+table.pn-datatable tbody tr:hover {
+	color: #333;
+	background: #e8eaec;
+}
+
+table.pn-datatable tbody tr th:hover {
+	background:#fff;
+}
+
+
+
+form.z-form fieldset{
+	background-color:inherit;
+}

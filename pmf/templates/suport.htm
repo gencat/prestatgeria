@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>Suport en línia</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link href="css/estils.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/styles.css" rel="stylesheet" type="text/css"/>	
+	<script type="text/javascript" src="inc/scripts.js"></script>
+</head>
+<body>
+<div class="page" style="padding-top:20px; ">
+	<div class="header">
+		<div style="padding:20px 0px 0px 30px" id="logo"><img src="imatges/logo.png" alt="Logo" /></div>
+		<div style="text-align:right;" id="menu">
+			<span style="padding: 0px 30px 0px 0px;">
+				{if $admet_comentaris eq 1 and $comment neq 1}<a href="suport.php?sid={$sid}&amp;comment=1" class="mini">afegeix un comentari</a> | {/if}<a href="{$retorn}" class="mini">torna</a>{if $validat eq 1}<a href="nou2.php" title="Entra un capítol nou"><img src="imatges/nou.gif" border="0" alt="Entra un capítol nou" /></a>{/if}
+			</span>
+		</div>
+	</div>
+	<div class="global">
+		{if $comment eq 1 and $admet_comentaris eq 1}
+			<div class="altres">
+				<span class="tema">
+					<font color="#3E77BE">Envia el teu comentari</font>
+				</span>
+				<br />
+				<br />
+				Cada vegada que rebem un comentari el valorem i, si ho creiem oportú, l'incorporem al sistema.
+			</div>
+			<div class="comment">
+				<form method="post" action="comment.php" enctype="application/x-www-form-urlencoded" name="nova">				
+					<input type="hidden" name="question_id" value="{$id}"/>
+					<input type="hidden" name="sid" value="{$sid}"/>
+					Comentari (*):
+					<br />
+					<textarea name="comment" cols="50" rows="5" style="background:#F5F5F5; "></textarea>
+					<br />
+					<br />
+					<br />
+					Persona que fa el comentari:
+					<br />
+					<div><input name="author" maxlength="100" size="30" style="background:#F5F5F5; "/></div>
+					<br />
+					<br />
+					<div style="text-align:right"><input type="submit" value="Envia el teu comentari"/></div>
+				</form>
+			</div>
+		{/if}
+		<div class="section">
+			<div class="tema">
+				{$capitol} - {$tema.titol}
+			</div>
+		</div>
+		<div class="label" style="padding:10px 0px 0px 25px; ">P:</div>
+		<div class="pregunta">
+			{$pregunta}
+		</div>
+		<div class="label" style="padding:0px 0px 0px 45px; ">R:</div>
+		<div class="resposta">
+			{$resposta}
+		</div>
+		<div class="altres">
+			<div class="tema">
+				Altres materials relacionats
+			</div>		
+		</div>
+		<div class="altres_content">	
+			{$altres}
+		</div>
+		{if $admet_comentaris eq 1}
+			<div class="comentaris">
+				<div class="tema">
+					Comentaris
+				</div>		
+			</div>
+			{section name="comments" loop=$comments}
+				<div class="comentaris_content" style="background-color:{$comments[comments].backgroud_color}; ">
+					{if $comments[comments].validate eq 1}
+						<a href="#" class="actiu">
+					{elseif $comments[comments].validate eq 2}
+						<a href="#" class="revisar">
+					{else}
+						<a href="#" class="innactiu">
+					{/if}
+					<div class="comentaris_content_date">
+						{$comments[comments].date}&nbsp;
+						<br />
+						{if $validat eq 1}
+							<a href="val_comment.php?id={$comments[comments].id}&amp;a=0&sid={$sid}" title="Invalida"><img src="imatges/invalida.gif" border="0" alt="Invalida" /></a>
+							<a href="val_comment.php?id={$comments[comments].id}&amp;a=2&sid={$sid}" title="Per revisar"><img src="imatges/revisa.gif" border="0" alt="Per revisar" /></a>
+							<a href="val_comment.php?id={$comments[comments].id}&amp;a=1&sid={$sid}" title="Valida"><img src="imatges/valida.gif" border="0" alt="Valida" /></a>
+							<a href="edit_comment.php?id={$comments[comments].id}&sid={$sid}" title="Edita"><img src="imatges/edita.gif" border="0" alt="Edita" /></a>
+							<a href="del_comment.php?id={$comments[comments].id}&sid={$sid}" title="Esborra"><img src="imatges/esborra.gif" border="0" alt="Esborra" /></a>
+						{/if}
+					
+					
+					</div>
+					<div class="comentaris_content_author">{$comments[comments].author}&nbsp;</div>
+					<div class="comentaris_content_comment">{$comments[comments].comment}&nbsp;</div>
+					</a>
+				</div>
+			{/section}
+		{/if}
+	</div>
+</div>
+</body>
+</html>

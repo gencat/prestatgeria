@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>Suport en línia</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link href="css/estils.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="inc/scripts.js"></script>
+</head>
+<body>
+	<div class="header">
+		<div style="padding:20px 0px 0px 30px" id="logo"><img src="imatges/logo.png" alt="Logo" /></div>
+		<div style="text-align:right; margin-top:-20px;">
+			<span style="padding: 0px 30px 0px 0px;"><a href="index.php" class="mini">Torna a l'índex</a></span>
+		</div>
+	</div>
+	<div class="global">
+		<div class="section">
+			Escriu el nom d'usuari i la contrasenya per poder administrar els continguts
+		</div>
+		<div class="pregunta">
+			<form method="post" action="login.php" enctype="application/x-www-form-urlencoded" name="nova">
+				Nom d'usuari:
+				<br />
+				<input type="text" name="user" size="10" maxlength="10"/>
+				<br />
+				<br />
+				Contrasenya:
+				<br />
+				<input type="password" name="password" maxlength="10" size="10"/>
+				<br />
+				<br />
+				<input type="submit" value="Entra a administrar" name="submit"/>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

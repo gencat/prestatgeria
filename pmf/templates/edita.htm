@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Informa de la web din�mica</title>
+	<link href="css/estils.css" rel="stylesheet" type="text/css"/>
+
+		<script type="text/javascript">
+			_editor_url  = "inc/xinha/"  // (preferably absolute) URL (including trailing slash) where Xinha is installed
+			_editor_lang = "<?php echo $lang;?>";      // And the language we need to use in the editor.
+		</script>
+		<script type="text/javascript" src="inc/xinha/XinhaCore.js"></script>	
+		<script language="javascript" type="text/javascript" src="inc/xinha/supportXinha1.js"></script>
+		<script language="javascript" type="text/javascript">
+			 {literal}
+			function envia(val){
+				if(val==0){
+					document.f.send.value=0;
+					document.f.action="entra_edita.php";
+				}else{
+					document.f.send.value=1;
+					document.f.action="edita.php";
+				}
+					document.f.submit();
+			}
+			{/literal}
+		</script>
+</head>
+
+<body bgcolor="#FFFFFF">
+	<div class="global">
+		<table>
+			<tr>
+				<td valign="top" class="titol">
+					Edici&oacute; d'una pregunta
+				</td>
+			</tr>
+		</table>
+		
+		<form method="post" enctype="application/x-www-form-urlencoded" name="f">
+		<div>				
+ 		<input type="hidden" name="sid" value="{$pregunta.sid}"/>
+		<input type="hidden" value="" name="setlang"/>
+		<input type="hidden" value="0" name="send"/>
+		</div>
+			<table width="100%" border="0" bgcolor="#FFFFFF">
+				<tr>
+					<td class="paragraf">
+						<strong>Pregunta:</strong>
+					</td>
+					<td>				
+						<input type="text" name="pregunta" value="{$pregunta.pregunta}" size="100" maxlength="255"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="paragraf">
+						<strong>Capitol:</strong>
+					</td>
+					<td>
+						<select name="capitol" onchange="envia(1)">
+						 	{section name=capitols loop=$capitols}
+							<option value="{$capitols[capitols].cid}" {if $capitols[capitols].cid eq $pregunta.c}selected="selected"{/if}>{$capitols[capitols].titol}</option>
+							{/section}
+						</select>
+		
+					</td>
+				</tr>
+				<tr>
+					<td class="paragraf">
+						<strong>Tema:</strong>
+					</td>
+					<td>
+						<select name="tema">
+							 {section name=tema loop=$tema}
+								<option value="{$tema[tema].tid}" {if $tema[tema].tid eq $pregunta.t}selected="selected"{/if}>{$tema[tema].titol}</option>
+							{/section} 
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="paragraf">
+						<strong>Idioma:</strong>
+					</td>
+					<td>
+						<select name="lang" onchange="this.form.setlang.value='true';this.form.submit();">						
+						 {section name=langs loop=$langs}
+								<option value="{$langs[langs].lang}" {if $langs[langs].name eq $lang}selected="selected"{/if}>{$langs[langs].name}</option>
+							{/section}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;
+						
+					</td>
+				</tr>
+				<tr>
+					<td class="paragraf" colspan="2">
+						<strong>Resposta:</strong>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<textarea name="resposta" id="resposta" rows="10" cols="80">{$pregunta.resposta}
+						</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;
+						
+					</td>
+				</tr>
+				<tr>
+					<td class="paragraf" colspan="2">
+						<strong>Altres materials relacionats:</strong>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<textarea name="altres" id="altres" rows="10" cols="80">{$pregunta.altres}
+						</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="button"  onclick="envia(0)" value="Modifica les dades"/>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<a href="index.php">Torna a l'&iacute;ndex</a>
+	</div>
+</body>
+</html>

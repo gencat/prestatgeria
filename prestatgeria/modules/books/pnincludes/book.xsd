@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="book" nillable="true">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:integer"/>
+				<xs:element name="schoolCode" type="xs:string"/>
+				<xs:element name="bookTitle" type="xs:string"/>
+				<xs:element name="overview" type="xs:string" nillable="true"/>
+				<xs:element name="image" type="xs:string" nillable="true"/>
+				<xs:element name="about" type="xs:string" nillable="true"/>
+				<xs:element name="adminEmail" type="xs:string"/>
+				<xs:element name="showSearch" type="xs:string" nillable="true"/>
+				<xs:element name="lang" type="xs:string"/>
+				<xs:element name="theme" type="xs:string"/>
+				<xs:element name="htmlEditor" type="xs:string"/>
+				<xs:element name="descriptors" type="xs:string"/>
+				<xs:element name="chapters" nillable="true" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="chapter" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="id" type="xs:integer"/>
+										<xs:element name="name" type="xs:string"/>
+										<xs:element name="description" type="xs:string"
+											nillable="true"/>
+										<xs:element name="image" type="xs:string" nillable="true"/>
+										<xs:element name="permission" type="xs:string"/>
+										<xs:element name="notifyEmail" type="xs:string"/>
+										<xs:element name="entriesPage" type="xs:string"/>
+										<xs:element name="showName" type="xs:string" nillable="true"/>
+										<xs:element name="showEmail" type="xs:string"
+											nillable="true"/>
+										<xs:element name="showUrl" type="xs:string" nillable="true"/>
+										<xs:element name="showImage" type="xs:string"
+											nillable="true"/>
+										<xs:element name="formatPage" type="xs:string"/>
+										<xs:element name="pages" nillable="true" maxOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+												<xs:element name="page" maxOccurs="unbounded"
+												minOccurs="0">
+												<xs:complexType>
+												<xs:sequence>
+												<xs:element name="title" type="xs:string"/>
+												<xs:element name="text" type="xs:string"
+												nillable="true"/>
+												<xs:element name="author" type="xs:string"
+												nillable="true"/>
+												<xs:element name="email" type="xs:string"
+												nillable="true"/>
+												<xs:element name="webAddress" type="xs:string"
+												nillable="true"/>
+												<xs:element name="webName" type="xs:string"
+												nillable="true"/>
+												<xs:element name="updated" type="xs:string"/>
+												<xs:element name="image" type="xs:string"/>
+												<xs:element name="imageAlign" type="xs:string"/>
+												</xs:sequence>
+												</xs:complexType>
+												</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="unnaproved" nillable="true" maxOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+												<xs:element name="page" maxOccurs="unbounded"
+												minOccurs="0">
+												<xs:complexType>
+												<xs:sequence>
+												<xs:element name="title" type="xs:string"/>
+												<xs:element name="text" type="xs:string"
+												nillable="true"/>
+												<xs:element name="author" type="xs:string"
+												nillable="true"/>
+												<xs:element name="email" type="xs:string"
+												nillable="true"/>
+												<xs:element name="webAddress" type="xs:string"
+												nillable="true"/>
+												<xs:element name="webName" type="xs:string"
+												nillable="true"/>
+												<xs:element name="updated" type="xs:string"/>
+												<xs:element name="image" type="xs:string"/>
+												<xs:element name="imageAlign" type="xs:string"/>
+												</xs:sequence>
+												</xs:complexType>
+												</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

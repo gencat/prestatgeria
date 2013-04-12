@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>Suport del projecte Quaderns Virtuals</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>	
+	<link href="css/estils.css" rel="stylesheet" type="text/css"/>
+	<link href="css/styles.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="inc/scripts.js"></script>
+</head>
+<body>
+<div class="page" style="padding-top:20px; ">
+		<div class="header">
+			<div style="padding:20px 0px 0px 30px" id="logo"><img src="imatges/logo.png" alt="logo"/></div>
+	<form style="height:25px;" name="search" action="search.php" method="post" enctype="application/x-www-form-urlencoded">		
+			
+			<div id="menu">
+				
+			<div style="float:right;" id="cercador">
+					<input type="text" size="20" maxlength="100" name="words" id="words" value="{$words}"/>
+					<img src="imatges/search.gif" title="cerca" alt="cerca" border="0" style='cursor:pointer; cursor:hand' onclick="search.submit()"/>    
+	</div>                
+				
+				
+				<div style="padding-top:10px;">
+					<a href="index.php?d=1" class="mini">desplega-ho tot</a>
+					 | <a href="index.php?d=0" class="mini">plega-ho tot</a>
+					 | <a href="nova.php" class="mini">suggereix pregunta</a>
+					{if $validat eq 1} | <a href="unlogin.php" class="mini">tanca sessió</a><a href="nou2.php" title="Entra un capítol nou"><img src="imatges/nou.gif" border="0" alt="Entra un capítol nou"/></a>{/if}
+				</div>
+			</div>
+	</form>		
+		</div>
+		<div class="global">
+		{if $validat eq 1}
+			<div class="section">
+				<strong>Preguntes amb comentaris pendents de validació</strong>
+			</div>
+			{section name=comments loop=$comments}
+				<div class="item">
+					<ul><li class="item">
+					{if $comments[comments].valida eq 1}
+						<a href="suport.php?sid={$comments[comments].id}&amp;lang={$lang}" class="actiu">
+					{elseif $comments[comments].valida eq 2}
+						<a href="suport.php?sid={$comments[comments].id}&amp;lang={$lang}" class="revisar">
+					{else}
+						<a href="suport.php?sid={$comments[comments].id}&amp;lang={$lang}" class="innactiu">
+					{/if}
+					{$comments[comments].text}</a>
+					{if $comments[comments].modified eq 1}
+						<img src="imatges/actualitzat.gif" border="0" alt="Actualitzat"/>
+					{elseif $comments[comments].created eq 1}
+						<img src="imatges/novetat.gif" border="0" alt="Novetat"/>
+					{/if}
+					{if $validat eq 1}
+						<a href="valida.php?id={$comments[comments].id}&amp;q=p&amp;a=0" title="Invalida"><img src="imatges/invalida.gif" border="0" alt="Invalida"/></a>
+						<a href="valida.php?id={$comments[comments].id}&amp;q=p&amp;a=2" title="Per revisar"><img src="imatges/revisa.gif" border="0" alt="Per revisar"/></a>
+						<a href="valida.php?id={$comments[comments].id}&amp;q=p&amp;a=1" title="Valida"><img src="imatges/valida.gif" border="0" alt="Valida"/></a>
+						<a href="edita.php?sid={$comments[comments].id}" title="Edita"><img src="imatges/edita.gif" border="0" alt="Edita"/></a>
+						<a href="esborra.php?id={$comments[comments].id}&amp;q=p" title="Esborra"><img src="imatges/esborra.gif" border="0" alt="Esborra"/></a>
+						<a href="no_na.php?id={$comments[comments].id}&amp;q=p" title="Treu les etiquetes"><img src="imatges/no_na.gif" border="0" alt="Treu les etiquetes"/></a>
+					{/if}
+					</li></ul>
+				</div>		
+			{/section}
+		{/if}
+		{section name=Items loop=$Items}
+			{if $Items[Items].tipus eq 0}
+				<div class="section">
+					{if $Items[Items].estatc eq 0}
+						<a href="index.php?i={$Items[Items].i}"><img src="imatges/up.gif" border="0" alt="Baixa" /></a>
+					{else}
+						<a href="index.php?i={$Items[Items].i}"><img src="imatges/down.gif" border="0" alt="Puja" /></a>
+					{/if}
+					<span class="capitol">
+						{if $Items[Items].valida eq 1}
+							<font color="#36627F">
+						{elseif $Items[Items].valida eq 2}
+							<font color="#FF6633"> 
+						{else}
+							<font color="#CC0033">
+						{/if}
+						{$Items[Items].text}</font>
+					</span>
+					{if $Items[Items].modified eq 1}
+						<img src="imatges/actualitzat.gif" border="0" alt="Actualitzat"/>
+					{elseif $Items[Items].created eq 1}
+						<img src="imatges/novetat.gif" border="0" alt="Novetat"/>
+					{/if}
+					{if $validat eq 1}
+						<a href="nou1.php?id={$Items[Items].id}" title="Entra un tema nou"><img src="imatges/nou.gif" border="0" alt="Entra un tema nou"/></a>
+						<a href="mou.php?id={$Items[Items].id}&amp;q=c&amp;m=b" title="Baixa"><img src="imatges/baixa.gif" border="0" alt="Baixa" /></a>
+						<a href="mou.php?id={$Items[Items].id}&amp;q=c&amp;m=p" title="Puja"><img src="imatges/puja.gif" border="0" alt="Puja" /></a>
+						<a href="valida.php?id={$Items[Items].id}&amp;q=c&amp;a=0" title="Invalida"><img src="imatges/invalida.gif" border="0" alt="Invalida" /></a>
+						<a href="valida.php?id={$Items[Items].id}&amp;q=c&amp;a=2" title="Per revisar"><img src="imatges/revisa.gif" border="0" alt="Per revisar" /></a>
+						<a href="valida.php?id={$Items[Items].id}&amp;q=c&amp;a=1" title="Valida"><img src="imatges/valida.gif" border="0" alt="Valida" /></a>
+						<a href="edita2.php?id={$Items[Items].id}" title="Edita"><img src="imatges/edita.gif" border="0" alt="Edita" /></a>
+						<a href="esborra.php?id={$Items[Items].id}&amp;q=c" title="Esborra"><img src="imatges/esborra.gif" border="0" alt="Esborra" /></a>
+						<a href="no_na.php?id={$Items[Items].id}&amp;q=c&amp;val=1" title="Posa com a novetat"><img src="imatges/nov.gif" border="0" alt="Posa com a novetat" /></a>
+						<a href="no_na.php?id={$Items[Items].id}&amp;q=c&amp;val=2" title="Posa com a actualitzat"><img src="imatges/act.gif" border="0" alt="Posa com a actualitzat" /></a>										
+						<a href="no_na.php?id={$Items[Items].id}&amp;q=c&amp;val=0" title="Treu les etiquetes"><img src="imatges/no_na.gif" border="0" alt="Treu les etiquetes" /></a>
+					{/if}		
+				</div>
+			{/if}
+			{if $Items[Items].tipus eq 1 and $Items[Items].estatc eq 0}
+				<div class="chapter">
+					{if $Items[Items].estatt eq 0}
+						<a href="index.php?i={$Items[Items].i}"><img src="imatges/up1.gif" border="0" alt="Puja"/></a>
+					{else}
+						<a href="index.php?i={$Items[Items].i}"><img src="imatges/down1.gif" border="0" alt="Baixa" /></a>
+					{/if}
+					<span class="tema">
+						{if $Items[Items].valida eq 1}
+							<font color="#36627F">
+						{elseif $Items[Items].valida eq 2}
+							<font color="#FF6633">
+						{else}
+							<font color="#CC0033">
+						{/if}
+						{$Items[Items].text}</font>
+					</span>
+					{if $Items[Items].modified eq 1}
+						<img src="imatges/actualitzat.gif" border="0" alt="Actualitzat"/>
+					{elseif $Items[Items].created eq 1}
+						<img src="imatges/novetat.gif" border="0" alt="Novetat"/>
+					{/if}
+					{if $validat eq 1}
+						<a href="nou.php?id={$Items[Items].id}" title="Entra un registre nou"><img src="imatges/nou.gif" border="0" alt="Entra un registre nou"/></a>
+						<a href="mou.php?id={$Items[Items].id}&amp;q=t&amp;m=b&amp;cid={$Items[Items].cid}" title="Baixa"><img src="imatges/baixa.gif" border="0" alt="Baixa"/></a>
+						<a href="mou.php?id={$Items[Items].id}&amp;q=t&amp;m=p&amp;cid={$Items[Items].cid}" title="Puja"><img src="imatges/puja.gif" border="0" alt="Puja"/></a>
+						<a href="valida.php?id={$Items[Items].id}&amp;q=t&amp;a=0" title="Invalida"><img src="imatges/invalida.gif" border="0" alt="Invalida"/></a>
+						<a href="valida.php?id={$Items[Items].id}&amp;q=t&amp;a=2" title="Per revisar"><img src="imatges/revisa.gif" border="0" alt="Per revisar"/></a>
+						<a href="valida.php?id={$Items[Items].id}&amp;q=t&amp;a=1" title="Valida"><img src="imatges/valida.gif" border="0" alt="Valida"/></a>
+						<a href="edita1.php?id={$Items[Items].id}" title="Edita"><img src="imatges/edita.gif" border="0" alt="Edita"/></a>
+						<a href="esborra.php?id={$Items[Items].id}&amp;q=t" title="Esborra"><img src="imatges/esborra.gif" border="0" alt="Esborra"/></a>
+						<a href="no_na.php?id={$Items[Items].id}&amp;q=t&amp;val=1" title="Posa com a novetat"><img src="imatges/nov.gif" border="0" alt="Posa com a novetat"/></a>
+						<a href="no_na.php?id={$Items[Items].id}&amp;q=t&amp;val=2" title="Posa com a actualitzat"><img src="imatges/act.gif" border="0" alt="Posa com a actualitzat"/></a>												
+						<a href="no_na.php?id={$Items[Items].id}&amp;q=t&amp;val=0" title="Treu les etiquetes"><img src="imatges/no_na.gif" border="0" alt="Treu les etiquetes"/></a>
+					{/if}
+				</div>
+			{/if}
+			{if $Items[Items].tipus eq 2 and ($Items[Items].estatc eq 0 and $Items[Items].estatt eq 0)}
+				<div class="item">
+					<ul><li class="item">
+					{if $Items[Items].valida eq 1}
+						<a href="suport.php?sid={$Items[Items].id}&amp;lang={$lang}" class="actiu">
+					{elseif $Items[Items].valida eq 2}
+						<a href="suport.php?sid={$Items[Items].id}&amp;lang={$lang}" class="revisar">
+					{else}
+						<a href="suport.php?sid={$Items[Items].id}&amp;lang={$lang}" class="innactiu">
+					{/if}
+					{$Items[Items].text}</a>
+					{if $Items[Items].modified eq 1}
+						<img src="imatges/actualitzat.gif" border="0" alt="Actualitzat"/>
+					{elseif $Items[Items].created eq 1}
+						<img src="imatges/novetat.gif" border="0" alt="Novetat"/>
+					{/if}
+					{if $showhits eq 1}
+						<span class="textmini">({$Items[Items].clics} clics)</span>
+					{/if}
+					{if $validat eq 1}
+						<a href="mou.php?id={$Items[Items].id}&amp;q=p&amp;m=b&amp;tid={$Items[Items].tid}" title="Baixa"><img src="imatges/baixa.gif" border="0" alt="Baixa"/></a>
+						<a href="mou.php?id={$Items[Items].id}&amp;q=p&amp;m=p&amp;tid={$Items[Items].tid}" title="Puja"><img src="imatges/puja.gif" border="0" alt="Puja"/></a>
+						<a href="valida.php?id={$Items[Items].id}&amp;q=p&amp;a=0" title="Invalida"><img src="imatges/invalida.gif" border="0" alt="Invalida"/></a>
+						<a href="valida.php?id={$Items[Items].id}&amp;q=p&amp;a=2" title="Per revisar"><img src="imatges/revisa.gif" border="0" alt="Per revisar" /></a>
+						<a href="valida.php?id={$Items[Items].id}&amp;q=p&amp;a=1" title="Valida"><img src="imatges/valida.gif" border="0" alt="Valida" /></a>
+						<a href="edita.php?sid={$Items[Items].id}" title="Edita"><img src="imatges/edita.gif" border="0" alt="Edita" /></a>
+						<a href="esborra.php?id={$Items[Items].id}&amp;q=p" title="Esborra"><img src="imatges/esborra.gif" border="0" alt="Esborra" /></a>
+						<a href="no_na.php?id={$Items[Items].id}&amp;q=p&amp;val=1" title="Posa com a novetat"><img src="imatges/nov.gif" border="0" alt="Posa com a novetat" /></a>
+						<a href="no_na.php?id={$Items[Items].id}&amp;q=p&amp;val=2" title="Posa com a actualitzat"><img src="imatges/act.gif" border="0" alt="Posa com a actualitzat" /></a>
+						<a href="no_na.php?id={$Items[Items].id}&amp;q=p&amp;val=0" title="Treu les etiquetes"><img src="imatges/no_na.gif" border="0" alt="Treu les etiquetes" /></a>
+					{/if}
+					</li></ul>
+				</div>
+			{/if}
+		{/section}
+		</div>
+		<div class="footer">
+	
+		</div>
+		<form action="index.php" method="post" name="rec">
+		<div>
+			<input type="hidden" name="wid"/>
+			<input type="hidden" name="edita"/>
+		</div>
+		</form>
+</div>		
+</body>
+</html>

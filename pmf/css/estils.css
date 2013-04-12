@@ -1,0 +1,185 @@
+/* CSS Document */
+body {
+	margin:0px;
+	padding:0px;
+	/*background-attachment: fixed;
+	background-image:url(../imatges/fons.png);
+	background-repeat: repeat-x;*/
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+.textmini{
+	font-size:10px; color:#2B5A78;
+}
+
+.pregunta{
+	font-size:13px; color:#36627F;font-weight:bold;
+}
+
+.paragraf{font-size:13px}
+.capitol{font-size:16px; font-weight:bold}
+.tema{
+	font-size:13px;
+	font-weight:bold;
+	padding-top:10px;
+	
+}
+div.tema:hover{
+  color: #FD5F07;text-decoration:underline;
+}
+div.tema{
+	font-size:13px;
+	font-weight:bold;
+	border-bottom:1px solid #749CCF;
+	padding-top:10px;
+	
+}
+.item li{list-style-image:url(../imatges/fletxa.gif); padding:0px 0px 0px 0px;}
+
+a{text-decoration:underline; color:#000;}
+a:visited{ color:#000}
+a:hover{color: #FD5F07;text-decoration:underline;}
+.avis{font-size:10px; margin-top:inherit}
+.titol{font-size:22px; color:#3A7AB6; font-weight:bold}
+.titol2{font-size:18px; color:#3A7AB6; font-weight:bold}
+.resposta{}
+.peuimatge{font-size:10px; color:#000000; font-style:italic}
+a.mini{text-decoration:underline;color:#000;}
+a.mini:visited{ color:#000; }
+a.mini:hover{color: #FD5F07;text-decoration:underline;}
+a.actiu{text-decoration:none; color:#000000;}
+a.actiu:visited{ color:#000000;}
+a.actiu:hover{color:#FD5F07; text-decoration:underline}
+a.innactiu{text-decoration:none; color:#CC0033; font-size:15px}
+a.innactiu:visited{ color:#CC0033; font-size:15px}
+a.innactiu:hover{color:#CC0033; font-size:15px}
+a.revisar{text-decoration:none; color:#FF6633; font-size:15px}
+a.revisar:visited{ color:#FF6633; font-size:15px}
+a.revisar:hover{color:#FF6633; font-size:15px}
+
+/* Les capes - index*/
+.global{
+	height:auto;
+	border-top:1px solid #66B0CF;
+	border-bottom:1px solid #66B0CF;
+	margin: 0px 0px 0px 0px;
+	padding-bottom: 30px;
+}
+.header{
+	height:auto;
+	margin-bottom: 10px;
+	padding-left:0px;
+}
+.main{width=100%; height:40px}
+
+.section{
+	margin: 0px;
+	padding: 20px 20px 0px 20px;
+}
+
+.chapter{
+	margin:0px;
+	padding: 5px 0px 0px 50px;
+}
+
+.item{
+	margin: 0px;
+	padding: 5px 20px 5px 80px;
+}
+
+.footer{
+	height:40px
+}
+
+div.pregunta{
+	height:auto;
+	margin: 0px 20px 0px 50px;	
+	padding: 10px 20px 10px 0px;
+}
+
+div.label{
+	float:left;
+	font-weight:bold;
+	color:#36627F;
+}
+
+div.resposta{
+	height:auto;
+	margin: 0px 20px 0px 70px;
+	padding: 1px 20px 5px 10px;
+	background-color:#F5F5F5;
+	border-left:1px solid #66B0CF;
+}
+
+div.altres{
+	margin: 0px;
+	padding: 30px 20px 0px 20px;
+}
+
+div.altres_content{
+	margin: 0px;
+	padding: 20px 20px 0px 40px;
+	list-style-image:url(../imatges/fletxa.gif);
+}
+
+div.comentaris{
+	margin: 0px;
+	padding: 30px 20px 0px 20px;
+}
+
+
+div.comment{
+	height:auto;
+	padding: 20px 20px 20px 70px;
+}
+
+
+div.comentaris_content{
+	margin: 0px 20px 0px 20px;
+	padding: 10px 20px 20px 0px;
+	clear: both;
+	color:#000000;
+}
+
+
+div.comentaris_content_date{
+	float:left;
+	padding: 0px 10px 0px 20px;
+	width: auto;
+}
+
+
+div.comentaris_content_author{
+	float:left;
+	padding: 0px 20px 0px 20px;
+	width: 150px;
+	font-weight: bold;
+	color:#000000;
+}
+
+div.comentaris_content_comment{
+	color:#000000;
+	margin-left:400px;
+	margin-right:20px;
+}
+
+
+#logo{
+	visibility: hidden;
+	display: none;
+}
+
+#menu{
+  clear: both;
+	margin-left: 0px;
+	visibility: visible;
+	display: inline;
+}
+
+textarea#comment, input#author{
+  background-color: #F5F5F5;
+}
+input#words{
+  font-size:11px;
+}
+
