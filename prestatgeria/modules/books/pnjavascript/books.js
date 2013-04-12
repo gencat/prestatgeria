@@ -193,45 +193,44 @@ function searchReload_response(req){
 	Element.update('search', json.content).innerHTML;
 }
 
-
-function autocomplete(filter,value,order){
-	if(value.length > 1){
-		var pars = "module=books&func=autocomplete&value=" + value + "&filter=" + filter + "&order=" + order;
+function autocompleteSearch(filter,value,order){
+	if(value.length > 2){
+		var pars = "module=books&func=autocompleteSearch&value=" + value + "&filter=" + filter + "&order=" + order;
 		var myAjax = new Ajax.Request("ajax.php", 
 		{
 			method: 'get', 
 			parameters: pars, 
-			onComplete: autocomplete_response,
-			onFailure: autocomplete_failure
+			onComplete: autocompleteSearch_response,
+			onFailure: autocompleteSearch_failure
 		});
 	}else{
-		hideAutoCompete();
+		hideAutoCompleteSearch();
 	}
 }
 
-function autocomplete_response(req){
+function autocompleteSearch_response(req){
 	if (req.status != 200 ) { 
 		pnshowajaxerror(req.responseText);
 		return;
 	}
 	var json = pndejsonize(req.responseText);
 	if(json.count > 0){
-		showAutoCompete();
+		showAutoCompleteSearch();
 		Element.update('autocompletediv', json.values).innerHTML;
 	}else{
-		hideAutoCompete();
+		hideAutoCompleteSearch();
 	}
 }
 
-function autocomplete_failure(){
+function autocompleteSearch_failure(){
 
 }
 
-function hideAutoCompete(){
+function hideAutoCompleteSearch(){
 	$('autocompletediv').style.visibility = "hidden";
 }
 
-function showAutoCompete(){
+function showAutoCompleteSearch(){
 	$('autocompletediv').style.visibility = "visible";
 }
 

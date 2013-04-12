@@ -20,9 +20,10 @@ function smarty_function_booksmenulinks()
 	$booksmenulinks = "<span class=\"" . $params['class'] . "\">" . $params['start'] . " ";
 
 	if (SecurityUtil::checkPermission('books::', "::", ACCESS_ADMIN)) {
-//		$booksmenulinks .= "<a href=\"" . DataUtil::formatForDisplayHTML(pnModURL('iw_main', 'admin', 'main')) . "\">" . _IWMAINCRON . "</a> " . $params['seperator'];
-//		$booksmenulinks .= " <a href=\"" . DataUtil::formatForDisplayHTML(pnModURL('iw_main', 'admin', 'conf')) . "\">" . _IWMAINCONFIG . "</a> " . $params['seperator'];
 		$booksmenulinks .= " <a href=\"" . DataUtil::formatForDisplayHTML(pnModURL('books', 'admin', 'manageDescriptors')) . "\">" . __('Administra els descriptors',$dom) . "</a> " . $params['seperator'];
+		$booksmenulinks .= " <a href=\"" . DataUtil::formatForDisplayHTML(pnModURL('books', 'admin', 'schoolsList', array('schoolsInfo' => 0))) . "\">" . __('Llista de centres',$dom) . "</a> " . $params['seperator'];
+		$booksmenulinks .= " <a href=\"" . DataUtil::formatForDisplayHTML(pnModURL('books', 'admin', 'schoolsList', array('schoolsInfo' => 1))) . "\">" . __('Informació de centres',$dom) . "</a> " . $params['seperator'];
+		$booksmenulinks .= " <a href=\"" . DataUtil::formatForDisplayHTML(pnModURL('books', 'admin', 'newSchool')) . "\">" . __('Crea un centre',$dom) . "</a> " . $params['seperator'];
 		$booksmenulinks .= " <a href=\"" . DataUtil::formatForDisplayHTML(pnModURL('books', 'admin', 'config')) . "\">" . __('Configura el mòdul',$dom) . "</a> ";
 	}
 

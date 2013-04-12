@@ -63,15 +63,7 @@ function books_adminapi_deleteDescriptor($args)
 	if (!DBUtil::deleteObjectByID('books_descriptors', $value, $key)) {
 		return LogUtil::registerError (_DELETEFAILED);
 	}
-	/*
-	$pntable = pnDBGetTables();
-	$c = $pntable['books_descriptors_column'];
-	$where = "$c[did] = $did";
-	$item = array('descriptor' => $value);
-	if (!DBUTil::updateObject ($item, 'books_descriptors', $where)) {
-		return LogUtil::registerError (_UPDATEFAILED);
-	}
-	*/
+
 	return true;
 }
 
@@ -215,4 +207,64 @@ function books_adminapi_changeBookPath($args)
     DBConnectionStack::popConnection();
     
     return true;
+}
+
+/**
+ * Get a school information
+ * @author:     Albert Pérez Monfort (aperezm@xtec.cat)
+ * @return:	The schools information
+*/
+function books_adminapi_getAllSchoolInfo($args)
+{
+	if(!SecurityUtil::checkPermission('books::', "::", ACCESS_ADMIN)) {
+		return LogUtil::registerError(_MODULENOAUTH, 403);
+	}
+
+	if ($args['schoolsInfo'] == 1){
+		$table = 'books_schools_info';
+		$key = 'schoolInfo';
+	} else {
+		$table = 'books_schools';
+		$key = 'schoolId';
+	}
+
+	$pntable = pnDBGetTables();
+	$c = $pntable[$table . '_column'];
+	$where = '';
+	$orderby = "$c[schoolCode]";
+	$items = DBUtil::selectObjectArray($table, $where, $orderby, '-1', '-1', $key);
+	// Check for an error with the database code, and if so set an appropriate
+	// error message and return
+	if($items === false) {
+		return LogUtil::registerError (_GETFAILED);
+	}
+	// Return the items
+	return $items;
+
+}
+
+function books_adminapi_createSchool($args)
+{
+	if(!SecurityUtil::checkPermission('books::', "::", ACCESS_ADMIN)) {
+		return LogUtil::registerError(_MODULENOAUTH, 403);
+	}
+
+	$time = time();
+
+	$item = array('schoolCode' => $args['schoolCode'],
+			'schoolType' => $args['schoolType'],
+			'schoolName' => $args['schoolName'],
+			'schoolCity' => $args['schoolCity'],
+			'schoolZipCode' => $args['schoolZipCode'],
+			'schoolRegion' => $args['schoolRegion'],
+			'schoolDateIns' => $time,
+			'schoolState' => 1,
+			);
+
+	if(!DBUtil::insertObject($item, 'books_schools', 'schoolId')) {
+		return LogUtil::registerError (_CREATEFAILED);
+	}
+
+	// Return the id of the newly created item to the calling process
+	return $item['schoolId'];
 }

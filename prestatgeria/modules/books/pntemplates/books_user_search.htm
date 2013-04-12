@@ -1,6 +1,6 @@
 <!--[include file="books_user_menu.htm"]-->
 <div class="search" id="search">
-	<form id="searchForm" name="searchForm" method="post" enctype="application/x-www-form-urlencoded" action="index.php">
+	<form id="searchForm" name="searchForm" method="post" enctype="application/x-www-form-urlencoded" action="javascript:void(0);">
 		<input type="hidden" name="a" value="search" />
 		<input type="hidden" name="insearch" value="1" />
 		<input type="hidden" name="searchAction" value="<!--[$searchAction]-->" />
@@ -31,7 +31,7 @@
 			<option value="collection" <!--[if $filter eq 'collection']--> selected <!--[/if]-->><!--[gt text='col·lecció']--></option>
 		</select>
 		<!--[if $filter eq 'name' || $filter eq 'schoolCode']-->
-			<!--[gt text='propietari del llibre és']--> <input type="text" name="filterValue" autocomplete="off" maxlength="40" size="20" value="<!--[$filterValue]-->" onKeyUp="autocomplete('name',this.value,'<!--[$order]-->')"/>
+			<!--[gt text='propietari del llibre és']--> <input type="text" name="filterValue" autocomplete="off" maxlength="40" size="20" value="<!--[$filterValue]-->" onKeyUp="autocompleteSearch('name',this.value,'<!--[$order]-->')"/>
 			<!--[gt text='Ajuda' assign=alt]-->
 			<a onClick="return overlay(this, 'help6')"><!--[pnimg modname=books src=info.gif set=pnimages altml=true titleml=true alt=$alt title=$alt]--></a>
 		<!--[elseif $filter eq 'collection']-->
@@ -45,9 +45,10 @@
 			<!--[gt text='Ajuda' assign=alt]-->
 			<a onClick="return overlay(this, 'help1')"><!--[pnimg modname=books src=info.gif set=pnimages altml=true titleml=true alt=$alt title=$alt]--></a>			
 		<!--[elseif $filter eq 'descriptor']-->
-			<!--[gt text='del llibre és']--> <input type="text" name="filterValue" autocomplete="off" maxlength="40" size="20" value="<!--[$filterValue]-->" onKeyUp="autocomplete('descriptor',this.value,'<!--[$order]-->')"/>
+			<!--[gt text='del llibre és']--> <input type="text" name="filterValue" autocomplete="off" maxlength="40" size="20" value="<!--[$filterValue]-->" onKeyUp="autocompleteSearch('descriptor',this.value,'<!--[$order]-->')"/>
 			<!--[gt text='Ajuda' assign=alt]-->
-			<a onClick="return overlay(this, 'help2')"><!--[pnimg modname=books src=info.gif set=pnimages altml=true titleml=true alt=$alt title=$alt]--></a>			
+			<a onClick="return overlay(this, 'help2')"><!--[pnimg modname=books src=info.gif set=pnimages altml=true titleml=true alt=$alt title=$alt]--></a>
+			<input type="button" value="Envia" onClick="catalogue('<!--[$order]-->','descriptor',1,document.searchForm.filterValue.value,1)"/>			
 		<!--[elseif $filter eq 'lang']-->
 			<!--[gt text='del llibre és']-->
 			<select name="filterValue" onChange="catalogue('<!--[$order]-->','lang',1,this.value,1)">
@@ -60,20 +61,20 @@
 			<!--[gt text='Ajuda' assign=alt]-->
 			<a onClick="return overlay(this, 'help3')"><!--[pnimg modname=books src=info.gif set=pnimages altml=true titleml=true alt=$alt title=$alt]--></a>			
 		<!--[elseif $filter eq 'city']-->
-			<!--[gt text='on està el centre és']--> <input type="text" name="filterValue" autocomplete="off" maxlength="40" size="20" value="<!--[$filterValue|replace:"--apos--":"'"]-->" onKeyUp="autocomplete('city',this.value,'<!--[$order]-->')"/>
+			<!--[gt text='on està el centre és']--> <input type="text" name="filterValue" autocomplete="off" maxlength="40" size="20" value="<!--[$filterValue|replace:"--apos--":"'"]-->" onKeyUp="autocompleteSearch('city',this.value,'<!--[$order]-->')"/>
 			<!--[gt text='Ajuda' assign=alt]-->
 			<a onClick="return overlay(this, 'help4')"><!--[pnimg modname=books src=info.gif set=pnimages altml=true titleml=true alt=$alt title=$alt]--></a>
 		<!--[elseif $filter eq 'admin']-->
-			<!--[gt text='del llibre és']--> <input type="text" name="filterValue" autocomplete="off" maxlength="8" size="8" value="<!--[$filterValue]-->" onKeyUp="autocomplete('admin',this.value,'<!--[$order]-->')"/>
+			<!--[gt text='del llibre és']--> <input type="text" name="filterValue" autocomplete="off" maxlength="8" size="8" value="<!--[$filterValue]-->" onKeyUp="autocompleteSearch('admin',this.value,'<!--[$order]-->')"/>
 			<!--[gt text='Ajuda' assign=alt]-->
-			<a onClick="return overlay(this, 'help5')"><!--[pnimg modname=books src=info.gif set=pnimages altml=true titleml=true alt=$alt title=$alt]--></a>		
+			<a onClick="return overlay(this, 'help5')"><!--[pnimg modname=books src=info.gif set=pnimages altml=true titleml=true alt=$alt title=$alt]--></a>
 		<!--[else]-->
 			<!--[gt text='del llibre conté les paraules']--> <input type="text" name="filterValue" autocomplete="off" maxlength="40" size="20" value="<!--[$filterValue]-->"/>
 			<!--[gt text='Ajuda' assign=alt]-->
 			<a onClick="return overlay(this, 'help7')"><!--[pnimg modname=books src=info.gif set=pnimages altml=true titleml=true alt=$alt title=$alt]--></a>
-			<input type="button" value="Envia" onClick="catalogue('<!--[$order]-->','title',1,document.searchForm.filterValue.value,1)"/>
+			<input type="button" value="Envia" onClick="catalogue('<!--[$order]-->','title',1,document.searchForm.filterValue.value,1);"/>
 		<!--[/if]-->
-		<div style="visibility: hidden; border: 1px solid #ffff9f; background-color:#ffffcf; padding: 5px; width: 200px;" id="autocompletediv"></div>
+		<div style="visibility: hidden; border: 1px solid #ffff9f; background-color:#ffffcf; padding: 5px; width: 200px; margin-left: 80px; margin-top: 7px;" id="autocompletediv"></div>
 	</form>
 </div>
 

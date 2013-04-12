@@ -95,3 +95,58 @@ function books_admin_purge(){
 	}
 	return pnRedirect(pnModURL('books', 'admin', 'manageDescriptors'));
 }
+
+function books_admin_schoolsList($args){
+	$schoolsInfo = FormUtil::getPassedValue('schoolsInfo', isset($args['schoolsInfo']) ? $args['schoolsInfo'] : 0, 'GET');
+	// Security check
+	if (!SecurityUtil::checkPermission('books::', "::", ACCESS_ADMIN)) {
+		return LogUtil::registerError(_MODULENOAUTH, 403);
+	}
+	$schools = pnModAPIFunc('books', 'admin', 'getAllSchoolInfo', array('schoolsInfo' => $schoolsInfo));
+
+	$pnRender = pnRender::getInstance('books',false);
+	$pnRender->assign('schools', $schools);
+	return $pnRender->fetch('books_admin_schoolsList.htm');
+}
+
+function books_admin_newSchool(){
+	// Security check
+	if (!SecurityUtil::checkPermission('books::', "::", ACCESS_ADMIN)) {
+		return LogUtil::registerError(_MODULENOAUTH, 403);
+	}
+	
+	$pnRender = pnRender::getInstance('books',false);
+	return $pnRender->fetch('books_admin_newSchool.htm');
+}
+
+function books_admin_createSchool($args){
+	$schoolCode = FormUtil::getPassedValue('schoolCode', isset($args['schoolCode']) ? $args['schoolCode'] : null, 'POST');
+	$schoolType = FormUtil::getPassedValue('schoolType', isset($args['schoolType']) ? $args['schoolType'] : null, 'POST');
+	$schoolName = FormUtil::getPassedValue('schoolName', isset($args['schoolName']) ? $args['schoolName'] : null, 'POST');
+	$schoolCity = FormUtil::getPassedValue('schoolCity', isset($args['schoolCity']) ? $args['schoolCity'] : null, 'POST');
+	$schoolZipCode = FormUtil::getPassedValue('schoolZipCode', isset($args['schoolZipCode']) ? $args['schoolZipCode'] : null, 'POST');
+	$schoolRegion = FormUtil::getPassedValue('schoolRegion', isset($args['schoolRegion']) ? $args['schoolRegion'] : null, 'POST');
+
+	// Security check
+	if (!SecurityUtil::checkPermission('books::', "::", ACCESS_ADMIN)) {
+		return LogUtil::registerError(_MODULENOAUTH, 403);
+	}
+
+	$created = pnModAPIFunc('books', 'admin', 'createSchool', array('schoolCode' => $schoolCode,
+				'schoolType' => $schoolType,
+				'schoolName' => $schoolName,
+				'schoolCity' => $schoolCity,
+				'schoolZipCode' => $schoolZipCode,
+				'schoolRegion' => $schoolRegion,
+				));
+	if (!$created) {
+		LogUtil::registerError (__('S\'ha produït un error en la creació del centre.', $dom));
+		return pnRedirect(pnModURL('books', 'admin', 'schoolsList'));
+	}
+
+	LogUtil::registerStatus (__('El centre ha estat creat correctament.', $dom));
+	return pnRedirect(pnModURL('books', 'admin', 'schoolsList'));
+}
+
+
+

@@ -46,7 +46,7 @@ function books_userapi_getAllBooks($args)
 	$onlyNumber = FormUtil::getPassedValue('onlyNumber', isset($args['onlyNumber']) ? $args['onlyNumber'] : null, 'POST');
 	$filter = FormUtil::getPassedValue('filter', isset($args['filter']) ? $args['filter'] : null, 'POST');
 	$filterValue = FormUtil::getPassedValue('filterValue', isset($args['filterValue']) ? $args['filterValue'] : null, 'POST');
-    $acceptEdit = FormUtil::getPassedValue('acceptEdit', isset($args['acceptEdit']) ? $args['acceptEdit'] : null, 'POST');
+        $acceptEdit = FormUtil::getPassedValue('acceptEdit', isset($args['acceptEdit']) ? $args['acceptEdit'] : null, 'POST');
 	// Security check
 	if(!SecurityUtil::checkPermission('books::', "::", ACCESS_READ)) {
 		return LogUtil::registerError(_MODULENOAUTH, 403);
@@ -80,6 +80,8 @@ function books_userapi_getAllBooks($args)
 	$pntables = pnDBGetTables();
 	$ocolumn = $pntables['books_column'];
 	$lcolumn = $pntables['books_schools_column'];
+        $filterValue = str_replace("'", "''", $filterValue);
+        $filterValue = str_replace("--apos--", "''", $filterValue);
 	switch($filter) {
 		case 'userBooks':
 			$where = " AND a.$ocolumn[bookAdminName] ='$filterValue'";
@@ -108,7 +110,7 @@ function books_userapi_getAllBooks($args)
 			$where = " AND b.$lcolumn[schoolId] = $filterValue";
 			break;
 		case 'city':
-			$where = " AND b.$lcolumn[schoolCity] = '$filterValue'";
+			$where = " AND b.$lcolumn[schoolCity] LIKE '%$filterValue%'";
 			break;
 		case 'lang':
 			$where = " AND a.$ocolumn[bookLang] = '$filterValue'";
@@ -119,7 +121,7 @@ function books_userapi_getAllBooks($args)
 				$values = explode(' ',$filterValue);
 				foreach($values as $value) {
 					if($value != '') {
-						$where .= " (a.$ocolumn[bookTitle] LIKE '$value %' OR a.$ocolumn[bookTitle] LIKE '% $value %' OR a.$ocolumn[bookTitle] LIKE '% $value') OR ";
+						$where .= " (a.$ocolumn[bookTitle] LIKE '%$value%') OR ";
 					}
 				}
 				$where = substr($where,0,-3);
@@ -141,7 +143,7 @@ function books_userapi_getAllBooks($args)
 	} else {
 		$where = substr($where, 4);
 	}
-    //print $where;die();
+    
 	$orderby = "a.$ocolumn[$orderbyField] desc";
 	if($onlyNumber == null) {
 		$items = DBUtil::selectExpandedObjectArray('books', $myJoin, $where, $orderby, $init, $ipp, 'bookId');
@@ -505,6 +507,7 @@ function books_userapi_filterValues($args)
 		return LogUtil::registerError(_MODULENOAUTH, 403);
 	}
 	$pntable = pnDBGetTables();
+        $value = str_replace("'", "''", $value);
 	switch($filter) {
 		case 'name':
 			$c = $pntable['books_schools_column'];
@@ -520,7 +523,7 @@ function books_userapi_filterValues($args)
 			break;
 		case 'city':
 			$c = $pntable['books_schools_column'];
-			$where = "$c[schoolCity] LIKE '$value%'";
+			$where = "$c[schoolCity] LIKE '%$value%'";
 			$orderby = "$c[schoolCity] desc";
 			$items = DBUtil::selectObjectArray('books_schools', $where, $orderby, '-1', '-1', 'schoolId');
 			break;
@@ -946,7 +949,6 @@ function books_userapi_editBook($args)
 	$pntable = pnDBGetTables();
 	$c = $pntable['books_column'];
 	$where = "$c[bookId] = $bookId";
-    $items = DataUtil::formatForStore($items);
 	if(!DBUTil::updateObject ($items, 'books', $where)) {
 		return LogUtil::registerError (_UPDATEFAILED);
 	}
@@ -1027,9 +1029,9 @@ function books_userapi_createBook($args)
 	$descriptorsString = '#';
 	foreach($descriptorsArray as $descriptor) {
 		if($descriptor != '') {
-		    $descriptor = utf8_encode(strtolower(utf8_decode(trim($descriptor))));
-            $descriptor = preg_replace('/\s*/m', '', $descriptor);
-			$descriptorsString .= '#' . $descriptor . '#';
+		    $descriptor = trim(mb_strtolower($descriptor));
+                    //$descriptor = preg_replace('/\s*/m', '', $descriptor);
+                    $descriptorsString .= '#' . $descriptor . '#';
 		}
 	}
 	$state = (pnUserGetVar('uname') == $mailxtec) ? 1 : '-1';
@@ -2165,3 +2167,70 @@ function books_userapi_editBookSettings($args)
 
     return true;
 }
+
+
+
+// XTEC ********** AFEGIT -> Manage descriptors when save / edit books
+// 2012.02.24 @mmartinez
+function books_userapi_updateDescriptors ($args){
+	// argument check
+	if(!isset($args['oldValue']) || !isset($args['newValue'])) {
+		return LogUtil::registerError (_MODARGSERROR);
+	}
+	
+	// security check
+	if(!SecurityUtil::checkPermission('books::', "::", ACCESS_READ)) {
+		return LogUtil::registerPermissionError();
+	}
+	
+	//check if there are diferences 
+	if ($args['oldValue'] != $args['newValue']){
+		$oldValue = explode('#', $args['oldValue']);
+		$newValue = explode('#', $args['newValue']);
+		
+		$pntables = pnDBGetTables();
+		$columns   = $pntables['books_descriptors_column'];
+		$where = '';
+		
+		//process the values taken out
+		$taken_out = array_diff($oldValue, $newValue);	
+		foreach ($taken_out as $val){			
+			$where = "$columns[descriptor] = '{$val}'";
+			$item = DBUtil::selectObject('books_descriptors', $where);
+			if(!$item) {
+				//no exits
+				continue;
+			} else {
+				//if exits, first check if value > 1 to less one, or not to delete the value
+				if ($item['number'] > 1){
+					//less one
+					$obj = array('number' => ($item['number'] - 1));
+					$result = DBUtil::updateObject($obj, 'books_descriptors', $where, 'did');
+				} else {
+					//take out from db
+					$result = DBUtil::deleteObjectByID('books_descriptors', $item['did'], 'did');
+				}
+			}
+		}
+		
+		//process the new values
+		$insert = array_diff($newValue, $oldValue);	
+        foreach ($insert as $val){
+        	$where = "$columns[descriptor] = '{$val}'";
+        	$item = DBUtil::selectObject('books_descriptors', $where);
+        	if(!$item) {
+        		//no exits, insert
+        		$obj = array('descriptor' => $val, 'number' => 1);
+        		$result = DBUtil::insertObject($obj, 'books_descriptors', 'did');
+        	} else {
+        		//plus one
+        		$obj = array('number' => ($item['number'] + 1));
+        		$result = DBUtil::updateObject($obj, 'books_descriptors', $where, 'did');
+        	}
+        }	
+	}
+	
+	return true;
+}
+
+// ************ FI

@@ -161,7 +161,7 @@ function books_ajax_searchReload($args)
 }
 
 
-function books_ajax_autocomplete($args)
+function books_ajax_autocompleteSearch($args)
 {
 	if (!SecurityUtil::checkPermission('books::', '::', ACCESS_READ)) {
 		AjaxUtil::error(DataUtil::formatForDisplayHTML(_MODULENOAUTH));

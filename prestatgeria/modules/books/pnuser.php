@@ -325,17 +325,19 @@ function books_user_collections()
 */
 function books_user_new()
 {
+	$pnRender = pnRender::getInstance('books',false);
+
+	$create = pnModFunc('books', 'user', 'canCreate', array('userName' => pnUserGetVar('uname')));
 	// Security check
-	if (!$create = pnModFunc('books', 'user', 'canCreate', array('userName' => pnUserGetVar('uname')))) {
-		return LogUtil::registerError(_MODULENOAUTH, 403);
+	if (!$create) {
+		return $pnRender->fetch('books_user_cantcreatenew.htm');
 	}
 	$collections = pnModAPIFunc('books', 'user', 'getAllCollection', array('state' => 1));
-	$pnRender = pnRender::getInstance('books',false);
 	$pnRender->assign('collections',$collections);
 	$pnRender->assign('canCreateToOthers',pnModGetVar('books', 'canCreateToOthers'));
 	$pnRender->assign('schoolCode',$create);
 	$pnRender->assign('userName', pnUserGetVar('uname'));
-    $pnRender->assign('helpTexts', pnModFunc('books', 'user', 'getHelpTexts'));
+    	$pnRender->assign('helpTexts', pnModFunc('books', 'user', 'getHelpTexts'));
 	return $pnRender->fetch('books_user_new.htm');
 }
 
@@ -378,7 +380,7 @@ function books_user_inscribe()
  * @return:	Redirect to a informative page if success or to the creation page oterwise
 */
 function books_user_updateBook($args)
-{
+{   
 	$dom = ZLanguage::getThemeDomain('Books');
 	
 	$ccentre = FormUtil::getPassedValue('ccentre', isset($args['ccentre']) ? $args['ccentre'] : null, 'POST');
@@ -470,6 +472,27 @@ function books_user_updateBook($args)
                                                                  'title' => __('Resultat en la creació del llibre',$dom),
                                                                  'result' => 0));
 		}
+		
+// XTEC *********** AFEGIT -> Manage descriptors when save / edit books
+// 2012.02.24 @mmartinez
+		$descriptorsArray = explode(',', $dllibre);
+                
+		$bookDescriptString = '#';
+		foreach($descriptorsArray as $descriptor) {
+			if($descriptor != ''){
+				$descriptor = trim(mb_strtolower($descriptor));
+				//$descriptor = preg_replace('/\s*/m', '', $descriptor);
+				$bookDescriptString .= '#' . $descriptor . '#';
+			}
+		}
+
+		if(!pnModAPIFunc('books', 'user', 'updateDescriptors', array('oldValue' => '',
+																	'newValue' => $bookDescriptString))) {
+				return pnModFunc('books', 'user', 'displayMsg', array('msg' => __("S'ha produït un error en editar els descriptors del llibre.",$dom),
+						'title' => __('Edita el llibre',$dom),
+						'result' => 0));
+		}
+// *********** FI
 	}
     // create the book folder where the book images have to be stored
     $path = pnModGetVar('books','serverImageFolder') . '/' . $ccentre .'_' . $bookId;
@@ -735,6 +758,15 @@ function books_user_removeBook($args)
     if($submit == _CANCEL){
         return pnRedirect(pnModURL('books', 'user', 'manage'));
     }  
+// XTEC *********** AFEGIT -> Manage descriptors when save / edit books
+// 2012.02.24 @mmartinez
+    if(!pnModAPIFunc('books', 'user', 'updateDescriptors', array('oldValue' => $book['bookDescript'],
+    															'newValue' => ''))) {
+    		return pnModFunc('books', 'user', 'displayMsg', array('msg' => __("S'ha produït un error en editar els descriptors del llibre.",$dom),
+    				'title' => __('Edita el llibre',$dom),
+    				'result' => 0));
+    }
+// *********** FI
 	// remove the book. If book state is -1 remove it completelly and set state to -2 otherwise and book is invible to users
     switch($book['bookState']){
         case -1:
@@ -783,7 +815,7 @@ function books_user_newPublic()
  * @return:	???
 */
 function books_user_editBook()
-{
+{   
 	$dom = ZLanguage::getThemeDomain('Books');
 	
     $bookId = FormUtil::getPassedValue('bookId', isset($args['bookId']) ? $args['bookId'] : null, 'GET');
@@ -859,7 +891,7 @@ function books_user_getHelpTexts($args)
  * @return:	Redirect to a informative page if success or to the creation page oterwise
 */
 function books_user_updateEditBook($args)
-{
+{   
 	$dom = ZLanguage::getThemeDomain('Books');
 	
     $bookId = FormUtil::getPassedValue('bookId', isset($args['bookId']) ? $args['bookId'] : null, 'POST');
@@ -870,6 +902,7 @@ function books_user_updateEditBook($args)
     $bookDescript = FormUtil::getPassedValue('bookDescript', isset($args['bookDescript']) ? $args['bookDescript'] : null, 'POST');
     $bookCollection = FormUtil::getPassedValue('bookCollection', isset($args['bookCollection']) ? $args['bookCollection'] : null, 'POST');
     $bookAdminName = FormUtil::getPassedValue('bookAdminName', isset($args['bookAdminName']) ? $args['bookAdminName'] : null, 'POST');
+    
 	// Confirm authorisation code
 	if (!SecurityUtil::confirmAuthKey()) {
 	    LogUtil::registerAuthidError();
@@ -892,6 +925,7 @@ function books_user_updateEditBook($args)
                                                                  'title' => __("Resultat de la càrrega d'un llibre",$dom),
                                                                  'result' => 0));
     }
+    
     $userName = pnUserGetVar('uname');
     $isOwner = false;
 	// check if user is the owner of the book
@@ -940,14 +974,16 @@ function books_user_updateEditBook($args)
     // edit the book properties
     if ($book['collectionId'] > 0) $bookCollection = $book['collectionId'];
     $descriptorsArray = explode(',',$bookDescript);
+    
 	$bookDescriptString = '#';
 	foreach($descriptorsArray as $descriptor) {
 		if($descriptor != ''){
-		    $descriptor = utf8_encode(strtolower(utf8_decode(trim($descriptor))));
-            $descriptor = preg_replace('/\s*/m', '', $descriptor);
+                        $descriptor = trim(mb_strtolower($descriptor));
+                        //$descriptor = preg_replace('/\s*/m', '', $descriptor);
 			$bookDescriptString .= '#' . $descriptor . '#';
 		}
 	}
+               
     if(!pnModAPIFunc('books', 'user', 'editBook', array('bookId' => $book['bookId'],
 	    											    'items' => array('newBookAdminName' => $newBookAdminName,
                                                                          'bookAdminName' => $bookAdminName,
@@ -960,6 +996,17 @@ function books_user_updateEditBook($args)
                                                                  'title' => __('Edita el llibre',$dom),
                                                                  'result' => 0));
     }
+
+// XTEC *********** AFEGIT -> Manage descriptors when save / edit books
+// 2012.02.24 @mmartinez
+   
+	if(!pnModAPIFunc('books', 'user', 'updateDescriptors', array('oldValue' => $book['bookDescript'],
+																'newValue' => $bookDescriptString))) {
+        return pnModFunc('books', 'user', 'displayMsg', array('msg' => __("S'ha produït un error en editar els descriptors del llibre.",$dom),
+                                                                 'title' => __('Edita el llibre',$dom),
+                                                                 'result' => 0));
+    }
+// *********** FI
 
     // edit the book settings
     if(!pnModAPIFunc('books', 'user', 'editBookSettings', array('bookId' => $book['bookId'],

@@ -35,14 +35,15 @@
 		</a>
 	</div>
 	<div style="clear:both;"></div>
-	<!--[if $canAdd]-->
+	<!--[pnuserloggedin assign=userid]-->
+	<!--[if $userid neq '']-->
 		<div class="blocLink">
 			<a href="<!--[pnmodurl modname="books" func="new"]-->">
 				<!--[gt text='Crea un llibre nou']-->
 			</a>
 		</div>
-		<div style="clear:both;"></div>
 	<!--[/if]-->
+	<div style="clear:both;"></div>
     <!--[if $mustInscribe]-->
     	<div class="blocLink">
 			<a href="<!--[pnmodurl modname="books" func="inscribe"]-->">
@@ -57,8 +58,6 @@
 		</a>
 	</div>
 	<div class="blocLink">
-		<!--[pnuserloggedin assign=userid]-->
-	 
 		<!--[if $userid neq '']-->
 			<a href="<!--[pnmodurl modname="users" func="logout"]-->">
 				<!--[gt text='Surt']-->
