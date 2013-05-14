@@ -1,0 +1,7 @@
+html/.htaccess
+html/config/config.php
+html/config/config_books.php
+html/config/xtecAPI.php
+html/pmf/inc/connecta.inc
+html/pmf/inc/sessio.inc
+   

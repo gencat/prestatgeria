@@ -1,6 +1,6 @@
 <?php
-$config_path = ('C:\Prestatgeria\src\config\config.php');
-$config_dist = ('http://localhost/llibres/');
+$config_path = ('/srv/www/prestatgeria/html/config/config.php');
+$config_dist = ('http://agora/prestatgeria/');
 
 include($config_path);
 define('_SITEDNS', $config_dist);
@@ -229,6 +229,7 @@ function checkSession() {
     $sql = "SELECT uid FROM session_info WHERE sessid = '$sessid'";
     $rs = mysql_query($sql);
     $uid = mysql_result($rs, 0, 0);
+
     if (!$rs) {
         mysql_close($connection);
         return false;
