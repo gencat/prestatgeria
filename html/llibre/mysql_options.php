@@ -34,12 +34,12 @@ Class MySQL_options
 		// debug
 		// print "$sql<br><br>";
 		if(empty($sql)) { return false; }
-		if(!eregi("^select",$sql))
+/*		if(!eregi("^select",$sql))
 		{
 			echo "<H2>Funci�n equivocada!</H2>\n";
 			return false;
 		}
-		if(empty($this->CONN)) { return false; }
+*/		if(empty($this->CONN)) { return false; }
 		$conn = $this->CONN;
 		$results = mysql_query($sql,$conn);
 		if( (!$results) or (empty($results))) {
@@ -61,12 +61,12 @@ Class MySQL_options
 	function insert ($sql="")
 	{
 		if(empty($sql)) { return false; }
-		if(!eregi("^insert",$sql))
+/*		if(!eregi("^insert",$sql))
 		{
 			echo "<H2>Funci�n equivocada!</H2>\n";
 			return false;
 		}
-		if(empty($this->CONN))
+*/		if(empty($this->CONN))
 		{
 			echo "<H2>No hay conexi�n!</H2>\n";
 			return false;
