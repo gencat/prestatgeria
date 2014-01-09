@@ -1,0 +1,52 @@
+CHANGELOG
+==========================================
+
+
+v13.01.13
+-------------------------------------------------------------
+- Updated Zikula to version 1.3.5
+- Added works.php
+
+
+v11.09.14
+-------------------------------------------------------------
+Errors solucionats:
+- El valor d'un paràmetre de la configuració inicial del mòdul AdvMailer era incorrecte.
+
+Canvis:
+- S'ha actualitzat el mòdul News de la versió 2.5.2 a la versió 2.6.2.
+
+
+v11.04.20
+-------------------------------------------------------------
+Errors solucionats:
+- S'ha mogut una variable de configuració del xinha de l'aplicació de les Preguntes Més Freqüents al fitxer de configuració sessio.inc.dist.
+
+Noves funcionalitats:
+- S'ha afegit el favicon al tema de la Prestatgeria del Zikula.
+
+
+v11.04.11
+-------------------------------------------------------------
+Canvis:
+- S'ha migrat el Zikula de la versió 1.1.2 a la versió 1.2.6.
+- S'han migrat els mòduls de Zikula EZComments, iw_webbox, News, Pages, Profile i Scribite a la versió corresponent a la maqueta 2.2 de la Intraweb.
+- S'ha afegit suport per gettext al mòdul Books de Zikula i s'han eliminat les crides a les funcions utf8_decode i utf8_encode.
+- S'ha canviat la configuració de la base de dades de latin1 a utf8 al fitxer de configuració config.php.dist.
+- S'ha afegit suport per gettext al tema iw_shelf.
+- S'ha canviat el comportament del formulari per autoritzar la creació de llibres nous de tal manera que encara que els noms del usuaris s'escriguin en majúscules, aquests es desen en minúscules.
+- S'ha mogut una variable de configuració del xinha al fitxer de configuració config_books.php.dist.
+
+Noves funcionalitats:
+- S'ha creat un script que permet canviar la codificació de les bases de dades i taules dels llibres de latin1 a utf8.
+- S'ha afegit una funció a l'API del mòdul Books que permet a un usuari administrador obtenir l'schoolcode, l'schoolid i el bookid de tots els llibres de la prestatgeria ordenats per base de dades.
+- S'ha afegit una funció a l'API del mòdul Books que permet a un usuari administrador canviar els paths de les imatges d'un llibre.
+- S'ha afegit un script que permet canviar els paths de les imatges dels llibres.
+- S'ha afegit la REL-11.04.04 del mòdul XTEC Advanced Mailer.
+- S'ha substituït el sistema d'enviament de correus electrònics tant del Zikula com del MyScrapBook pel sistema d'enviament de correus electrònics mitjançant el servei web del Departament d'Ensenyament.
+
+
+v11.03.16
+-------------------------------------------------------------
+- Versió provinent de phobos.
+
