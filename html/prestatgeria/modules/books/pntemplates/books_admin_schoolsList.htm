@@ -1,0 +1,28 @@
+<!--[include file="books_admin_menu.htm"]-->
+<div class="pn-admincontainer">
+	<div class="pn-adminpageicon"><!--[pnimg modname=core src=package_settings.gif set=icons/large alt=$templatetitle]--></div>
+	<h2><!--[gt text='Llista de centres amb drets de creació de llibres nous']--></h2>
+	<div class="page">
+		<table class='pn-datatable'>
+			<!--[foreach item=school from=$schools]-->
+				<tr bgcolor="<!--[cycle values="#ffffff, #eeeeee"]-->" id="row_<!--[$descriptor.did]-->">
+					<td>
+						<!--[$school.schoolCode]-->
+					</td>
+					<td>
+						<!--[$school.schoolType]--> <!--[$school.schoolName]-->
+					</td>
+					<td>
+						<!--[$school.schoolCity]-->
+					</td>
+					<td>
+						<!--[$school.schoolZipCode]-->
+					</td>
+					<td>
+						<!--[$school.schoolRegion]-->
+					</td>
+				</tr>
+			<!--[/foreach]-->
+		</table>
+	</div>
+</div>

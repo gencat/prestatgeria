@@ -1,26 +1,27 @@
 <?php
 /**
- * Copyright Zikula Foundation 2009 - Zikula Application Framework
+ * Zikula Application Framework
  *
- * This work is contributed to the Zikula Foundation under one or more
- * Contributor Agreements and licensed to You under the following license:
+ * @copyright (c) 2001, Zikula Development Team
+ * @link http://www.zikula.org
+ * @version $Id: modifier.updated.php 24342 2008-06-06 12:03:14Z markwest $
+ * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  *
- * @license GNU/LGPLv3 (or at your option, any later version).
- * @package Zikula
- *
- * Please see the NOTICE file distributed with this source code for further
- * information regarding copyright and licensing.
+ * @package Zikula_Themes
+ * @subpackage Atom
  */
 
 /**
- * Smarty modifier format an issue date for an atom news feed.
+ * Smarty modifier format an issue date for an atom news feed
  *
  * Example
  *
- *   {$MyVar|updated}
+ *   <!--[$MyVar|updated]-->
  *
- * @param array $string The contents to transform.
- *
+ * @author       Mark West
+ * @author		 Franz Skaaning
+ * @since        02 March 2004
+ * @param        array    $string     the contents to transform
  * @return       string   the updated output
  */
 function smarty_modifier_updated($string)

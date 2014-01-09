@@ -1,0 +1,16 @@
+<div class="page">
+	<div class="mainTitle"><!--[pnml name='Esborra el llibre']--> <!--[$book.bookTitle]--></div>
+	<hr />
+	<form name="removeBook" id="removeBook" action="<!--[pnmodurl modname="books" func="removeBook"]-->" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="confirmation" value="1" />
+			<input type="hidden" name="bookId" value="<!--[$book.bookId]-->" />
+			<!--[pnml name='Confirma que vols esborrar el llibre de forma permanent i definitiva. Tingués present que no serà possible recuperar-ne els continguts.']-->
+			<br />
+			<br />
+			<div>
+				<input type="submit" name="submit" value="<!--[pnml name='Esborra el llibre']-->" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" name="submit" value="<!--[pnml name='Cancel·la]-->" />
+			</div>
+	</form>
+</div>

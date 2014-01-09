@@ -1,160 +1,164 @@
 <?php
 /**
- * Copyright Zikula Foundation 2009 - Zikula Application Framework
+ * Zikula Application Framework
  *
- * This work is contributed to the Zikula Foundation under one or more
- * Contributor Agreements and licensed to You under the following license:
- *
- * @license GNU/LGPLv3 (or at your option, any later version).
- * @package Zikula
- *
- * Please see the NOTICE file distributed with this source code for further
- * information regarding copyright and licensing.
+ * @copyright (c) 2001, Zikula Development Team
+ * @link http://www.zikula.org
+ * @version $Id: index.php 27842 2009-12-12 06:08:16Z drak $
+ * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
-include 'lib/bootstrap.php';
-$core->init();
+// include base api
+include 'includes/pnAPI.php';
 
-$core->getEventManager()->notify(new Zikula_Event('frontcontroller.predispatch'));
+// start PN
+pnInit(PN_CORE_ALL & ~PN_CORE_AJAX);
+
+if (SessionUtil::hasExpired()) {
+    // Session has expired, display warning
+    header('HTTP/1.0 403 Access Denied');
+    Loader::includeOnce('header.php');
+    echo pnModAPIFunc('Users', 'user', 'expiredsession');
+    Loader::includeOnce('footer.php');
+    pnShutDown();
+}
 
 // Get variables
-$module = FormUtil::getPassedValue('module', '', 'GETPOST', FILTER_SANITIZE_STRING);
-$type   = FormUtil::getPassedValue('type', '', 'GETPOST', FILTER_SANITIZE_STRING);
-$func   = FormUtil::getPassedValue('func', '', 'GETPOST', FILTER_SANITIZE_STRING);
+// Note the op parameter is re-added here for gallery embedding
+// this should be removed once gallery has been updated for better
+// detection of zikula - assuming this parameter exists is
+// far from the best solution - markwest
+$module = FormUtil::getPassedValue('module', null, 'GETPOST');
+$type   = FormUtil::getPassedValue('type', 'user', 'GETPOST');
+$func   = FormUtil::getPassedValue('func', 'main', 'GETPOST');
+$name   = FormUtil::getPassedValue('name', null, 'GETPOST');
+$file   = FormUtil::getPassedValue('file', 'index', 'GETPOST');
 
-// check requested module
-$arguments = array();
+// Check for site closed
+if (pnConfigGetVar('siteoff') && !SecurityUtil::checkPermission('Settings::', 'SiteOff::', ACCESS_ADMIN) && !($module == 'Users' && $func == 'siteofflogin')) {
+    if (SecurityUtil::checkPermission('Users::', '::', ACCESS_OVERVIEW) && pnUserLoggedIn()){
+        pnUserLogOut();
+    }
+    header('HTTP/1.1 503 Service Unavailable');
+    if (file_exists('config/templates/siteoff.htm')) {
+        Loader::requireOnce('config/templates/siteoff.htm');
+    } else {
+        Loader::requireOnce('system/Theme/pntemplates/siteoff.htm');
+    }
+    pnShutDown();
+}
 
-// process the homepage
-if (!$module) {
-    // set the start parameters
-    $module = System::getVar('startpage');
-    $type = System::getVar('starttype');
-    $func = System::getVar('startfunc');
-    $args = explode(',', System::getVar('startargs'));
-
+// check requested module and set to start module if not present
+if (empty($name) && empty($module)) {
+    // legacy hack - some older themes rely on $GLOBALS['index'] being 1 for center blocks
+    $GLOBALS['index'] = 1;
+    $module = pnConfigGetVar('startpage');
+    $type   = pnConfigGetVar('starttype');
+    $func   = pnConfigGetVar('startfunc');
+    $args   = explode(',', pnConfigGetVar('startargs'));
+    $arguments = array();
     foreach ($args as $arg) {
         if (!empty($arg)) {
             $argument = explode('=', $arg);
             $arguments[$argument[0]] = $argument[1];
+            pnQueryStringSetVar($argument[0], $argument[1]);
         }
     }
+} elseif (empty($module) && !empty($name)) {
+    $module = $name;
 }
 
 // get module information
-$modinfo = ModUtil::getInfoFromName($module);
+$modinfo = pnModGetInfo(pnModGetIDFromName($module));
 
-// we need to force the mod load if we want to call a modules interactive init
-// function because the modules is not active right now
-if ($modinfo) {
-    $module = $modinfo['url'];
-
-    if (System::isLegacyMode()) {
-        $type = (empty($type)) ? $type = 'user' : $type;
-        $func = (empty($func)) ? $func = 'main' : $func;
-    }
-    if ($type == 'init' || $type == 'interactiveinstaller') {
-        ModUtil::load($modinfo['name'], $type, true);
-    }
+if ($type <> 'init' && !empty($module) && !pnModAvailable($modinfo['name'])) {
+    Loader::includeOnce('header.php');
+    LogUtil::registerError(__f("The '%s' module is not currently accessible.", DataUtil::formatForDisplay(strip_tags($module))));
+    echo pnModFunc('Errors', 'user', 'main', array('type' => 404));
+    Loader::includeOnce('footer.php');
+    pnShutDown();
 }
 
-$httpCode = 404;
-$message = '';
-$debug = null;
-$return = false;
-$e = null;
-
-if (System::getVar('Z_CONFIG_USE_TRANSACTIONS')) {
-    $dbConn = Doctrine_Manager::getInstance()->getCurrentConnection();
-    $dbConn->beginTransaction();
-}
-
-try {
-    if (empty($module)) {
-        // we have a static homepage
-        $return = ' ';
-    } elseif ($modinfo) {
-        // call the requested/homepage module
-        $return = ModUtil::func($modinfo['name'], $type, $func, $arguments);
+if ($modinfo['type'] == 2 || $modinfo['type'] == 3) {
+    // New-new style of loading modules
+    if (!isset($arguments)) {
+        $arguments = array();
     }
 
-    if (!$return) {
-        // hack for BC since modules currently use ModUtil::func without expecting exceptions - drak.
-        throw new Zikula_Exception_NotFound(__('Page not found.'));
-    }
-    $httpCode = 200;
+    // we need to force the mod load if we want to call a modules interactive init
+    // function because the modules is not active right now
+    $force_modload = ($type=='init') ? true : false;
+    if (empty($type)) $type = 'user';
+    if (empty($func)) $func = 'main';
+    if (pnModLoad($modinfo['name'], $type, $force_modload)) {
+        if (pnConfigGetVar('PN_CONFIG_USE_TRANSACTIONS')) {
+            $dbConn = pnDBGetConn(true);
+            $dbConn->StartTrans();
+        }
 
-    if (System::getVar('Z_CONFIG_USE_TRANSACTIONS')) {
-        $dbConn->commit();
-    }
+        $return = pnModFunc($modinfo['name'], $type, $func, $arguments);
 
-} catch (Exception $e) {
-    $event = new Zikula_Event('frontcontroller.exception', $e, array('modinfo' => $modinfo, 'type' => $type, 'func' => $func, 'arguments' => $arguments));
-    $core->getEventManager()->notify($event);
-
-    if ($event->isStopped()) {
-        $httpCode = $event['httpcode'];
-        $message = $event['message'];
-    } else {
-        if ($e instanceof Zikula_Exception_NotFound) {
-            $httpCode = 404;
-            $message = $e->getMessage();
-            $debug = array_merge($e->getDebug(), $e->getTrace());
-        } elseif ($e instanceof Zikula_Exception_Forbidden) {
-            $httpCode = 403;
-            $message = $e->getMessage();
-            $debug = array_merge($e->getDebug(), $e->getTrace());
-        } elseif ($e instanceof Zikula_Exception_Redirect) {
-            System::redirect($e->getUrl(), array(), $e->getType());
-            System::shutDown();
-        } elseif ($e instanceof PDOException) {
-            $httpCode = 500;
-            $message = $e->getMessage();
-            if (System::getVar('Z_CONFIG_USE_TRANSACTIONS')) {
-                $return = __('Error! The transaction failed. Performing rollback.') . $return;
-                $dbConn->rollback();
-            } else {
-                $return = __('Error! The transaction failed.') . $return;
+        if (pnConfigGetVar('PN_CONFIG_USE_TRANSACTIONS')) {
+            if ($dbConn->HasFailedTrans()) {
+                $return = __('Error! The transaction failed. Please perform a rollback.') . $return;
             }
-        } elseif ($e instanceof Exception) {
-            // general catch all
-            $httpCode = 500;
-            $message = $e->getMessage();
-            $debug = $e->getTrace();
+            $dbConn->CompleteTrans();
         }
+    } else {
+        $return = false;
     }
+
+    // Sort out return of function.  Can be
+    // true - finished
+    // false - display error msg
+    // text - return information
+    if ($return !== true) {
+        Loader::includeOnce('header.php');
+        if ($return === false) {
+            // check for existing errors or set a generic error
+            if (!LogUtil::hasErrors()) {
+                 LogUtil::registerError(__f("Could not load the '%s' module (at '%s' function).", array($modinfo['url'], $func)), 404);
+            }
+            echo pnModFunc('Errors', 'user', 'main');
+        } elseif (is_string($return) && strlen($return) > 1) {
+            // Text
+            echo $return;
+        } elseif (is_array($return)) {
+            $pnRender = & pnRender::getInstance($modinfo['name']);
+            $pnRender->assign($return);
+            if (isset($return['template'])) {
+                echo $pnRender->fetch($return['template']);
+            } else {
+                $modname = strtolower($modinfo['name']);
+                $type = strtolower($type);
+                $func = strtolower($func);
+                echo $pnRender->fetch("{$modname}_{$type}_{$func}.htm");
+            }
+        } else {
+            LogUtil::registerError(__f('The \'%1$s\' module returned at the \'%2$s\' function.', array($modinfo['url'], $func)), 404);
+            echo pnModFunc('Errors', 'user', 'main');
+        }
+        Loader::includeOnce('footer.php');
+    }
+} elseif ($modinfo['type'] == 1) {
+    // Old-old style of loading modules
+    define('LOADED_AS_MODULE', '1');
+    // ensure that the module table information is available
+    pnModDBInfoLoad($modinfo['name'], $modinfo['directory']);
+    if (file_exists('modules/' . DataUtil::formatForOS($modinfo['directory']) . '/' . DataUtil::formatForOS($file) . '.php')) {
+        include 'modules/' . DataUtil::formatForOS($modinfo['directory']) . '/' . DataUtil::formatForOS($file) . '.php';
+    } else {
+        // Failed to load the module
+        header('HTTP/1.0 404 Not Found');
+        Loader::includeOnce('header.php');
+        LogUtil::registerError(__f("Could not load the '%s' module.", $modinfo['url']), 404);
+        echo pnModFunc('Errors', 'user', 'main');
+        Loader::includeOnce('footer.php');
+        pnShutDown();
+    }
+} else {
+    Loader::includeOnce('header.php');
+    Loader::includeOnce('footer.php');
 }
 
-switch (true)
-{
-    case ($return === true):
-        // prevent rendering of the theme.
-        System::shutDown();
-        break;
-
-    case ($httpCode == 403):
-        if (!UserUtil::isLoggedIn()) {
-            $url = ModUtil::url('Users', 'user', 'login', array('returnpage' => urlencode(System::getCurrentUri())));
-            LogUtil::registerError(LogUtil::getErrorMsgPermission(), $httpCode, $url);
-            System::shutDown();
-        }
-        // there is no break here deliberately.
-    case ($return === false):
-        if (!LogUtil::hasErrors()) {
-            LogUtil::registerError(__f('Could not load the \'%1$s\' module at \'%2$s\'.', array($module, $func)), $httpCode, null);
-        }
-        echo ModUtil::func('Errors', 'user', 'main', array('message' => $message, 'exception' => $e));
-        break;
-
-    case ($httpCode == 200):
-        echo $return;
-        break;
-
-    default:
-        LogUtil::registerError(__f('The \'%1$s\' module returned an error in \'%2$s\'.', array($module, $func)), $httpCode, null);
-        echo ModUtil::func('Errors', 'user', 'main', array('message' => $message, 'exception' => $e));
-        break;
-}
-
-Zikula_View_Theme::getInstance()->themefooter();
-System::shutdown();
+pnShutDown();

@@ -1,4 +1,5 @@
 <?php
+// $Id:  $
 // ----------------------------------------------------------------------
 // LICENSE
 //
@@ -42,10 +43,10 @@ function News_needleapi_news($args)
         if (!isset($cache[$nid])) {
             // not in cache array
 
-            $obj = ModUtil::apiFunc('News', 'user', 'get', array('sid' => $nid));
+            $obj = pnModAPIFunc('News', 'user', 'get', array('sid' => $nid));
 
             if ($obj != false) {
-                $url   = DataUtil::formatForDisplay(ModUtil::url('News', 'user', 'display', array('sid' => $nid)));
+                $url   = DataUtil::formatForDisplay(pnModURL('News', 'user', 'display', array('sid' => $nid)));
                 $title = DataUtil::formatForDisplay($obj['title']);
                 $cache[$nid] = '<a href="' . $url . '" title="' . $title . '">' . $title . '</a>';
             } else {

@@ -1,14 +1,7 @@
 CHANGELOG
 ==========================================
 
-
-v13.01.13
--------------------------------------------------------------
-- Updated Zikula to version 1.3.5
-- Added works.php
-
-
-v11.09.14
+v.11.09.14
 -------------------------------------------------------------
 Errors solucionats:
 - El valor d'un paràmetre de la configuració inicial del mòdul AdvMailer era incorrecte.
@@ -17,7 +10,7 @@ Canvis:
 - S'ha actualitzat el mòdul News de la versió 2.5.2 a la versió 2.6.2.
 
 
-v11.04.20
+v.11.04.20
 -------------------------------------------------------------
 Errors solucionats:
 - S'ha mogut una variable de configuració del xinha de l'aplicació de les Preguntes Més Freqüents al fitxer de configuració sessio.inc.dist.
@@ -26,7 +19,7 @@ Noves funcionalitats:
 - S'ha afegit el favicon al tema de la Prestatgeria del Zikula.
 
 
-v11.04.11
+v.11.04.11
 -------------------------------------------------------------
 Canvis:
 - S'ha migrat el Zikula de la versió 1.1.2 a la versió 1.2.6.
@@ -46,7 +39,6 @@ Noves funcionalitats:
 - S'ha substituït el sistema d'enviament de correus electrònics tant del Zikula com del MyScrapBook pel sistema d'enviament de correus electrònics mitjançant el servei web del Departament d'Ensenyament.
 
 
-v11.03.16
+v.11.03.16
 -------------------------------------------------------------
 - Versió provinent de phobos.
-

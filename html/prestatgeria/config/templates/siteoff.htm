@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>El lloc web est&agrave; desactivat</title>
+<style type="text/css">
+<!--
+#login {
+	visibility:hidden;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+a {color: #000099;}
+img {border: none;}
+h1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	text-align: center;
+    padding: 0 0 20px 0;
+}
+h2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align: center;
+}
+.style2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+.center {
+    text-align:center;
+}
+-->
+</style>
+<script type="text/javascript">
+<!--
+function toggleBox(szDivID, iState) // 1 visible, 0 hidden
+{
+   var obj = document.layers ? document.layers[szDivID] :
+   document.getElementById ?  document.getElementById(szDivID).style :
+   document.all[szDivID].style;
+   obj.visibility = document.layers ? (iState ? "show" : "hide") :
+   (iState ? "visible" : "hidden");
+}
+// -->
+</script>
+</head>
+<body>
+<div class="center">
+    <img src="images/icons/large/error.gif" alt="Site Disabled" id="sitedisabled" width="48" height="48" />
+</div>
+<h1>El lloc web est&agrave; desactivat</h1>
+<h2><?php echo pnConfigGetVar('siteoffreason');?></h2>
+<div id="login">
+Nom&eacute;s els usuaris administradors poden entrar:<br />
+<form action="<?php pnConfigGetVar('entrypoint', 'index.php'); ?>?module=Users&amp;func=siteofflogin" method="post">
+    <div>
+        <div>
+          <label for="user">Nom d'usuari: </label>
+        </div>
+        <div><input id="user" type="text" name="user" size="14" maxlength="25" /></div>
+        <div>
+          <label for="pass">Contrasenya: </label>
+        </div>
+        <div><input id="pass" type="password" name="pass" size="14" maxlength="20" /></div>
+        <div><input type="submit" value="Entra" /></div>
+    </div>
+</form>
+</div>
+<div class="center style2">
+    <a href="#" class="a.link" onclick="toggleBox('login', 1);" title="Administrator Login">Entrada d'administraci&oacute;</a>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-// ** I18N
+﻿// ** I18N
 // Greek, utf8
 Calendar._DN = new Array
 ("Κυριακή",

@@ -1,15 +1,14 @@
 <?php
 /**
- * Copyright Zikula Foundation 2009 - Zikula Application Framework
+ * Zikula Application Framework
  *
- * This work is contributed to the Zikula Foundation under one or more
- * Contributor Agreements and licensed to You under the following license:
+ * @copyright (c) 2001, Zikula Development Team
+ * @link http://www.zikula.org
+ * @version $Id: modifier.modified.php 18169 2006-03-16 02:17:22Z drak $
+ * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  *
- * @license GNU/LGPLv3 (or at your option, any later version).
- * @package Zikula
- *
- * Please see the NOTICE file distributed with this source code for further
- * information regarding copyright and licensing.
+ * @package Zikula_Themes
+ * @subpackage Atom
  */
 
 /**
@@ -17,8 +16,10 @@
  *
  * Example
  *
- *   <updated>{updated}</updated>
+ *   <updated><!--[updated]--></updated>
  *
+ * @author       Mark West
+ * @since        18 February 2007
  * @return       string the atom ID
  */
 function smarty_function_updated($params, &$smarty)

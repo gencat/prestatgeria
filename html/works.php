@@ -2,10 +2,10 @@
 
 require_once 'config/config.php';
 
-$dbhost = $ZConfig['DBInfo']['databases']['default']['host'];
-$dbuname = $ZConfig['DBInfo']['databases']['default']['user'];
-$dbpass = $ZConfig['DBInfo']['databases']['default']['password'];
-$dbname = $ZConfig['DBInfo']['databases']['default']['dbname'];
+$dbhost = $PNConfig['DBInfo']['default']['dbhost'];
+$dbuname = $PNConfig['DBInfo']['default']['dbuname'];
+$dbpass = $PNConfig['DBInfo']['default']['dbpass'];
+$dbname = $PNConfig['DBInfo']['default']['dbname'];
 
 $dbc = new mysqli($dbhost, $dbuname, $dbpass, $dbname);
 
@@ -15,13 +15,13 @@ if ($dbc->connect_errno > 0) {
     // Charset is not really required, but it's fair setting it
     $dbc->set_charset('utf8');
 
-    $sql = 'SELECT uname FROM users LIMIT 1';
+    $sql = 'SELECT pn_uname FROM zk_users LIMIT 1';
 
     if (!$result = $dbc->query($sql)) {
         echo 'Error ' . $dbc->connect_errno . ': ' . $dbc->connect_error;
     } else {
         $row = $result->fetch_assoc();
-        if (!empty($row['uname'])) {
+        if (!empty($row['pn_uname'])) {
             // If this point is reached, everything is Ok!
             echo 'Aplicacio:OK';
         } else {

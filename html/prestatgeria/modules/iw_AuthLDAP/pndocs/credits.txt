@@ -1,0 +1,9 @@
+$Id: credits.txt 12811 2004-02-28 23:19:04Z markwest $
+========================================================================
+Credits
+========================================================================
+
+AuthLDAP v 0.2
+Created by mikegoldfinger@linuxmail.org
+
+Maked API compliant by markwest@digitalme.com, Many tanks!

@@ -1,15 +1,14 @@
 <?php
 /**
- * Copyright Zikula Foundation 2009 - Zikula Application Framework
+ * Zikula Application Framework
  *
- * This work is contributed to the Zikula Foundation under one or more
- * Contributor Agreements and licensed to You under the following license:
+ * @copyright (c) 2001, Zikula Development Team
+ * @link http://www.zikula.org
+ * @version $Id: modifier.modified.php 18169 2006-03-16 02:17:22Z drak $
+ * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  *
- * @license GNU/LGPLv3 (or at your option, any later version).
- * @package Zikula
- *
- * Please see the NOTICE file distributed with this source code for further
- * information regarding copyright and licensing.
+ * @package Zikula_Themes
+ * @subpackage Atom
  */
 
 /**
@@ -17,21 +16,23 @@
  *
  * Example
  *
- *   <id>{id}</id>
+ *   <id><!--[id]--></id>
  *
+ * @author       Mark West
+ * @since        18 February 2007
  * @return       string the atom ID
  */
 function smarty_function_id($params, &$smarty)
 {
-    $baseurl = System::getBaseUrl();
+    $baseurl = pnGetBaseURL();
 
     $parts = parse_url($baseurl);
 
-    $starttimestamp = strtotime(System::getVar('startdate'));
+    $starttimestamp = strtotime(pnConfigGetVar('startdate'));
     $startdate = strftime('%Y-%m-%d', $starttimestamp);
 
-    $sitename = System::getVar('sitename');
-    $sitename = preg_replace('/[^a-zA-Z0-9-\s]/', '', $sitename);
+    $sitename = pnConfigGetVar('sitename');
+    $sitename = preg_replace('/[^a-zA-Z0-9-\s]/', '', $sitename); 
     $sitename = DataUtil::formatForURL($sitename);
 
     return "tag:{$parts['host']},{$startdate}:{$sitename}";
