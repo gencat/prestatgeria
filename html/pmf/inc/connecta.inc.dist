@@ -11,3 +11,9 @@ $connection = mysql_select_db($database, $server);
 $clauedicio="1caf51fc04fd9170c477485da2663772";
 $arrel="continguts/";
 
+// XTEC ADDED
+// @aginard: Force latin1 connections to DB
+mysql_query("SET NAMES 'latin1'");
+mysql_query("SET CHARACTER SET latin1");
+mysql_query("SET COLLATION_CONNECTION = 'latin1_general_ci'");
+

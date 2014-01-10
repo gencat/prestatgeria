@@ -25,6 +25,13 @@ Class MySQL_options
 		if(!mysql_select_db($database,$conn)) {
 			$this->error("Error al seleccionar la base de datos");
 		}
+
+		// XTEC ADDED
+		// @aginard: Force latin1 connections to DB
+		mysql_query("SET NAMES 'latin1'");
+		mysql_query("SET CHARACTER SET latin1");
+		mysql_query("SET COLLATION_CONNECTION = 'latin1_general_ci'");
+
 		$this->CONN = $conn;
 		return true;
 	}
