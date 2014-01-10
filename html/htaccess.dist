@@ -1,4 +1,4 @@
 RewriteEngine on
-RewriteBase /llibres/
+RewriteBase /prestatgeria/
 RewriteRule ^([^/]*)/llibre$ $1/llibre/ [QSA,R=permanent,L]
 RewriteRule ^([^/]*)/llibre/(.*)$ llibre/$2?fisbn=$1 [QSA,L]
