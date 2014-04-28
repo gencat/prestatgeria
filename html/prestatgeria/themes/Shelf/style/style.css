@@ -196,6 +196,12 @@ a {
 	background-color: #d0dcd1;
 }
 
+/* Login block */
+.z-bkey-login .left_inside .left_content { 
+    padding: 8px 6px 8px 6px;
+}
+
+
 /* Footer */
 #themefooter {
 	position:relative;

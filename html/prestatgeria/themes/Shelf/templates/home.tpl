@@ -54,7 +54,7 @@
             </div>
             <div id="contentwrapper">
                 <div id="contentcolumn">
-                    <div class="innertube" id="theme_content">
+                    <div id="z-maincontent" class="innertube">
                         {blockposition name=center}
                         {$maincontent}		
                     </div>
