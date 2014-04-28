@@ -3,18 +3,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset={charset}" />
         <meta name="description" content="{$modvars.ZConfig.slogan}" />
+        <meta name="keywords" content="{$metatags.keywords}" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="{$modvars.ZConfig.sitename}" />
         <meta name="copyright" content="Copyright (c) 2009 by {$modvars.ZConfig.sitename}" />
-        <meta name="generator" content="Zikula {$coredata.version_num} - http://zikula.org" />
+        <meta name="generator" content="Zikula - http://zikula.org" />
+        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
         <title>{pagegetvar name='title'}</title>
         <link rel="icon" type="image/x-icon" href="{$imagepath}/favicon.ico" /> {* W3C *}
         <link rel="shortcut icon" type="image/ico" href="{$imagepath}/favicon.ico" /> {* IE *}
         <link rel="stylesheet" href="{$themepath}/style/{$stylesheet}" type="text/css" />
-
-        <style type="text/css">
-
-        </style>
     </head>
 
     <body>
@@ -43,9 +41,12 @@
                 <div id="menu">
                     <span class="menuitems">
                         {blockposition name=menu}
+                        {userloggedin assign="logged"}
+                        {if not $logged}
+                        <a href="{modurl modname='Users' type='user' func='loginscreen'}">Entra</a>&nbsp;|&nbsp;
+                        {/if}
                         <a href="index.php">Inici</a>&nbsp;|&nbsp;
-                        <a href="index.php?module=Pages&func=display&pageid=1">Condicions d'&uacute;s</a>&nbsp;|&nbsp;
-                        <a href="http://phobos.xtec.cat/forum/viewforum.php?f=43" target="_blank">F&ograve;rum</a>
+                        <a href="{modurl modname='Pages' type='user' func='display' pageid='1'}">Condicions d'&uacute;s</a>
                     </span>
                 </div>
                 <div id="menubar">
