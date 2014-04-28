@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------
 require "config.php";
 require "functions.php";
-include_once $zikulapath . '/modules/advMailer/pnincludes/mailsender.class.php';
-include_once $zikulapath . '/modules/advMailer/pnincludes/message.class.php';
+include_once $zikulapath . '/modules/XtecMailer/includes/mailsender.class.php';
+include_once $zikulapath . '/modules/XtecMailer/includes/message.class.php';
 
 //Select the file with the lang strings
 include("lang/".$lang.'.php');
