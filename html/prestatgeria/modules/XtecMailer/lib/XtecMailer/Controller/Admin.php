@@ -41,7 +41,7 @@ class XtecMailer_Controller_Admin extends Zikula_AbstractController {
         $render->assign(ModUtil::getVar('XtecMailer'));
 
         // @aginard: force replyAddress to be site admin mail
-        $render->assign('replyAddress', ModUtil::getVar($this->name, 'replyAddress'));
+        $render->assign('replyAddress', System::getVar('adminmail'));
 
         // @aginard: configuration params will be shown to all admins
         $render->assign('showextraparams', 1);
@@ -145,10 +145,10 @@ class XtecMailer_Controller_Admin extends Zikula_AbstractController {
             // Success
             LogUtil::registerStatus(__('Done! Message sent.'));
         } elseif ($result === false) {
-            // Failiure
+            // Failure
             LogUtil::registerError(__f('Error! Could not send message. %s', ''));
         } else {
-            // Failiure with error
+            // Failure with error
             LogUtil::registerError(__f('Error! Could not send message. %s', $result));
         }
 
