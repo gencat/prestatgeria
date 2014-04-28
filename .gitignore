@@ -4,6 +4,6 @@ html/config/config_books.php
 html/config/xtecAPI.php
 html/pmf/inc/connecta.inc
 html/pmf/inc/sessio.inc
-zTemp/
+ztemp/
 templates_c/
    

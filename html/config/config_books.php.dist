@@ -15,7 +15,7 @@ $ENVIRONMENT = 'INT';
 $CONTENTTYPE = 'text/html';
 $LOG = false;
 $LOGDEBUG = false;
-$LOGPATH = '/srv/www/prestatgeria/pnTemp/error_logs/mailsender.log';
+$LOGPATH = '/srv/www/prestatgeria/ztemp/error_logs/mailsender.log';
 
 //Others
 $zikulapath = '/srv/www/prestatgeria/html/prestatgeria';
