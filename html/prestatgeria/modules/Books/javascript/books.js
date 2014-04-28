@@ -20,7 +20,7 @@ function showBookData_response(a){
         return;
     }
     var b=a.getData();
-    $("theme_content").update(b.content);
+    $("z-maincontent").update(b.content);
 }
 
 function catalogue(a,aa,aaa,aaaa,aaaaa){
@@ -45,11 +45,11 @@ function catalogue_response(a){
         return;
     }
     var b=a.getData();
-    $("theme_content").update(b.content);
+    $("z-maincontent").update(b.content);
 }
 
 function wait(){
-    $("theme_content").update('<center><img src="' + Zikula.Config.baseURL + 'modules/books/images/wait.gif" /></center>');
+    $("z-maincontent").update('<center><img src="' + Zikula.Config.baseURL + 'modules/Books/images/wait.gif" /></center>');
 }
 
 function addPrefer(a){
@@ -111,7 +111,7 @@ function addComment_response(a){
         return;
     }
     var b=a.getData();
-    $("theme_content").update(b.content);
+    $("z-maincontent").update(b.content);
 }
 
 function sendComment(){
@@ -137,7 +137,7 @@ function sendComment_response(a){
         return;
     }
     var b=a.getData();
-    $("theme_content").update(b.content);
+    $("z-maincontent").update(b.content);
 }
 
 function collections(bookId){
@@ -154,11 +154,11 @@ function collections_response(a){
         return;
     }
     var b=a.getData();
-    $("theme_content").update(b.content);
+    $("z-maincontent").update(b.content);
 }
 
 function searchReload(a,aa,aaa){
-    $("searchIcon").update('<img src="' + Zikula.Config.baseURL + 'modules/books/pnimages/wait.gif" />');
+    $("searchIcon").update('<img src="' + Zikula.Config.baseURL + 'modules/Books/pnimages/wait.gif" />');
     var b={
         filter:a,
         filterValue:aa,
@@ -257,7 +257,7 @@ function manage_response(a){
         return;
     }
     var b=a.getData();
-    $("theme_content").update(b.content);
+    $("z-maincontent").update(b.content);
 }
 
 function allowUser(a,aa){
@@ -405,5 +405,5 @@ function descriptors_response(a){
         return;
     }
     var b=a.getData();
-    $("theme_content").update(b.content);
+    $("z-maincontent").update(b.content);
 }
