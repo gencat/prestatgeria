@@ -16,13 +16,13 @@ L'adreça d'accés a aquest llibre és <a href="{$bookSoftwareUrl}/{$book.school
 Una vegada hagis acceptat podràs accedir a l'administració del llibre amb el teu nom d'usuari/ària i contransenya de la XTEC.
 <br />
 <br />
-A l'hora de fer ús del llibre, tingues present les <a href="{$bookSoftwareUrl}/index.php?module=Pages&func=display&pageid=1">condicions d'ús dels llibres digitals de la XTEC</a>.
+A l'hora de fer ús del llibre, has de tenir present les <a href="{$bookSoftwareUrl}/prestatgeria/index.php?module=Pages&func=display&pageid=1">condicions d'ús dels llibres digitals de la XTEC</a>.
 <br />
 <br />
 Si tens dubtes de com editar i afegir continguts nous al teu llibre, <a href="{$bookSoftwareUrl}/llibres_1/llibre">visita el llibre d'ajuda</a>.
 <br />
 <br />
-Si vols fer comentaris o tens dubtes sobre el funcionament dels llibres, pots dirigir-te als <a href="http://phobos.xtec.cat/forum/viewforum.php?f=43">fòrums de la XTEC</a>.
+En cas de necessitar suport de qualsevol tipus relatiu al funcionament dels llibres, pots dirigir-te al SAU.
 <br />
 <br />
 Esperem que gaudeixis d'aquest servei.
