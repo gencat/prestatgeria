@@ -648,8 +648,9 @@ class Books_Api_User extends Zikula_AbstractApi {
                 mysql_close($connect);
                 return LogUtil::registerError(_UPDATEFAILED);
             }
-            $user = UserUtil::getVars(UserUtil::getVar('uid'));
-            $pass = $user['password'];
+            $fullpass = UserUtil::getVar('pass');
+            $fullpass_array = explode('$', $fullpass);
+            $pass = $fullpass_array[2];
             //Update admin name and password in book
             $sql = "UPDATE `" . $prefix . "_config` SET myname='" . $userName . "', mypass='" . $pass . "';";
             $rs = mysql_query($sql, $connect);
@@ -1042,6 +1043,9 @@ class Books_Api_User extends Zikula_AbstractApi {
         $prefix = $ccentre . '_' . $item['bookId'];
 
         // _config
+        $fullpass = UserUtil::getVar('pass');
+        $fullpass_array = explode('$', $fullpass);
+        $pass = $fullpass_array[2];
         $sql = "INSERT INTO " . $prefix . "_config (
 				site_title,
 				site_home,
@@ -1060,7 +1064,7 @@ class Books_Api_User extends Zikula_AbstractApi {
 				'" . mysql_real_escape_string($tllibre) . "',
 				'" . mysql_real_escape_string($site_path) . "llibre.php?fisbn=" . $prefix . "',
 				'" . mysql_real_escape_string($mailxtec) . "',				
-				'" . mysql_real_escape_string(UserUtil::getVar('pass')) . "',
+				'" . mysql_real_escape_string($pass) . "',
 				'" . mysql_real_escape_string($descllibre) . "',
 				'" . mysql_real_escape_string($abouttext) . "',
 				'" . mysql_real_escape_string($version) . "',

@@ -923,7 +923,9 @@ class Books_Controller_User extends Zikula_AbstractController {
         } else if ($bookAdminName == $userName) {
             // the administrator change but it is the same as the owner. The confirmation is not required
             $myname = $userName;
-            $mypass = UserUtil::getVar('pass');
+            $fullpass = UserUtil::getVar('pass');
+            $fullpass_array = explode('$', $fullpass);
+            $mypass = $fullpass_array[2];
         } else {
             // the administrator change and the confirmation is required
             $oBookAdminName = $bookAdminName;
