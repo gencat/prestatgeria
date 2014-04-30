@@ -15,9 +15,9 @@ class Books_Version extends Zikula_AbstractVersion {
     public function getMetaData() {
         $meta = array();
         $meta['displayname'] = $this->__("Llibres");
-        $meta['description'] = $this->__("Integració d'un sistema multiMyScrackBook a Zikula");
+        $meta['description'] = $this->__("Integració d'un sistema MyScrapBook múltiple al Zikula");
         $meta['url'] = $this->__("Books");
-        $meta['version'] = '1.0.0';
+        $meta['version'] = '2.0.0';
         $meta['securityschema'] = array('Books::' => '::');
         return $meta;
     }
