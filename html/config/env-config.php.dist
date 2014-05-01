@@ -7,5 +7,7 @@ $presta['dbname'] = '';
 $presta['dbuser'] = '';
 $presta['dbpass'] = '';
 
+define ('_SITEDNS', 'http://server/prestatgeria/');
+
 // Note: some environment variables are still defined in config_books.php. Will be fixed in the future.
 
