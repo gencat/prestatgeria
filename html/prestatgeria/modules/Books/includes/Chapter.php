@@ -374,7 +374,7 @@ class Chapter {
         $pageNodes = $pagesNode->getElementsByTagName('page');
         foreach ($pageNodes as $pageNode) {
 
-            Loader::RequireOnce("modules/books/includes/Page.php");
+            Loader::RequireOnce("modules/Books/includes/Page.php");
 
             $page = new Page();
 
@@ -390,7 +390,7 @@ class Chapter {
         $pageNodes = $unnaprovedNode->getElementsByTagName('page');
         foreach ($pageNodes as $pageNode) {
 
-            Loader::RequireOnce('modules/books/includes/Page.php');
+            Loader::RequireOnce('modules/Books/includes/Page.php');
 
             $page = new Page();
 

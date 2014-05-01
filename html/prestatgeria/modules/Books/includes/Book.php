@@ -45,7 +45,7 @@ class Book {
         }
 
         // Validates the document
-        if (!$doc->schemaValidate('modules/books/includes/book.xsd')) {
+        if (!$doc->schemaValidate('modules/Books/includes/book.xsd')) {
             return LogUtil::registerError('El fitxer ' . $filename . ' no és vàlid.');
         }
 
@@ -155,7 +155,7 @@ class Book {
         $chapterNodes = $chaptersNode->getElementsByTagName('chapter');
         foreach ($chapterNodes as $chapterNode) {
 
-            Loader::RequireOnce("modules/books/includes/Chapter.php");
+            Loader::RequireOnce("modules/Books/includes/Chapter.php");
 
             $chapter = new Chapter();
 
@@ -419,7 +419,7 @@ class Book {
             return false;
         }
 
-        Loader::RequireOnce("modules/books/includes/eBookLib/ebook.php");
+        Loader::RequireOnce("modules/Books/includes/eBookLib/ebook.php");
         $ebook = new ebook();
         $ebook->setDcTitle($this->bookTitle);
         $ebook->setDcCreator($this->getAdminEmail());
@@ -495,7 +495,7 @@ class Book {
         $ebook->setSpine($spine);
         $dirsource = '/srv/www/htdocs/prestatgeria/html/centres' . '/' . $this->schoolCode . '_' . $this->bookId;
 
-        Loader::RequireOnce("modules/books/includes/utils.php");
+        Loader::RequireOnce("modules/Books/includes/utils.php");
         // images
         copydir(ModUtil::getVar('books', 'serverImageFolder') . '/' . $this->schoolCode . '_' . $this->bookId, $ebook->getContentLoc() . 'images');
 
