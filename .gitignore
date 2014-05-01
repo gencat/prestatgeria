@@ -1,9 +1,9 @@
 html/.htaccess
-html/config/config.php
+html/config/env-config.php
 html/config/config_books.php
-html/config/xtecAPI.php
 html/pmf/inc/connecta.inc
 html/pmf/inc/sessio.inc
 ztemp/
 templates_c/
 centres/
+rss/

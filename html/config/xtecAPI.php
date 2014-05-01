@@ -1,9 +1,6 @@
 <?php
-$config_path = ('/srv/www/prestatgeria/html/config/config.php');
-$config_dist = ('http://agora/prestatgeria/');
 
-include($config_path);
-define('_SITEDNS', $config_dist);
+require '../prestatgeria/config/config.php';
 
 //Connect to data base
 function connect($db) {
