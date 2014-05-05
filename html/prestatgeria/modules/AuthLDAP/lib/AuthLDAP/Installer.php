@@ -21,7 +21,7 @@ class AuthLDAP_Installer extends Zikula_AbstractInstaller {
                 ->setVar('authldap_searchattr', 'uid')
                 ->setVar('authldap_protocol', '3');
 
-        EventUtil::registerPersistentModuleHandler('AuthLDAP', 'module.users.ui.login.started', array('AuthLDAP_Listeners', 'tryAuthLDAPListener'));
+        EventUtil::registerPersistentModuleHandler('AuthLDAP', 'module.users.ui.login.failed', array('AuthLDAP_Listeners', 'tryAuthLDAPListener'));
 
         // successful
         return true;
@@ -60,7 +60,7 @@ class AuthLDAP_Installer extends Zikula_AbstractInstaller {
         $table = DBUtil::getTables();
         switch ($oldversion) {
             case '1.0':
-                EventUtil::registerPersistentModuleHandler('AuthLDAP', 'module.users.ui.login.started', array('AuthLDAP_Listeners', 'tryAuthLDAPListener'));
+                EventUtil::registerPersistentModuleHandler('AuthLDAP', 'module.users.ui.login.failed', array('AuthLDAP_Listeners', 'tryAuthLDAPListener'));
             case '1.0.1':
         }
         return true;
