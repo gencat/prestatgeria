@@ -19,34 +19,45 @@ class AuthLDAP_Listeners {
 
     /**
      * Validate user via LDAP because the Zikula authentication has failed and create it if necessary
+     * 
      * @author Albert Pérez Monfort
-     * @return bool true authetication succesful
+     * @author Toni Ginard
+     * 
+     * @return bool true if authentication is succesfull
      */
     public static function tryAuthLDAPListener(Zikula_Event $event) {
         $authentication_info = FormUtil::getPassedValue('authentication_info', isset($args['authentication_info']) ? $args['authentication_info'] : null, 'POST');
 
         // Argument check
-        if ($authentication_info['login_id'] == '' || $authentication_info['pass'] == '')
+        if ($authentication_info['login_id'] == '' || $authentication_info['pass'] == '') {
             return false;
+        }
 
         $uname = $authentication_info['login_id'];
         $pass = $authentication_info['pass'];
-
-        $info = array();
 
         // define the attributes we want to get in our search
         $justthese = array('cn', 'uid', 'givenname', 'sn', 'mail');
 
         // connect to ldap server
-        if (!$ldap_ds = ldap_connect(modUtil::getVar('AuthLDAP', 'authldap_serveradr')))
+        if (!$ldap_ds = ldap_connect(ModUtil::getVar('AuthLDAP', 'authldap_serveradr'))) {
             return false;
+        }
+
+        // Get configuration data
+        $authldap_searchattr = ModUtil::getVar('AuthLDAP', 'authldap_searchattr');
+        $authldap_basedn = ModUtil::getVar('AuthLDAP', 'authldap_basedn');
+        $authldap_searchdn = ModUtil::getVar('AuthLDAP', 'authldap_searchdn');
 
         // XTEC LDAP server uses non-standar bind
-        $ldaprdn = modUtil::getVar('AuthLDAP', 'authldap_searchattr') . '=' . $uname . ',' . modUtil::getVar('AuthLDAP', 'authldap_basedn');    // ldap rdn or dn
-        ldap_bind($ldap_ds, $ldaprdn, $pass);
+        $ldaprdn = $authldap_searchattr . '=' . $uname . ',' . $authldap_basedn;    // ldap rdn or dn
+        if (ldap_bind($ldap_ds, $ldaprdn, $pass) === false) {
+            LogUtil::registerError('El nom d\'usuari/ària o la contrasenya no són correctes');
+            return false;
+        }
 
-        // search the directory for our user
-        if (!$ldap_sr = ldap_search($ldap_ds, modUtil::getVar('AuthLDAP', 'authldap_searchdn'), modUtil::getVar('AuthLDAP', 'authldap_searchattr') . '=' . DataUtil::formatForStore($uname), $justthese)) {
+        // search the directory for the user
+        if (!$ldap_sr = ldap_search($ldap_ds, $authldap_searchdn, $authldap_searchattr . '=' . DataUtil::formatForStore($uname), $justthese)) {
             LogUtil::registerError('No s\'ha trobat l\'usuari/ària en el servei LDAP i no podeu entrar a la Prestatgeria. Poseu-vos en contacte amb el SAU.');
             return false;
         }
@@ -64,14 +75,20 @@ class AuthLDAP_Listeners {
             }
         }
 
-        // we're now finished with ldap itself so we don't need the connection anymore
-        @ldap_unbind($ldap_ds);
+        // Disconnect from LDAP server
+        ldap_unbind($ldap_ds);
 
-        // check if the user already exists in the Zikula database. If not, create it.
+        // Check if the user already exists in the Zikula database. If not, create it.
         $user = ModUtil::APIFunc('Users', 'user', 'get', array('uname' => $info[0]['uid'][0]));
 
         if (!empty($user) && isset($user['uid'])) {
+            // Update password
             $uid = $user['uid'];
+            $object = array(
+                'uid' => $user['uid'],
+                'pass' => '1$$' . md5($pass),
+            );
+            DBUtil::updateObject($object, 'users', '', 'uid');
         } else {
             // User doesn't exist. Create the user in Zikula users table
             $item = array('uname' => $info[0]['uid'][0],
