@@ -47,6 +47,9 @@
                         {/if}
                         <a href="index.php">Inici</a>&nbsp;|&nbsp;
                         <a href="{modurl modname='Pages' type='user' func='display' pageid='1'}">Condicions d'&uacute;s</a>
+                        {if $logged}
+                        &nbsp;|&nbsp;<a href="{modurl modname='Users' type='user' func='logout'}">Surt</a>
+                        {/if}
                     </span>
                 </div>
                 <div id="menubar">
