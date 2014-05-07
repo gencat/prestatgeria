@@ -94,8 +94,8 @@ class XtecMailer_Listeners {
 
         // @aginard: get environment info from html/config/env-config.php file, so
         // it's automatically filled with proper value
-        global $agora;
-        $environment = $agora['server']['enviroment'];
+        global $presta;
+        $environment = $presta['environment'];
 
         $mail = new mailsender($idApp, $replyAddress, $sender, $environment, $log, $debug, $logpath);
 
