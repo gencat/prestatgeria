@@ -1,11 +1,11 @@
 <?php
 
-require_once 'config/config.php';
+require_once 'config/env-config.php';
 
-$dbhost = $ZConfig['DBInfo']['databases']['default']['host'];
-$dbuname = $ZConfig['DBInfo']['databases']['default']['user'];
-$dbpass = $ZConfig['DBInfo']['databases']['default']['password'];
-$dbname = $ZConfig['DBInfo']['databases']['default']['dbname'];
+$dbhost = $presta['dbhost'];
+$dbuname = $presta['dbuser'];
+$dbpass = $presta['dbpass'];
+$dbname = $presta['dbname'];
 
 $dbc = new mysqli($dbhost, $dbuname, $dbpass, $dbname);
 
