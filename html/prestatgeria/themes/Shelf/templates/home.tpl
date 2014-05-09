@@ -42,13 +42,12 @@
                     <span class="menuitems">
                         {blockposition name=menu}
                         {userloggedin assign="logged"}
-                        {if not $logged}
-                        <a href="{modurl modname='Users' type='user' func='loginscreen'}">Entra</a>&nbsp;|&nbsp;
-                        {/if}
                         <a href="index.php">Inici</a>&nbsp;|&nbsp;
-                        <a href="{modurl modname='Pages' type='user' func='display' pageid='1'}">Condicions d'&uacute;s</a>
-                        {if $logged}
-                        &nbsp;|&nbsp;<a href="{modurl modname='Users' type='user' func='logout'}">Surt</a>
+                        <a href="{modurl modname='Pages' type='user' func='display' pageid='1'}">Condicions d'&uacute;s</a>&nbsp;|&nbsp;
+                        {if not $logged}
+                            <a href="{modurl modname='Users' type='user' func='loginscreen'}">Entra</a>
+                        {else}
+                            <a href="{modurl modname='Users' type='user' func='logout'}">Surt</a>
                         {/if}
                     </span>
                 </div>
