@@ -3,7 +3,7 @@
     {if $filter neq '' and $filterValue neq '' and $filter neq 'schoolCode'}
     {gt text='Llibres'} 
     {if $filter == 'descriptor'}
-    {gt text='que tenen el descritor'}
+    {gt text='que tenen el descriptor'}
     {elseif $filter == 'collection'}
     {gt text='de la col·lecció'}
     {elseif $filter == 'name' || $filter == 'schoolCode'}
