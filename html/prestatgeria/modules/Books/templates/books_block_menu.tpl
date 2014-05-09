@@ -57,16 +57,5 @@
             Com funcionen els llibres?
         </a>
     </div>
-    <div class="blocLink">
-        {if $userid neq ''}
-        <a href="{modurl modname='Users' type='user' func='logout'}">
-            {gt text='Surt'}
-        </a>
-        {else}
-        <a href="{modurl modname='Users' type='user' func='loginscreen'}">
-            {gt text='Entra'}
-        </a>
-        {/if}
-    </div>
 </div>
 <div style="clear:both; padding-bottom: 20px;"></div>

@@ -30,8 +30,9 @@ class Books_Block_Mainmenu extends Zikula_Controller_AbstractBlock {
         if (!ModUtil::available('Books'))
             return;
 
-        if (UserUtil::isLoggedIn())
+        if (UserUtil::isLoggedIn()) {
             setcookie('zkllibres', $GLOBALS['_ZSession']['obj']['sessid'], 0, '/');
+        }
 
         $view = Zikula_View::getInstance('Books', false);
 
@@ -39,8 +40,9 @@ class Books_Block_Mainmenu extends Zikula_Controller_AbstractBlock {
         $creator = ModUtil::func('Books', 'user', 'canCreate', array('userName' => UserUtil::getVar('uname')));
 
         $canAdd = false;
-        if ($creator != '')
+        if ($creator != '') {
             $canAdd = true;
+        }
 
         //Check if user can create books
         $canAdminCreateBooks = false;
@@ -50,8 +52,9 @@ class Books_Block_Mainmenu extends Zikula_Controller_AbstractBlock {
 
         //Check if user is administrator
         $canAdmin = false;
-        if (SecurityUtil::checkPermission('Books::', "::", ACCESS_ADMIN))
+        if (SecurityUtil::checkPermission('Books::', "::", ACCESS_ADMIN)) {
             $canAdmin = true;
+        }
 
         $mustInscribe = false;
         if (UserUtil::isLoggedIn()) {
@@ -62,8 +65,9 @@ class Books_Block_Mainmenu extends Zikula_Controller_AbstractBlock {
             $uname = str_replace('e', '4', $uname);
             $schoolInfo = ModUtil::apiFunc('Books', 'user', 'getSchoolInfo', array('schoolCode' => $uname));
             // if user is a school but can create books it can subscribe into the shell
-            if ($schoolInfo && !$creator)
+            if ($schoolInfo && !$creator) {
                 $mustInscribe = true;
+            }
         }
 
         $view->assign('bookSoftwareUrl', ModUtil::getVar('Books', 'bookSoftwareUrl'));
