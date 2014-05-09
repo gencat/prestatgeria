@@ -1,7 +1,7 @@
 {include file="books_user_menu.tpl"}
 
 <div class="return">
-    <a href="#" onclick="catalogue('','','','',2)">
+    <a href="#" onclick="catalogue('lastEntry','',1,'',2)">
         {gt text='Torna al catàleg de llibres'}
     </a>
 </div>
