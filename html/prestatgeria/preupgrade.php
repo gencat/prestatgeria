@@ -77,6 +77,7 @@ $commands[] = "INSERT INTO module_vars (`pn_modname`, `pn_name`, `pn_value`) VAL
 // remove unnecessary module_vars records
 $commands[] = "DELETE FROM module_vars where pn_modname='advMailer'";
 $commands[] = "DELETE FROM module_vars where pn_modname='iw_AuthLDAP'";
+$commands[] = "DELETE FROM module_vars where pn_modname='AuthPN'";
 $commands[] = "DELETE FROM module_vars where pn_modname='pnRender'";
 
 // change iw_webbox table name
