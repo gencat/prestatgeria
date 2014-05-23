@@ -3,6 +3,11 @@ CHANGELOG
 
 Changes in progress
 -------------------------------------------------------------
+
+
+
+v14.05.26
+-------------------------------------------------------------
 - Fixed connection to Books databases from Books Zikula module
 
 
