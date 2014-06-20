@@ -3,6 +3,7 @@ CHANGELOG
 
 Changes in progress
 -------------------------------------------------------------
+- Added support for md5 in password hash
 
 
 
