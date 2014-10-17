@@ -81,7 +81,7 @@ $IMConfig['images_dir'] = $image_folder_path;
 // try to figure out the URL of the sample images directory. For your installation
 // you will probably want to keep images in another directory.
 
-$IMConfig['images_url'] = $images_url_imconfig . $schoolFolder;
+$IMConfig['images_url'] = $image_folder . $schoolFolder;
 
 // -------------------------------------------------------------------------
 

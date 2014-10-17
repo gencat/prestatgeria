@@ -12,7 +12,13 @@
  * information regarding copyright and licensing.
  */
 
-require_once('../config/env-config.php');
+if (file_exists('../prestatgeria/config/config.php')) {
+    // Regular access
+    require_once('../config/env-config.php');
+} else {
+    // Access from file manager
+    require_once('../../../../config/env-config.php');
+}
 
 global $ZConfig, $presta;
 

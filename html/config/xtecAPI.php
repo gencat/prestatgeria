@@ -1,6 +1,12 @@
 <?php
 
-require '../prestatgeria/config/config.php';
+if (file_exists('../prestatgeria/config/config.php')) {
+    // Regular access
+    include_once '../prestatgeria/config/config.php';
+} else {
+    // Access from file manager
+    include_once '../../../../prestatgeria/config/config.php';
+}
 
 //Connect to data base
 function connect($db) {
@@ -246,7 +252,7 @@ function checkSession() {
 function editBook($bookId, $bookTitle, $bookLang) {
     global $ZConfig;
     $connection = connect($ZConfig['DBInfo']['databases']['default']['dbname']);
-    $sql = "UPDATE books SET bookTitle = '$bookTitle', bookLang = '$bookLang' WHERE bookId = $bookId";
+    $sql = "UPDATE books SET bookTitle = '" . mysql_real_escape_string($bookTitle, $connection) . "', bookLang = '$bookLang' WHERE bookId = $bookId";
     $rs = mysql_query($sql);
     if (!$rs) {
         mysql_close($connection);
