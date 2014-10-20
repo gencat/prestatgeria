@@ -5,6 +5,7 @@ Changes in progress
 -------------------------------------------------------------
 - Added support for md5 in password hash
 - Fixed upload of images in books
+- Force use of https in login
 
 
 v14.05.26
