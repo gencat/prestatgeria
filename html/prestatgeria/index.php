@@ -43,7 +43,8 @@ if (!$module) {
 
 
 // XTEC ************ AFEGIT - Provide https login using BigIP
-// 2014.10.20 @aginard
+// 2014.10.20 @aginard: Functionality unused until this App is moved to the new CPD
+/*
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
     $rurl = $_SERVER['HTTP_X_FORWARDED_PROTO'];
 } elseif (isset($_SERVER['HTTPS'])) {
@@ -61,6 +62,7 @@ if (($module == 'users' || $module == 'usuaris') && ($type == 'user') && ($func 
         header('location:http://' . System::serverGetVar('HTTP_HOST') . System::getCurrentUri());
     }
 }
+*/
 //************ FI
 
 

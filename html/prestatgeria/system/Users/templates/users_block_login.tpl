@@ -18,10 +18,11 @@
     </div>
 
     {* MODIFICAT XTEC BEGIN - Force use of https in login *}
-    <form id="users_loginblock_login_form" class="z-form z-linear{if !$show_login_form} z-hide{/if}" action="{modurl modname="Users" type="user" func="login" ssl=true}" method="post">
-    {* ORIGINAL 
+    {* https unused until this App is moved to the new CPD *}
+    {* <form id="users_loginblock_login_form" class="z-form z-linear{if !$show_login_form} z-hide{/if}" action="{modurl modname="Users" type="user" func="login" ssl=true}" method="post"> *}
+    {* ORIGINAL *}
     <form id="users_loginblock_login_form" class="z-form z-linear{if !$show_login_form} z-hide{/if}" action="{modurl modname="Users" type="user" func="login"}" method="post">
-     MODIFICAT XTEC END *}
+    {* MODIFICAT XTEC END *}
 
         <div>
             <input type="hidden" id="users_loginblock_returnpage" name="returnpage" value="{$returnpage|safetext}" />

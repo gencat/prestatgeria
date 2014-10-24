@@ -1,11 +1,12 @@
-CHANGELOG
-==========================================
+Release notes for La Prestatgeria (http://apliense.xtec.cat/prestatgeria/)
+
+More information on each of the fixes can be found in the project
+development home at https://github.com/projectestac/prestatgeria
 
 Changes in progress
--------------------------------------------------------------
+---------------------------------------------------------------------------------------
 - Added support for md5 in password hash
 - Fixed upload of images in books
-- Force use of https in login
 
 
 v14.05.26

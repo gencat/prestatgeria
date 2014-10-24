@@ -16,10 +16,11 @@
     <div class="authentication_select_method_bigbutton">
 
     {* MODIFICAT XTEC BEGIN - Force use of https in login *}
-    {modurl modname='Users' type='user' func='login' ssl=true assign='form_action'}
-    {* ORIGINAL
+    {* https unused until this App is moved to the new CPD *}
+    {* {modurl modname='Users' type='user' func='login' ssl=true assign='form_action'} *}
+    {* ORIGINAL *}
     {modurl modname='Users' type='user' func='login' assign='form_action'}
-     MODIFICAT XTEC END *}
+    {* MODIFICAT XTEC END *}
 
     {modurl modname='Users' type='user' func='login' ssl=true assign='form_action'}
     {foreach from=$authentication_method_display_order item='authentication_method' name='authentication_method_display_order'}
