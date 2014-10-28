@@ -155,15 +155,6 @@ $nextpage = $page + 1;
 					//v1.0
 					window.open(theURL,winName,features);
 				}
-				// onmouseovers
-				r_about = new Image;
-				h_about = new Image;
-				r_about.src = 'themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/about_pro.gif';
-				h_about.src = 'themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/about_pro2.gif';
-				r_about2 = new Image;
-				h_about2 = new Image;
-				r_about2.src = 'themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/about_web.gif';
-				h_about2.src = 'themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/about_web2.gif';
 			</script>
 			<table width="500">
 				<tr>
