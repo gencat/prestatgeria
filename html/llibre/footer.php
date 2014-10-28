@@ -73,7 +73,7 @@ if($formatpage == 1){
 			// this is the main page. only admin has access to it.
 			if($section == "") { $h = "frontpage"; } else { $h = "bookcontents"; }
 			if(md5($prefix.$password_admin) == $mypass){?>
-				<td align="center"><a href="singlepage.php?html=<?php echo $h; ?>.php&section=<?echo $section;?>&page=<?echo $page;?>&viewis=editmode&username=<?php echo $username;?>" target="_top"><img src="themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/edit.gif" border="0"></a></td>
+				<td align="center"><a href="singlepage.php?html=<?php echo $h; ?>.php&section=<?php echo $section;?>&page=<?php echo $page;?>&viewis=editmode&username=<?php echo $username;?>" target="_top"><img src="themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/edit.gif" border="0"></a></td>
 			<?php }
 			if($formatpage == 1){?>
 				<td><a href="<?php echo $nextlink; ?>" target="_top"><img src="themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/next.gif" border="0"></a></td>
@@ -83,16 +83,16 @@ if($formatpage == 1){
 			if ((($current % 2)== 1) || ($formatpage == 1)){?>
 				<td align="left"><a href="<?php echo $backlink; ?>" target="_top"><img src="themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/back.gif" border="0"></a></td>
 				<?php if(((md5($prefix.$password_admin) == $mypass) || (has_access("F",$section))) && ($page != 0)){ ?>
-					<td align="center"><a href="singlepage.php?html=bookcontents.php&footer=1&section=<?echo "$section"?>&page=<?echo "$page"?>&viewis=editmode&username=<?php echo $username; ?>" target="_top"><img src="themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/edit.gif" border="0"></a></td>
+					<td align="center"><a href="singlepage.php?html=bookcontents.php&footer=1&section=<?php echo "$section"?>&page=<?php echo "$page"?>&viewis=editmode&username=<?php echo $username; ?>" target="_top"><img src="themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/edit.gif" border="0"></a></td>
 				<?php }
 				// if this chapter allows outside submissions then show this icon 
 				if(has_access("A",$section)){?>
-					<td align="center"><a href="singlepage.php?html=addwords.php&section=<?echo "$section"?>" target="_top"><img src="themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/add.gif" border="0"></a></td>
+					<td align="center"><a href="singlepage.php?html=addwords.php&section=<?php echo "$section" ?>" target="_top"><img src="themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/add.gif" border="0"></a></td>
 				<?php } else { ?>
 					<td align="center">&nbsp;</td>
 				<?php } ?>
 				<td align="center"><a href="<?php echo $entireslink;?>" target="_top"><img src="themes/<?php echo $theme;?>/lang/<?php echo $lang;?>/entries.gif" border="0"></a></td>
-			<?} 
+			<?php } 
 			if ((($current % 2) == 0) || ($formatpage == 1)){?>
 				<td align="center">
 					<?php if ($section != ""){ ?>

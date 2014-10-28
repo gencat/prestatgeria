@@ -180,8 +180,8 @@ if (($name != "") && ($action == "doit")){
 	<center>
 		<form action="addchapter.php" method="post" target="_top" enctype="multipart/form-data">
 			<input type="hidden" name="action" value="doit">
-			<strong><span class="Estilo1"><span class="Estilo6"><?echo _BOOKCREATECHAPTER;?></span>:
-			<?if ($errors != ""){print '<br><font color="#990000"><strong>'._BOOKNEEDCORRECTIONS.":</strong><ul>".$errors."</ul></font>";}?>
+			<strong><span class="Estilo1"><span class="Estilo6"><?php echo _BOOKCREATECHAPTER;?></span>:
+			<?php if ($errors != "") { print '<br><font color="#990000"><strong>'._BOOKNEEDCORRECTIONS.":</strong><ul>".$errors."</ul></font>";}?>
 			<table>
 				<tr>
 					<td class="Estilo11"><?php echo _BOOKCHAPTERNUMBER;?>:</td>

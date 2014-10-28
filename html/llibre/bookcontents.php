@@ -104,7 +104,7 @@
 				<td><strong><?php echo _BOOKCHAPTERNUMBER;?>:</strong></td>
 				<td>
 					<select name="ordernum">
-					<?
+					<?php
 						for($i=1;$i<41;$i++){
 							print "<option value=$i ";
 							if($data['ordernum'] == $i){print " selected ";}
@@ -536,7 +536,7 @@ if ($current == 0){ ?>
 									<option>100</option>
 								</select>
 								<?php echo _BOOKWIDTH;?>:
-							<?}?>
+							<?php } ?>
 							<br>
 							<?php 
 							echo '<tr><td>'._BOOKREQUIREDNAME.":</td><td><input type=\"text\" size=\"30\" name=\"name\" value=\"$name\" ><td></tr>";

@@ -43,7 +43,7 @@ if ($footer == ""){
 
   <frameset cols="61,*,70" border="0" frameborder="0" framespacing="0" spacing="0">
    <frame src="themes/<?php echo $theme;?>/mid.html" name="ac" scrolling="no" border="0" marginheight="0" marginwidth="0">
-   <frame src="<?php echo $html;?>?action=<?php echo $action;?>&section=<?php echo $section; ?>&page=<?php echo $page; ?>&viewis=<?php echo $viewis; ?>&id=<?= $id ?>" name="ad" scrolling="auto" border="0" marginheight="0" marginwidth="0">
+   <frame src="<?php echo $html;?>?action=<?php echo $action;?>&section=<?php echo $section; ?>&page=<?php echo $page; ?>&viewis=<?php echo $viewis; ?>&id=<?php echo $id ?>" name="ad" scrolling="auto" border="0" marginheight="0" marginwidth="0">
     <frame src="themes/<?php echo $theme;?>/wordsright.html" name="ae" scrolling="no" border="0" marginheight="0" marginwidth="0">
   </frameset>
   <frameset cols="61,*,70" border="0" frameborder="0" framespacing="0" spacing="0">

@@ -119,7 +119,7 @@ if(md5($prefix.$password_admin) != $mypass){
 										<input type="submit" name="UPDATE_USER" value="<?php echo _BOOKUPDATE;?>">
 									</td>
 								</tr>
-							<?} else {?>
+							<?php } else { ?>
 								<tr>
 									<td><?php echo $row['name'];?></td>
 									<td><?php echo $row['myusername'];?></td>

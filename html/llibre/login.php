@@ -33,7 +33,7 @@ if($action == "logout"){
 	<br>
 	<script>
 		function gothere(){
-     			window.parent.location.replace("index.php?section=<?= $recno ?>");
+     			window.parent.location.replace("index.php?section=<?php echo $recno ?>");
      		}
 		setTimeout("gothere();",2000); 
 	</script>
@@ -83,13 +83,13 @@ if($action == "login"){
 			}
 			function gothere(num){
 				if(num < 250000){
-					window.parent.location.replace("index.php?section=<?= $recno ?>");
+					window.parent.location.replace("index.php?section=<?php echo $recno ?>");
 				} else {
 					document.mine.submit();
 					setTimeout("gothere(2);",2000);
 				}
 			}
-			setTimeout("gothere(<?= $logins ?>);",2000);
+			setTimeout("gothere(<?php echo $logins ?>);",2000);
 		</script>
 		<form action="http://craftysyntax.com/myscrapbook/abouts.php" method="get" name="mine" target="_blank">
 			<input type="hidden" name="v" value="<?php $version; ?>" >

@@ -50,7 +50,7 @@
 <input type="hidden" name="__plugin" value="ImageManager">
 <input type="hidden" name="__function" value="images">
 <?php $bookCode=explode("__", $_COOKIE['bookCode']); ?><br>
-<input type="hidden" name="dir" value="<?=$bookCode[0];?>">
+<input type="hidden" name="dir" value="<?php echo $bookCode[0];?>">
 
 
 <fieldset>
@@ -65,7 +65,7 @@
             foreach($dirs as $relative=>$fullpath)
             {
               ?>
-              <option value="<?php echo rawurlencode($relative); ?>" <?=$relative==("/".$bookCode[0]."/")?"selected":""?> ><?php echo $relative; ?></option>
+              <option value="<?php echo rawurlencode($relative); ?>" <?php echo $relative==("/".$bookCode[0]."/")?"selected":""?> ><?php echo $relative; ?></option>
               <?php
             }
           ?>

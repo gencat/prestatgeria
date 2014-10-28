@@ -59,6 +59,7 @@ function getBook($bookId) {
     }
     mysql_close($connection);
     if ($bookState < 0) {
+        echo 'El llibre no est&agrave; activat';
         return false;
     }
     return $bookId;

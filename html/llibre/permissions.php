@@ -107,7 +107,7 @@
 						$data_user = $mydatabase->select($query);
 						$data_user = $data_user[0];
 						?>
-						<select name="access_<?= $myrow['recno']; ?>">
+						<select name="access_<?php echo $myrow['recno']; ?>">
 							<option value="N" <?php if (($data_user['myaccess'] == "") || ($data_user['myaccess'] == "N")){print " selected "; } ?>><?php echo _BOOKNOTACCES;?></option>
 							<option value="R" <?php if($data_user['myaccess'] == "N"){print " selected ";} ?>><?php echo _BOOKREADONLY;?></option>
 							<option value="A" <?php if($data_user['myaccess'] == "N"){print " selected ";} ?>><?php echo _BOOKADDWITHAPROVAL;?></option>
