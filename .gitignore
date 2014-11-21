@@ -1,5 +1,5 @@
 html/.htaccess
-html/config-restricted.php
+html/config/config-restricted.php
 html/config/env-config.php
 html/config/config_books.php
 html/pmf/inc/connecta.inc

@@ -26,7 +26,7 @@ $VERSION='$Id: apc.php,v 3.68 2007/07/22 00:25:48 gopalv Exp $';
 
 ////////// READ OPTIONAL CONFIGURATION FILE ////////////
 if (file_exists('apc.conf.php')) include('apc.conf.php');
-if (file_exists('config-restricted.php')) include('config-restricted.php');
+if (file_exists('config/config-restricted.php')) include('config/config-restricted.php');
 ////////////////////////////////////////////////////////
 
 ////////// BEGIN OF DEFAULT CONFIG AREA ///////////////////////////////////////////////////////////
