@@ -143,21 +143,18 @@ class Books_Controller_Ajax extends Zikula_Controller_AbstractAjax {
     public function searchReload($args) {
         if (!SecurityUtil::checkPermission('Books::', '::', ACCESS_READ)) {
             throw new Zikula_Exception_Forbidden();
-        }
+        }       
         $filter = $this->request->getPost()->get('filter', '');
         if (!$filter) {
             throw new Zikula_Exception_Fatal($this->__('no filter'));
         }
         $filterValue = $this->request->getPost()->get('filterValue', '');
-        if (!$filterValue) {
-            throw new Zikula_Exception_Fatal($this->__('no filter'));
-        }
         $order = $this->request->getPost()->get('order', '');
         $content = ModUtil::func('Books', 'user', 'search', array('filter' => $filter,
                     'filterValue' => $filterValue,
                     'order' => $order));
         return new Zikula_Response_Ajax(array('content' => $content,
-                ));
+        ));
     }
 
     public function autocompleteSearch($args) {

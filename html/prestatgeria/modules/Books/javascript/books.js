@@ -2,116 +2,116 @@ function failure() {
     
 }
 
-function showBookData(a){
+function showBookData(idLlibre){
     wait();
-    var b={
-        bookId:a
+    var parametres = {
+        bookId: idLlibre
     };
-    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=showBookData",{
-        parameters:b,
+    var ajaxResponse = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=showBookData",{
+        parameters: parametres,
         onComplete:showBookData_response,
         onFailure: failure
     });
 }
 
-function showBookData_response(a){
-    if(!a.isSuccess()){
-        Zikula.showajaxerror(a.getMessage());
+function showBookData_response(ajaxResponse){
+    if(!ajaxResponse.isSuccess()){
+        Zikula.showajaxerror(ajaxResponse.getMessage());
         return;
     }
-    var b=a.getData();
-    $("z-maincontent").update(b.content);
+    var ajaxData = ajaxResponse.getData();
+    $("z-maincontent").update(ajaxData.content);
 }
 
-function catalogue(a,aa,aaa,aaaa,aaaaa){
+function catalogue(ordre, filtre, inicialitzacio , valorFiltre, historial){
     wait();
-    var b={
-        order:a,
-        filter:aa,
-        init:aaa,
-        filterValue:aaaa,
-        history:aaaaa
+    var parametres = {
+        order: ordre,
+        filter: filtre,
+        init: inicialitzacio,
+        filterValue: valorFiltre,
+        history: historial
     };
-    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=catalogue",{
-        parameters:b,
-        onComplete:catalogue_response,
+    var ajaxResponse = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=catalogue",{
+        parameters: parametres,
+        onComplete: catalogue_response,
         onFailure: failure
     });
 }
 
-function catalogue_response(a){
-    if(!a.isSuccess()){
-        Zikula.showajaxerror(a.getMessage());
+function catalogue_response(ajaxResponse){
+    if(!ajaxResponse.isSuccess()){
+        Zikula.showajaxerror(ajaxResponse.getMessage());
         return;
     }
-    var b=a.getData();
-    $("z-maincontent").update(b.content);
+    var ajaxData = ajaxResponse.getData();
+    $("z-maincontent").update(ajaxData.content);
 }
 
 function wait(){
     $("z-maincontent").update('<center><img src="' + Zikula.Config.baseURL + 'modules/Books/images/wait.gif" /></center>');
 }
 
-function addPrefer(a){
-    var b={
-        bookId:a
+function addPrefer(idLlibre){
+    var parametres = {
+        bookId:idLlibre
     };
-    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=addPrefer",{
-        parameters:b,
-        onComplete:addPrefer_response,
+    var ajaxResponse = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=addPrefer",{
+        parameters: parametres,
+        onComplete: addPrefer_response,
         onFailure: failure
     });
 }
 
-function addPrefer_response(a){
-    if(!a.isSuccess()){
-        Zikula.showajaxerror(a.getMessage());
+function addPrefer_response(ajaxResponse){
+    if(!ajaxResponse.isSuccess()){
+        Zikula.showajaxerror(ajaxResponse.getMessage());
         return;
     }
-    var b=a.getData();
-    $("prefered").update(b.content);
+    var ajaxData = ajaxResponse.getData();
+    $("prefered").update(ajaxData.content);
 }
 
-function delPrefer(a){
-    var b={
-        bookId:a
+function delPrefer(idLlibre){
+    var parametres = {
+        bookId: idLlibre
     };
-    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=delPrefer",{
-        parameters:b,
+    var ajaxResponse = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=delPrefer",{
+        parameters: parametres,
         onComplete:delPrefer_response,
         onFailure: failure
     });
 }
 
-function delPrefer_response(a){
-    if(!a.isSuccess()){
-        Zikula.showajaxerror(a.getMessage());
+function delPrefer_response(ajaxResponse){
+    if(!ajaxResponse.isSuccess()){
+        Zikula.showajaxerror(ajaxResponse.getMessage());
         return;
     }
-    var b=a.getData();
-    $('bookPrefered_' + b.bookId).toggle();
+    var ajaxData = ajaxResponse.getData();
+    $('bookPrefered_' + ajaxData.bookId).toggle();
 }
 
-function addComment(a,aa){
-    var b={
-        bookId:a,
-        history:aa
+function addComment(idLlibre, historial){
+    var parametres = {
+        bookId: idLlibre,
+        history: historial
     };
-    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=addComment",{
-        parameters:b,
-        onComplete:addComment_response,
+    var ajaxResponse = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=addComment",{
+        parameters: parametres,
+        onComplete: addComment_response,
         onFailure: failure
     });
     
 }
 
-function addComment_response(a){
-    if(!a.isSuccess()){
-        Zikula.showajaxerror(a.getMessage());
+function addComment_response(ajaxResponse){
+    if(!ajaxResponse.isSuccess()){
+        Zikula.showajaxerror(ajaxResponse.getMessage());
         return;
     }
-    var b=a.getData();
-    $("z-maincontent").update(b.content);
+    var ajaxData = ajaxResponse.getData();
+    $("z-maincontent").update(ajaxData.content);
 }
 
 function sendComment(){
@@ -142,42 +142,42 @@ function sendComment_response(a){
 
 function collections(bookId){
     wait();
-    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=collections",{
+    var ajaxResponse = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=collections",{
         onComplete:collections_response,
         onFailure: failure
     });
 }
 
-function collections_response(a){
-    if(!a.isSuccess()){
-        Zikula.showajaxerror(a.getMessage());
+function collections_response(ajaxResponse){
+    if(!ajaxResponse.isSuccess()){
+        Zikula.showajaxerror(ajaxResponse.getMessage());
         return;
     }
-    var b=a.getData();
-    $("z-maincontent").update(b.content);
+    var ajaxData = ajaxResponse.getData();
+    $("z-maincontent").update(ajaxData.content);
 }
 
-function searchReload(a,aa,aaa){
+function searchReload(filtre, valorFiltre, ordre){
     $("searchIcon").update('<img src="' + Zikula.Config.baseURL + 'modules/Books/pnimages/wait.gif" />');
-    var b={
-        filter:a,
-        filterValue:aa,
-        order:aaa
+    var parametres = {
+        filter: filtre,
+        filterValue: valorFiltre,
+        order: ordre
     };
-    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=searchReload",{
-        parameters:b,
-        onComplete:searchReload_response,
+    var ajaxResponse = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=searchReload",{
+        parameters: parametres,
+        onComplete: searchReload_response,
         onFailure: failure
     });
 }
 
-function searchReload_response(a){
-    if(!a.isSuccess()){
-        Zikula.showajaxerror(a.getMessage());
+function searchReload_response(ajaxResponse){
+    if(!ajaxResponse.isSuccess()){
+        Zikula.showajaxerror(ajaxResponse.getMessage());
         return;
     }
-    var b=a.getData();
-    $("search").update(b.content);
+    var ajaxData = ajaxResponse.getData();
+    $("search").update(ajaxData.content);
 }
 
 function autocompleteSearch(a,aa,aaa){
