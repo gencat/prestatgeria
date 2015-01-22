@@ -260,25 +260,25 @@ function manage_response(a){
     $("z-maincontent").update(b.content);
 }
 
-function allowUser(a,aa){
-    var b={
-        task:a,
-        userName:aa
+function allowUser(funcio, nomUsuari){
+    var parametres = {
+        task: funcio,
+        userName: nomUsuari
     };
-    var c=new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=showCreators",{
-        parameters:b,
-        onComplete:allowUser_response,
+    var ajaxResponse = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Books&func=showCreators",{
+        parameters: parametres,
+        onComplete: allowUser_response,
         onFailure: failure
     });
 }
 
-function allowUser_response(a){
-    if(!a.isSuccess()){
-        Zikula.showajaxerror(a.getMessage());
+function allowUser_response(ajaxResponse){
+    if(!ajaxResponse.isSuccess()){
+        Zikula.showajaxerror(ajaxResponse.getMessage());
         return;
     }
-    var b=a.getData();
-    $("creatorsList").update(b.content);
+    var ajaxData = ajaxResponse.getData();
+    $("creatorsList").update(ajaxData.content);
 }
 
 function createNewBook(){

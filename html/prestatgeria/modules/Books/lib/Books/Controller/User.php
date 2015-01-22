@@ -124,7 +124,7 @@ class Books_Controller_User extends Zikula_AbstractController {
      * @return:	The school code that is going to create a book or false otherwise
      */
     public function canCreate($args) {
-        $userName = FormUtil::getPassedValue('userName', isset($args['userName']) ? $args['userName'] : null, 'POST');
+        $userName = FormUtil::getPassedValue('userName', isset($args['userName']) ? $args['userName'] : null, 'GET');
         // Security check
         if (!SecurityUtil::checkPermission('Books::', "::", ACCESS_READ)) {
             throw new Zikula_Exception_Forbidden();
@@ -147,7 +147,7 @@ class Books_Controller_User extends Zikula_AbstractController {
         }
         return false;
     }
-
+    
     /**
      * Displays the information sheet of a book.
      * @author:     Albert Pérez Monfort (aperezm@xtec.cat)
