@@ -5,8 +5,13 @@ development home at https://github.com/projectestac/prestatgeria
 
 Changes in progress
 ---------------------------------------------------------------------------------------
+
+
+
+v15.01.26
+-------------------------------------------------------------
 - Solved issue with the filter in Cataleg de llibres (AGIN 1059-2014-0007)
-- Let schools to enable and disable users to make them books (AGIN XXX)
+- Let schools to enable and disable users to make their own books (AGIN 1059-2015-0001)
 
 
 v14.12.11
