@@ -1,0 +1,3 @@
+[submodule "html/prestatgeria/modules/XtecMailer/includes/mailer"]
+	path = html/prestatgeria/modules/XtecMailer/includes/mailer
+	url = https://github.com/projectestac/mailer.git

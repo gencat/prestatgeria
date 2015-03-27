@@ -8,3 +8,6 @@ ztemp/
 templates_c/
 centres/
 rss/
+.settings/*
+.buildpath
+.project
