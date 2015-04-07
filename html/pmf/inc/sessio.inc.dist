@@ -1,13 +1,18 @@
 <?php
 
-$user="";
-$password=""; //md5
-$days_modified=10;
-$days_created=10;
-$lang='ca';
-$showhits=1;
-$admet_comentaris=1;
-$Smarty_path='libs/Smarty.class.php';
-$_SESSION['validat']=0;
+$user = '';
+$password = ''; //md5
+$days_modified = 10;
+$days_created = 10;
+$lang = 'ca';
+$showhits = 1;
+$admet_comentaris = 1;
+$Smarty_path = 'libs/Smarty.class.php';
+
+session_start();
+
+if (!isset($_SESSION['validat']) ) {
+    $_SESSION['validat'] = 0;
+}
 
 $images_url = "http://localhost/prestatgeria/pmf/images";

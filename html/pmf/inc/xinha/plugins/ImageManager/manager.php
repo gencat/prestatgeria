@@ -48,8 +48,7 @@
 
 <input type="hidden" name="__plugin" value="ImageManager">
 <input type="hidden" name="__function" value="images">
-<?php $bookCode=explode("__", $_COOKIE['bookCode']); ?><br>
-<input type="hidden" name="dir" value="<?php echo $bookCode[0];?>">
+<input type="hidden" name="dir" value="">
 
 
 <fieldset>
@@ -64,7 +63,7 @@
             foreach($dirs as $relative=>$fullpath)
             {
               ?>
-              <option value="<?php echo rawurlencode($relative); ?>" <?php echo $relative==("/".$bookCode[0]."/")?"selected":""?> ><?php echo $relative; ?></option>
+              <option value="<?php echo rawurlencode($relative); ?>"><?php echo $relative; ?></option>
               <?php
             }
           ?>
@@ -103,7 +102,6 @@
   <div id="messages" style="display: none;"><span id="message"></span><img SRC="<?php print $IMConfig['base_url']; ?>img/dots.gif" width="22" height="12" alt="..." /></div>
 
   <iframe src="<?php print $IMConfig['backend_url']; ?>__function=images" name="imgManager" id="imgManager" class="imageFrame" scrolling="auto" title="Image Selection" frameborder="0"></iframe>
-  <!--iframe src="<?php print $IMConfig['backend_url']; ?>__function=images&dir=<?php print $_REQUEST['dir']?>" name="imgManager" id="imgManager" class="imageFrame" scrolling="auto" title="Image Selection" frameborder="0"></iframe-->
 
 </fieldset>
 
