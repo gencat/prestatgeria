@@ -7,8 +7,6 @@
 	$smarty = new Smarty;
 	$smarty->compile_check = true;
 	$smarty->debugging = false;
-	//session_start();
-	session_register("estat");
 
 	//Posem les funcions de consulta de la base de dades
 	include_once('inc/db.php');

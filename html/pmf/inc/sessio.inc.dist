@@ -8,6 +8,6 @@ $lang='ca';
 $showhits=1;
 $admet_comentaris=1;
 $Smarty_path='libs/Smarty.class.php';
-session_register("validat");
+$_SESSION['validat']=0;
 
 $images_url = "http://localhost/prestatgeria/pmf/images";
