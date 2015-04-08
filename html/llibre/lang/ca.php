@@ -262,7 +262,7 @@ define('_BOOKENTERTHEEMAIL','Si us plau, introdueix l\'adreça de correu electròn
 define('_BOOKIFDONTHAVEAACOUNT','Fes clic per obtenir un compte');
 define('_BOOKGOBACKTOPAGES','Torna a la pàgina del llibre sense tenir connexió');
 define('_BOOKHERETOLOGININ','Fes clic aquí per tornat a entrar a la pantalla');
-define('_BOOKEMAILSENDTO','S\ha enviat un correu electrònic a');
+define('_BOOKEMAILSENDTO','S\'ha enviat un correu electrònic a');
 define('_BOOKWITHTHEENTRYINFO','amb la informació per connectar-se.');
 define('_BOOKTHEEMAILHASBEENSENDED','S\'ha fet una sol·licitud per recuperar la contrasenya per accedir al llibre.');
 define('_BOOKBELOWISTHELOGGININFO','Aquí sota hi ha la informació per connectar-te. Si apareix més d\'una adreça, és que tens adreces múltiples');
@@ -315,5 +315,5 @@ define('_BOOKPLEASENOTREPLY','Si us plau, no responguis aquest missatge');
 define('_BOOKTHEMAINUSER','L\'administrador/a dels llibres compartits de la XTEC');
 define('_BOOKCONFIRMDELETE','Confirma que vols esborrar la pàgina.');
 define('_BOOKHTMLEDITOR','Editor d\'HTML');
-define('_BOOKIMAGEMAXSIZE','La mida màxima dels fitxers d\'imatge és de 400kb');
-define('_BOOKFILETOOBIG', 'La mida de la imatge és massa gran. La mida màxima és de 400kb');
+define('_BOOKIMAGEMAXSIZE','La mida màxima dels fitxers d\'imatge és de 400 KB');
+define('_BOOKFILETOOBIG', 'La mida de la imatge és massa gran. La mida màxima és de 400 KB');

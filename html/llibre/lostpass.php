@@ -12,13 +12,14 @@
 // feel free to send a donation by going to:
 // http://craftysyntax.com/myscrapbook/abouts.php
 //-----------------------------------------------------------------
-$errors = "";
-require "config.php";
-include_once $zikulapath . '/modules/XtecMailer/includes/mailsender.class.php';
-include_once $zikulapath . '/modules/XtecMailer/includes/message.class.php';
+$errors = '';
+require_once 'config.php';
+require_once 'functions.php';
+include_once $zikulapath . '/modules/XtecMailer/includes/mailer/mailsender.class.php';
+include_once $zikulapath . '/modules/XtecMailer/includes/mailer/message.class.php';
 
 //Select the file with the lang strings
-include("lang/".$lang.'.php');
+include('lang/' . $lang . '.php');
 
 if($action == "search"){
 	$adminemail = $data['adminemail'];
@@ -50,8 +51,26 @@ if($action == "search"){
 		$subject = _BOOKLOSTPASSWORD;
 		$headers .= "To: <".$email.">\r\n";
 				
-		$mailsender = new mailsender($IDAPP,$REPLYADDRESS,$SENDER,$ENVIRONMENT,$LOG,$LOGDEBUG,$LOGPATH);
-		$msg = new message($CONTENTTYPE,$LOG,$LOGDEBUG,$LOGPATH);
+        $mailconf = getEmailParamsFromZikula();
+
+        $mailsender = new mailsender(
+                $mailconf['idApp'],
+                $mailconf['replyAddress'],
+                $mailconf['sender'],
+                $mailconf['environment'],
+                $mailconf['log'],
+                $mailconf['debug'],
+                $mailconf['logpath']
+                );
+
+        $contentType = ($mailconf['contenttype'] == 2) ? 'text/html' : 'text/plain';
+
+        $msg = new message(
+                $contentType,
+                $mailconf['log'],
+                $mailconf['debug'],
+                $mailconf['logpath']
+                );
 		
 		//Indiquem l'adreça del destinatari
 		$adr_desti = $top_r['notifyemail'];

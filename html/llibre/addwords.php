@@ -12,10 +12,11 @@
 // feel free to send a donation by going to:
 // http://craftysyntax.com/myscrapbook/abouts.php
 //-----------------------------------------------------------------
-require "config.php";
-require "functions.php";
-include_once $zikulapath . '/modules/XtecMailer/includes/mailsender.class.php';
-include_once $zikulapath . '/modules/XtecMailer/includes/message.class.php';
+
+require_once 'config.php';
+require_once 'functions.php';
+include_once $zikulapath . '/modules/XtecMailer/includes/mailer/mailsender.class.php';
+include_once $zikulapath . '/modules/XtecMailer/includes/mailer/message.class.php';
 
 //Select the file with the lang strings
 include("lang/".$lang.'.php');
@@ -43,10 +44,30 @@ if ($action == "doit"){
 	if ($title == ""){ $errors = "<li>"._BOOKTITLEISREQUIRED.'</li>'; }
 	if ($comment == ""){ $errors .= "<li>"._BOOKADDTEXT.'</li>'; }
 	if ($_FILES['myimage']['size'] > 409600) $errors .= "<li>" . _BOOKFILETOOBIG . '</li>';
+    
 	if ($errors == ""){
 		if($top_r['notifyemail'] != ""){
-			$mailsender = new mailsender($IDAPP,$REPLYADDRESS,$SENDER,$ENVIRONMENT,$LOG,$LOGDEBUG,$LOGPATH);
-			$message = new message($CONTENTTYPE,$LOG,$LOGDEBUG,$LOGPATH);
+            
+            $mailconf = getEmailParamsFromZikula();
+            
+			$mailsender = new mailsender(
+                    $mailconf['idApp'],
+                    $mailconf['replyAddress'],
+                    $mailconf['sender'],
+                    $mailconf['environment'],
+                    $mailconf['log'],
+                    $mailconf['debug'],
+                    $mailconf['logpath']
+                    );
+            
+            $contentType = ($mailconf['contenttype'] == 2) ? 'text/html' : 'text/plain';
+            
+			$message = new message(
+                    $contentType,
+                    $mailconf['log'],
+                    $mailconf['debug'],
+                    $mailconf['logpath']
+                    );
 			
 			//Indiquem l'adreça del destinatari
 			$adr_desti = $top_r['notifyemail'];

@@ -33,12 +33,11 @@
 <script type="text/javascript" src="<?php print $IMConfig['base_url'];?>assets/dialog.js"></script>
 <script type="text/javascript">
 /*<![CDATA[*/
-    if(window.opener)
+	if(window.opener)
 		HTMLArea = window.opener.HTMLArea;
 
 	var thumbdir = "<?php echo $IMConfig['thumbnail_dir']; ?>";
 	var base_url = "<?php echo $manager->getImagesURL(); ?>";
-    window.resizeBy(0, 30);
 /*]]>*/
 </script>
 <script type="text/javascript" src="<?php print $IMConfig['base_url'];?>assets/manager.js"></script>
@@ -104,7 +103,6 @@
   <div id="messages" style="display: none;"><span id="message"></span><img SRC="<?php print $IMConfig['base_url']; ?>img/dots.gif" width="22" height="12" alt="..." /></div>
 
   <iframe src="<?php print $IMConfig['backend_url']; ?>__function=images" name="imgManager" id="imgManager" class="imageFrame" scrolling="auto" title="Image Selection" frameborder="0"></iframe>
-  <!--iframe src="<?php print $IMConfig['backend_url']; ?>__function=images&dir=<?php print $_REQUEST['dir']?>" name="imgManager" id="imgManager" class="imageFrame" scrolling="auto" title="Image Selection" frameborder="0"></iframe-->
 
 </fieldset>
 

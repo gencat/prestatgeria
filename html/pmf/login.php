@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(dirname(__FILE__)) . '/config/config_books.php';
+
 //Posem les funcions de consulta de la base de dades
 include_once('inc/sessio.inc');
 
@@ -12,7 +14,7 @@ if (!isset($_REQUEST['submit'])) {
 
     $smarty->display('login.htm');
 } else {
-    if ($user == $_REQUEST['user'] && md5($_REQUEST['password']) == $password) {
+    if ($user_pmf == $_REQUEST['user'] && md5($_REQUEST['password']) == $pass_pmf) {
         $_SESSION['validat'] = 1;
     }
     header('location:index.php');
