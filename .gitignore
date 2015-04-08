@@ -1,9 +1,6 @@
 html/.htaccess
 html/config/config-restricted.php
 html/config/env-config.php
-html/config/config_books.php
-html/pmf/inc/connecta.inc
-html/pmf/inc/sessio.inc
 ztemp/
 templates_c/
 centres/
@@ -12,3 +9,4 @@ rss/
 .buildpath
 .project
 images/
+.Trash*/

@@ -1,7 +1,7 @@
 <?php
 
-$user = '';
-$password = ''; //md5
+require_once dirname(dirname(dirname(__FILE__))) . '/config/config_books.php';
+
 $days_modified = 10;
 $days_created = 10;
 $lang = 'ca';
@@ -14,5 +14,3 @@ session_start();
 if (!isset($_SESSION['validat']) ) {
     $_SESSION['validat'] = 0;
 }
-
-$images_url = "http://localhost/prestatgeria/pmf/images";

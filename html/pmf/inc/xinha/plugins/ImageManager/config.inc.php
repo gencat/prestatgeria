@@ -82,7 +82,7 @@ $IMConfig['images_dir'] = "../../../../images";
 //2011.04.19@fbassas
 
 include('../../../sessio.inc');
-$IMConfig['images_url'] = $images_url;
+$IMConfig['images_url'] = $images_url_pmf;
 
 //************ ORIGINAL
 /*
@@ -265,8 +265,8 @@ $IMConfig['default_thumbnail'] = 'img/default.gif';
 *  Thumbnail dimensions.
 */
 
-$IMConfig['thumbnail_width'] = 96;
-$IMConfig['thumbnail_height'] = 96;
+$IMConfig['thumbnail_width'] = 80;
+$IMConfig['thumbnail_height'] = 80;
 
 // -------------------------------------------------------------------------
 
@@ -343,4 +343,3 @@ include_once( "ddt.php" );
 
 // END
 
-?>

@@ -1,15 +1,16 @@
 <?php
 
-$host = "";
-$username = "";
-$password = "";
-$database = "";
+require_once dirname(dirname(dirname(__FILE__))) . '/config/env-config.php';
+
+$host = $presta['dbhost'];
+$username = $presta['dbuser'];
+$password = $presta['dbpass'];
+$database = $presta['dbname'];
+
 $server = mysql_connect($host, $username, $password) or die(mysql_error());
-// Select the database now:
 $connection = mysql_select_db($database, $server);
 
-$clauedicio="1caf51fc04fd9170c477485da2663772";
-$arrel="continguts/";
+$arrel = 'continguts/';
 
 // XTEC ADDED
 // @aginard: Force latin1 connections to DB

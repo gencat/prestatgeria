@@ -94,4 +94,35 @@ function uniqueimagename(){
 	$fullname = $string . $ext;
 	return $string;
 }
-?>
+
+/**
+ * Retrieve connection data for email sending service from Zikula tables
+ */
+function getEmailParamsFromZikula() {
+
+    global $presta;
+
+    $connection = mysql_connect($presta['dbhost'], $presta['dbuser'], $presta['dbpass']);
+    
+    if (!$connection) {
+        echo 'Connection to database server ' . $presta['dbhost'] . ' with user ' . $presta['dbuser'] . ' failed';
+    }
+    if (!mysql_select_db($presta['dbname'], $connection)) {
+        echo 'Connection to database ' . $presta['dbname'] . ' failed';
+    }
+
+    $sql = "SELECT name, value FROM module_vars WHERE modname LIKE 'XtecMailer'";
+    
+    $results = mysql_query($sql, $connection);
+    
+    $conf = array();
+    while ($row = mysql_fetch_array($results)) {
+        $conf[$row['name']] = unserialize($row['value']);
+    }
+    
+    mysql_free_result($results);
+    mysql_close($connection);
+    
+    return $conf;
+}
+

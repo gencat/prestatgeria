@@ -178,7 +178,7 @@ function generateRss($prefix) {
         'number' => 15));
     $schoolInfo = getSchoolInfo($book[0]);
     $bookInfo = getBookInfo($book[1]);
-    $siteURL = _SITEDNS;
+    $siteURL = $booksBaseURL;
     //Calc the actual date in RFC2820 format
     $date = date("r", time());
     $file = '../rss/' . $prefix . '.xml';

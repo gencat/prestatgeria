@@ -264,8 +264,8 @@ $IMConfig['default_thumbnail'] = 'img/default.gif';
 *  Thumbnail dimensions.
 */
 
-$IMConfig['thumbnail_width'] = 96;
-$IMConfig['thumbnail_height'] = 96;
+$IMConfig['thumbnail_width'] = 80;
+$IMConfig['thumbnail_height'] = 80;
 
 // -------------------------------------------------------------------------
 
@@ -342,4 +342,3 @@ include_once( "ddt.php" );
 
 // END
 
-?>

@@ -63,10 +63,9 @@ class XtecMailer_Listeners {
         $debug = ModUtil::getVar('XtecMailer', 'debug');
         $logpath = ModUtil::getVar('XtecMailer', 'logpath');
         // Load the environment, if and URL is set, then user the WSDL, if not:
-        // @aginard: get environment info from html/config/env-config.php file, so
-        // it's automatically filled with proper value
+        // get environment info from database, so it's automatically filled with proper value
         $wsdl = ModUtil::getVar('XtecMailer', 'environment_url');
-        $wsdl = empty($wsdl) ? $agora['server']['enviroment'] : $wsdl;
+        $wsdl = empty($wsdl) ? ModUtil::getVar('XtecMailer', 'environment') : $wsdl;
         try {
             $mailsender = new mailsender($idApp, $replyAddress, $sender, $wsdl, $log, $debug, $logpath);
         } catch (Exception $e) {
