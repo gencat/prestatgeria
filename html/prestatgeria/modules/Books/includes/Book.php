@@ -493,9 +493,8 @@ class Book {
             $innerTocElements = '';
         }
         $ebook->setSpine($spine);
-        $dirsource = '/srv/www/htdocs/prestatgeria/html/centres' . '/' . $this->schoolCode . '_' . $this->bookId;
 
-        Loader::RequireOnce("modules/Books/includes/utils.php");
+        Loader::RequireOnce('modules/Books/includes/utils.php');
         // images
         copydir(ModUtil::getVar('books', 'serverImageFolder') . '/' . $this->schoolCode . '_' . $this->bookId, $ebook->getContentLoc() . 'images');
 
