@@ -27,6 +27,7 @@ class Books_Controller_Admin extends Zikula_AbstractController {
                         ->assign('bookSoftwareUri', ModUtil::getVar('Books', 'bookSoftwareUri'))
                         ->assign('booksDatabase', ModUtil::getVar('Books', 'booksDatabase'))
                         ->assign('serverImageFolder', ModUtil::getVar('Books', 'serverImageFolder'))
+                        ->assign('pwd', getcwd())
                         ->fetch('books_admin_config.tpl');
     }
 

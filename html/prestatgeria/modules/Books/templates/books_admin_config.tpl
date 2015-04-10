@@ -29,6 +29,10 @@
             <label for="serverImageFolder">{gt text='Directori on es desen les imatges dels llibres.'}</label>
             <input type="text" name="serverImageFolder" size="50" value="{$serverImageFolder}"  />
         </div>
+        <div class="z-formrow">
+            <label for="pwd">{gt text='Directori del Zikula'}</label>
+            {$pwd}
+        </div>
         {gt text='Create' assign=alt_create}
         {gt text='Cancel' assign=alt_cancel}
         <div class="z-center">
