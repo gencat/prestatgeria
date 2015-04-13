@@ -7,9 +7,5 @@ $presta['dbname'] = '';
 $presta['dbuser'] = '';
 $presta['dbpass'] = '';
 
-$presta['environment'] = 'INT'; // For XTEC mail
-
-define ('_SITEDNS', 'http://server/prestatgeria/');
-
-// Note: some environment variables are still defined in config_books.php. Will be fixed in the future.
-
+$booksBaseURL = 'http://agora/prestatgeria'; // URL de l'aplicació
+$dirroot = '/srv/www/prestatgeria/html'; // Directori de l'aplicació (sense barra final)
