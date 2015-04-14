@@ -1,43 +1,44 @@
 <?php
-	//-----------------------------------------------------------------
-	//MyScrapBook online book program by Eric Gerdes (Crafty Syntax . Com )
-	//-----------------------------------------------------------------
-	//Spanish Translation and new features to version 4.0 by Antonio Temprano (antoniotemprano.org)
-	//----------------------------------------------------------------------------------------------
-	// Feel free to change this code to better fit your website. I am
-	// open for any suggestions on how to improve the program and 
-	// you can submit suggestions and/or bugs to:
-	// http://craftysyntax.com/myscrapbook/updates/
-	// if you like using this program and feel it is a good program 
-	// feel free to send a donation by going to:
-	// http://craftysyntax.com/myscrapbook/abouts.php
-	//-----------------------------------------------------------------
 
-	require "config.php";
-	require "functions.php";
+//-----------------------------------------------------------------
+//MyScrapBook online book program by Eric Gerdes (Crafty Syntax . Com )
+//-----------------------------------------------------------------
+//Spanish Translation and new features to version 4.0 by Antonio Temprano (antoniotemprano.org)
+//----------------------------------------------------------------------------------------------
+// Feel free to change this code to better fit your website. I am
+// open for any suggestions on how to improve the program and 
+// you can submit suggestions and/or bugs to:
+// http://craftysyntax.com/myscrapbook/updates/
+// if you like using this program and feel it is a good program 
+// feel free to send a donation by going to:
+// http://craftysyntax.com/myscrapbook/abouts.php
+//-----------------------------------------------------------------
 
-	//Select the file with the lang strings
-	include("lang/".$lang.'.php');
+require "config.php";
+require "functions.php";
 
-	if((has_access("F",$section)) && ($whattodo == "reorderpages")){
-		while (list($key, $val) = each($HTTP_POST_VARS)) {
-			$array = split("__",$key);
-			if($array[0] == "ordernum") {
-				$query = "UPDATE ".$prefix."_words set ordernum='$val' WHERE id='$array[1]' ";
-				$mydatabase->sql_query($query);
-			}
-		}
-	}
+//Select the file with the lang strings
+include("lang/".$lang.'.php');
 
-	$next =  $page + 1;
-	$back =  $page - 1;
-	$current = $page;
-	$othercurrent = $current + 1;
-	$displayedsomething = 0;
+if((has_access("F",$section)) && ($whattodo == "reorderpages")) {
+    while (list($key, $val) = each($_POST)) {
+        $array = explode('__', $key);
+        if($array[0] == 'ordernum') {
+            $query = "UPDATE ".$prefix."_words set ordernum='$val' WHERE id='$array[1]' ";
+            $mydatabase->sql_query($query);
+        }
+    }
+}
 
-	$query = "SELECT * FROM ".$prefix."_contents WHERE recno='$section'";
-	$result = $mydatabase->select($query);
-	$top_r = $result[0];
+$next =  $page + 1;
+$back =  $page - 1;
+$current = $page;
+$othercurrent = $current + 1;
+$displayedsomething = 0;
+
+$query = "SELECT * FROM ".$prefix."_contents WHERE recno='$section'";
+$result = $mydatabase->select($query);
+$top_r = $result[0];
 ?>
 
 <html>

@@ -98,31 +98,26 @@ function uniqueimagename(){
 /**
  * Retrieve connection data for email sending service from Zikula tables
  */
-function getEmailParamsFromZikula() {
+function getEmailParamsFromZikula($mydatabase) {
 
     global $presta;
 
-    $connection = mysql_connect($presta['dbhost'], $presta['dbuser'], $presta['dbpass']);
-    
-    if (!$connection) {
-        echo 'Connection to database server ' . $presta['dbhost'] . ' with user ' . $presta['dbuser'] . ' failed';
-    }
-    if (!mysql_select_db($presta['dbname'], $connection)) {
+    if (!mysql_select_db($presta['dbname'], $mydatabase->CONN)) {
         echo 'Connection to database ' . $presta['dbname'] . ' failed';
     }
 
-    $sql = "SELECT name, value FROM module_vars WHERE modname LIKE 'XtecMailer'";
-    
-    $results = mysql_query($sql, $connection);
-    
+    $query = "SELECT name, value FROM module_vars WHERE modname LIKE 'XtecMailer'";
+
+    $results = $mydatabase->sql_query($query);
     $conf = array();
     while ($row = mysql_fetch_array($results)) {
         $conf[$row['name']] = unserialize($row['value']);
     }
-    
-    mysql_free_result($results);
-    mysql_close($connection);
-    
+
+    $currentDB = $mydatabase->currentDB;
+    if (!mysql_select_db($currentDB, $mydatabase->CONN)) {
+        echo 'Connection to database ' . $presta['dbname'] . ' failed';
+    }
+
     return $conf;
 }
-

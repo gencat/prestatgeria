@@ -19,7 +19,7 @@ include_once $zikulapath . '/modules/XtecMailer/includes/mailer/mailsender.class
 include_once $zikulapath . '/modules/XtecMailer/includes/mailer/message.class.php';
 
 //Select the file with the lang strings
-include("lang/".$lang.'.php');
+include('lang/'.$lang.'.php');
 
 if ($tablewidth == ""){$tablewidth = 250;}
 
@@ -30,27 +30,28 @@ if ($page == ""){$page = 1;}
 $nextpage = $page + 1;
 $errors = "";
 if ($action == "doit"){
-	$query = "SELECT ordernum FROM ".$prefix."_words ORDER by ordernum";
-	$result_t = $mydatabase->select($query);
-	$top_t = $result_t[0];
-	$ordernum = $top_t[ordernum] - 1;
+    $query = "SELECT ordernum FROM ".$prefix."_words ORDER by ordernum";
+    $result_t = $mydatabase->select($query);
+    $top_t = $result_t[0];
+    $ordernum = $top_t[ordernum] - 1;
 
-	$query = "SELECT * FROM ".$prefix."_contents WHERE recno='$tabtype'";
-	$result = $mydatabase->select($query);
-	$top_r = $result[0];
+    $query = "SELECT * FROM ".$prefix."_contents WHERE recno='$tabtype'";
+    $result = $mydatabase->select($query);
+    $top_r = $result[0];
 
-	if(has_access("m",$tabtype)){$approved = "Y";}else{$approved = "N";}
+    if(has_access("m",$tabtype)){$approved = "Y";}else{$approved = "N";}
 
-	if ($title == ""){ $errors = "<li>"._BOOKTITLEISREQUIRED.'</li>'; }
-	if ($comment == ""){ $errors .= "<li>"._BOOKADDTEXT.'</li>'; }
-	if ($_FILES['myimage']['size'] > 409600) $errors .= "<li>" . _BOOKFILETOOBIG . '</li>';
+    if ($title == ""){ $errors = "<li>"._BOOKTITLEISREQUIRED.'</li>'; }
+    if ($comment == ""){ $errors .= "<li>"._BOOKADDTEXT.'</li>'; }
+    if ($_FILES['myimage']['size'] > 409600) $errors .= "<li>" . _BOOKFILETOOBIG . '</li>';
     
-	if ($errors == ""){
-		if($top_r['notifyemail'] != ""){
-            
-            $mailconf = getEmailParamsFromZikula();
-            
-			$mailsender = new mailsender(
+    if ($errors == ""){
+
+        if($top_r['notifyemail'] != ""){
+
+            $mailconf = getEmailParamsFromZikula($mydatabase);
+
+            $mailsender = new mailsender(
                     $mailconf['idApp'],
                     $mailconf['replyAddress'],
                     $mailconf['sender'],
@@ -59,152 +60,150 @@ if ($action == "doit"){
                     $mailconf['debug'],
                     $mailconf['logpath']
                     );
-            
+
             $contentType = ($mailconf['contenttype'] == 2) ? 'text/html' : 'text/plain';
-            
-			$message = new message(
-                    $contentType,
-                    $mailconf['log'],
-                    $mailconf['debug'],
-                    $mailconf['logpath']
-                    );
-			
-			//Indiquem l'adreça del destinatari
-			$adr_desti = $top_r['notifyemail'];
-			$message->set_to($adr_desti);
 
-			//Assignem assumpte i cos al missatge
-			$message->set_subject(_BOOKNEWENTRY);	
-			
-			$missatge_html = _BOOKDEAR.'<br /><br />'._BOOKAUTOMATICMSG;
-			$missatge_html .='<br /><br />'._BOOKNEWENTRYTITLE.':<strong> '.$title.'</strong>';
-			$missatge_html .='<br /><br />'._BOOKPLEASENOTREPLY;
-			$missatge_html .='<br /><br />'._BOOKTHEMAINUSER;
+            $message = new message(
+                $contentType,
+                $mailconf['log'],
+                $mailconf['debug'],
+                $mailconf['logpath']
+                );
 
-//			$missatge_pla = _BOOKDEAR.'\n\n'._BOOKAUTOMATICMSG;
-//			$missatge_pla .='\n\n'._BOOKNEWENTRYTITLE.": ".$title;
-//			$missatge_pla .='\n\n'._BOOKPLEASENOTREPLY;
-//			$missatge_pla .='\n\n'._BOOKTHEMAINUSER;
+            //Indiquem l'adreça del destinatari
+            $adr_desti = $top_r['notifyemail'];
+            $message->set_to($adr_desti);
 
-			$message->set_bodyContent($missatge_html);
+            //Assignem assumpte i cos al missatge
+            $message->set_subject(_BOOKNEWENTRY);	
 
-			$mailsender->add($message);
-			
-			$exit = $mailsender->send_mail();
-				
-//			//Si no s'ha pogut enviar realitzem 4 intents més... fem una pausa de 5 s a cada nou intent ( funció sleep )
-//			$intents = 1;
-//			while ((!$exit) && ($intents < 2)) {
-//				sleep(5);
-//				$exit = $mail->Send();
-//				$intents = $intents + 1;
-//			}			
-		}
+            $missatge_html = _BOOKDEAR.'<br /><br />'._BOOKAUTOMATICMSG;
+            $missatge_html .='<br /><br />'._BOOKNEWENTRYTITLE.':<strong> '.$title.'</strong>';
+            $missatge_html .='<br /><br />'._BOOKPLEASENOTREPLY;
+            $missatge_html .='<br /><br />'._BOOKTHEMAINUSER;
 
-		if (($myimage != "") && ($myimage != "none")){
-			// get a good image name
-			$imagename = uniqueimagename();
-	
-			if (function_exists('move_uploaded_file')) {
-				move_uploaded_file($myimage,$image_folder_path.'/'.$imagename); 
-			}else{
-				copy($myimage,$image_folder_path.'/'.$imagename);
-			}
-			// get the height and width
-			$imagehw = GetImageSize($image_folder_path.'/'.$imagename);
-			$width = $imagehw[0]; 
-			$height = $imagehw[1]; 
-			switch($imagehw[2]) {
-				case 1:
-					$ext = ".gif";
-					break;
-				case 2:
-					$ext = ".jpg";
-					break;
-				case 3:
-					$ext = ".png";
-					break;
-				case 4:
-					$ext = ".swf";
-					break;
-				case 5:
-					$ext = ".psd";
-					break;
-				case 6:
-					$ext = ".bmp";
-					break;
-			}		
-			$largeimage = $imagename . $ext;
-			copy($image_folder_path.'/'.$imagename,$image_folder_path.'/'.$largeimage);
-			unlink($image_folder_path.'/'.$imagename);
-			chmod($image_folder_path.'/'.$largeimage, 0775);
-			$image_tan = $largeimage;
+//            $missatge_pla = _BOOKDEAR.'\n\n'._BOOKAUTOMATICMSG;
+//            $missatge_pla .='\n\n'._BOOKNEWENTRYTITLE.": ".$title;
+//            $missatge_pla .='\n\n'._BOOKPLEASENOTREPLY;
+//            $missatge_pla .='\n\n'._BOOKTHEMAINUSER;
 
-			// convert image for netpbm
-			$dirpath = $application_root.$image_folder;
-			if ($Processor == "netpbm"){
-				$nextpath = $dirpath."/".$largeimage."_2.pnm";
-				if($ext == ".jpg"){        
-					system("$imagemagic/jpegtopnm --quiet $dirpath/$largeimage > $dirpath/$imagename.pnm");     	
-				}
-				if($ext == ".gif"){
-					system("$imagemagic/giftopnm --quiet $dirpath/$largeimage > $dirpath/$imagename.pnm");        	     	
-				}	
-				chmod("$dirpath/$imagename.pnm", 0777);
-			}	  
-	  	
-			// fix the big image if it is too big
-			if($maxwidth == ""){ $maxwidth = 300; }
-			if (($width > $maxwidth) && ($Processor != "none")){    
-				if ($Processor == "ImageMagick"){
-					system("$imagemagic -geometry $maxwidthx10000 $dirpath/$largeimage  $dirpath/$largeimage");   
-					chmod("$dirpath/$largeimage", 0777); 
-				}
-				if ($Processor == "netpbm"){
-					if ($ext == ".jpg"){       	     	
-						system("$imagemagic/pnmscale --quiet -width $maxwidth $dirpath/$imagename.pnm > $nextpath");
-						chmod($nextpath, 0777);
-						system("$imagemagic/ppmtojpeg --quiet $nextpath > $dirpath/$largeimage");     	
-						chmod("$dirpath/$largeimage", 0777);
-					}        
-					if($ext == ".gif"){      	     	
-						system("$imagemagic/pnmscale --quiet -width $maxwidth $dirpath/$imagename.pnm > $nextpath");
-						chmod($nextpath, 0777);
-						system("$imagemagic/ppmtogif --quiet $nextpath > $dirpath/$largeimage");     	
-						chmod("$dirpath/$largeimage", 0777);
-					}        
-				}
-			} 	
-		}
+            $message->set_bodyContent($missatge_html);
 
-		$comment = nl2br($comment);
-		$updated = date("YmdHis",time());
-		$query = "INSERT into ".$prefix."_words (email,webaddress,webname,comment,name,title,updated,contentsid,approved,myimage,ordernum) VALUES ";
-		if (get_magic_quotes_gpc()==1) {
-			$query .= " ('$email','$webaddress','$webname','$comment','$name','$title','$updated','$tabtype','$approved','$image_tan','$ordernum') ";
-		} else {
-			$query .= " ('$email','$webaddress','". addslashes($webname) . "','". addslashes($comment) . "','". addslashes($name) . "','". addslashes($title) ."','$updated','$tabtype','$approved','$image_tan','$ordernum') ";	
-		}
-		$mydatabase->insert($query);
-		//XTEC MULTIBOOKS
-		if($approved=='Y'){
-            include('../config/config_books.php');
-    		include_once('../config/xtecAPI.php');
-    		$book=explode('_',$prefix);
+            $mailsender->add($message);
+
+            $exit = $mailsender->send_mail();
+
+        }
+
+        if (($myimage != "") && ($myimage != "none")) {
+            // get a good image name
+            $imagename = uniqueimagename();
+
+            if (function_exists('move_uploaded_file')) {
+                move_uploaded_file($myimage, $image_folder_path . '/' . $imagename);
+            } else {
+                copy($myimage, $image_folder_path . '/' . $imagename);
+            }
+            // get the height and width
+            $imagehw = GetImageSize($image_folder_path . '/' . $imagename);
+            $width = $imagehw[0];
+            $height = $imagehw[1];
+            switch ($imagehw[2]) {
+                case 1:
+                    $ext = ".gif";
+                    break;
+                case 2:
+                    $ext = ".jpg";
+                    break;
+                case 3:
+                    $ext = ".png";
+                    break;
+                case 4:
+                    $ext = ".swf";
+                    break;
+                case 5:
+                    $ext = ".psd";
+                    break;
+                case 6:
+                    $ext = ".bmp";
+                    break;
+            }
+
+            $largeimage = $imagename . $ext;
+            copy($image_folder_path . '/' . $imagename, $image_folder_path . '/' . $largeimage);
+            unlink($image_folder_path . '/' . $imagename);
+            chmod($image_folder_path . '/' . $largeimage, 0775);
+            $image_tan = $largeimage;
+
+            // convert image for netpbm
+            $dirpath = $application_root.$image_folder;
+            if ($Processor == "netpbm"){
+                $nextpath = $dirpath."/".$largeimage."_2.pnm";
+                if($ext == ".jpg"){        
+                        system("$imagemagic/jpegtopnm --quiet $dirpath/$largeimage > $dirpath/$imagename.pnm");     	
+                }
+                if($ext == ".gif"){
+                        system("$imagemagic/giftopnm --quiet $dirpath/$largeimage > $dirpath/$imagename.pnm");        	     	
+                }	
+                chmod("$dirpath/$imagename.pnm", 0777);
+            }	  
+
+            // fix the big image if it is too big
+            if($maxwidth == ""){ $maxwidth = 300; }
+            if (($width > $maxwidth) && ($Processor != "none")){    
+                if ($Processor == "ImageMagick"){
+                    system("$imagemagic -geometry $maxwidthx10000 $dirpath/$largeimage  $dirpath/$largeimage");   
+                    chmod("$dirpath/$largeimage", 0777); 
+                }
+                if ($Processor == "netpbm"){
+                    if ($ext == ".jpg"){       	     	
+                        system("$imagemagic/pnmscale --quiet -width $maxwidth $dirpath/$imagename.pnm > $nextpath");
+                        chmod($nextpath, 0777);
+                        system("$imagemagic/ppmtojpeg --quiet $nextpath > $dirpath/$largeimage");     	
+                        chmod("$dirpath/$largeimage", 0777);
+                    }        
+                    if($ext == ".gif"){      	     	
+                        system("$imagemagic/pnmscale --quiet -width $maxwidth $dirpath/$imagename.pnm > $nextpath");
+                        chmod($nextpath, 0777);
+                        system("$imagemagic/ppmtogif --quiet $nextpath > $dirpath/$largeimage");     	
+                        chmod("$dirpath/$largeimage", 0777);
+                    }        
+                }
+            } 	
+        }
+
+        $comment = nl2br($comment);
+        $updated = date("YmdHis",time());
+  
+        $query = "INSERT into ".$prefix."_words (email,webaddress,webname,comment,name,title,updated,contentsid,approved,myimage,ordernum) VALUES ";
+        if (get_magic_quotes_gpc()==1) {
+                $query .= " ('$email','$webaddress','$webname','$comment','$name','$title','$updated','$tabtype','$approved','$image_tan','$ordernum') ";
+        } else {
+                $query .= " ('$email','$webaddress','". addslashes($webname) . "','". addslashes($comment) . "','". addslashes($name) . "','". addslashes($title) ."','$updated','$tabtype','$approved','$image_tan','$ordernum') ";	
+        }
+
+        $mydatabase->insert($query);
+
+        //XTEC MULTIBOOKS
+        if($approved=='Y'){
+            include_once ('../config/config_books.php');
+            include_once ('../config/xtecAPI.php');
+            $book=explode('_',$prefix);
             $editLastEntryBook = editLastEntryBook($book[1]);
-           	//get schoolId
-    	    $school = getSchool($book[0]);
-    	    //Calc the database from school identity
-    	    $num = floor($school/50) + 1;
+
+            //get schoolId
+            $school = getSchool($book[0]);
+            //Calc the database from school identity
+            $num = floor($school/50) + 1;
             $database .= $num;
-    		updateBookPages($prefix, $database);
-			generateRss($prefix);
-		}
-		//XTEC END
-		header("location: thankyou.php?section=$tabtype&approved=$approved&section=$tabtype");
-	} else {
-		$section = $tabtype;
-	}
+            updateBookPages($prefix, $database);
+            generateRss($prefix);
+        }
+        //XTEC END
+        header("location: thankyou.php?section=$tabtype&approved=$approved&section=$tabtype");
+    } else {
+        $section = $tabtype;
+    }
 }
 ?>
 

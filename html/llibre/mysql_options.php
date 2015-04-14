@@ -5,6 +5,7 @@ Class MySQL_options
 	var $CONN   = "";
 	var $TRAIL = array();
 	var $HITS = array();
+        var $currentDB = '';
 
 	function error($text)
 	{
@@ -25,6 +26,8 @@ Class MySQL_options
 		if(!mysql_select_db($database,$conn)) {
 			$this->error("Error al seleccionar la base de datos");
 		}
+                
+                $this->currentDB = $database;
 
 		// XTEC ADDED
 		// @aginard: Force latin1 connections to DB
@@ -38,16 +41,10 @@ Class MySQL_options
 
 	function select ($sql="", $column="")
 	{
-		// debug
-		// print "$sql<br><br>";
 		if(empty($sql)) { return false; }
-/*		if(!eregi("^select",$sql))
-		{
-			echo "<H2>Funci�n equivocada!</H2>\n";
-			return false;
-		}
-*/		if(empty($this->CONN)) { return false; }
-		$conn = $this->CONN;
+                if(empty($this->CONN)) { return false; }
+
+                $conn = $this->CONN;
 		$results = mysql_query($sql,$conn);
 		if( (!$results) or (empty($results))) {
 		print $sql;
@@ -68,17 +65,13 @@ Class MySQL_options
 	function insert ($sql="")
 	{
 		if(empty($sql)) { return false; }
-/*		if(!eregi("^insert",$sql))
+		if(empty($this->CONN))
 		{
-			echo "<H2>Funci�n equivocada!</H2>\n";
-			return false;
-		}
-*/		if(empty($this->CONN))
-		{
-			echo "<H2>No hay conexi�n!</H2>\n";
+			echo "<H2>No hay conexión!</H2>\n";
 			return false;
 		}
 		$conn = $this->CONN;
+                //var_dump($conn); die();
 		$results = mysql_query($sql,$conn);
 		if(!$results) 
 		{
