@@ -8,6 +8,14 @@ Changes in progress
 
 
 
+v15.04.17
+-------------------------------------------------------------
+- Simplified configuration files
+- Moved mailer as a submodule
+- Improved code for sending e-mail in llibres section
+- Fixed compatibility with PHP 5.4
+
+
 v15.01.26
 -------------------------------------------------------------
 - Solved issue with the filter in Cataleg de llibres (AGIN 1059-2014-0007)
