@@ -100,7 +100,6 @@ define('_BOOKNEXT','Suivant');
 define('_BOOKNEWINSTALL','Nouvelle installation');
 
 
-define('_BOOKADMINEMAIL','Courrier électronique de l\'administrateur');
 define('_BOOKPLAINTEXTFILE','Dossiers de texte plat');
 define('_BOOKHASBEENSELECTED','a été sélectionné en haut');
 define('_BOOKDATABASESERVER','Serveur de bases de données');
@@ -222,7 +221,6 @@ define('_BOOKTOREMOVEIMAGE','Pour effacer cette image');
 define('_BOOKCHECKHERE','marque cette case');
 define('_BOOKTOLOADIMAGE','Pour changer l\'image utilise la charge d\'images ci-dessous');
 define('_BOOKIFWANTSEARCHINMAINPAGE','Si on le montre apparaîtra une case de recherche sur la page d\'accueil. ');
-define('_BOOKADMINEMAIL','Courrier électronique de l\'administrateur');
 define('_BOOKTHEPAGEHSBEENREMOVED','La page a été effacée');
 define('_BOOKEDITVALIDATEPAGE','Page d\édition/d\'approbation');
 define('_BOOKHASBEENAPROVED','Ton article a été ajouté au Livre... ');
@@ -272,7 +270,6 @@ define('_BOOKIFYOUANADMIN','Si c\est un administrateur de ce livre et tu crois q
 define('_BOOKYOUCANNOW','Maintenant tu peux');
 define('_BOOKLOGGINFAIL','Erreur dans l\'essai de connexion');
 define('_BOOKSELECTDBERROR','Erreur au moment de selectionner la base de données');
-define('_BOOKSELECTDBERROR','Fonction incorrecte! ');
 define('_BOOKTHEREISNOTCONNECTION','Il n\'y a pas de connexion! ');
 define('_BOOKNOTRESULTS','Il n\'y a pas de résultats! ');
 define('_BOOKWRONGREQUEST','La demande n\'a pas fonctionnée! ');

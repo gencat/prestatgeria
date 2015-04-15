@@ -100,7 +100,6 @@ define('_BOOKNEXT','Next');
 define('_BOOKNEWINSTALL','New installation');
 
 
-define('_BOOKADMINEMAIL','Webmaster\'s e-mail');
 define('_BOOKPLAINTEXTFILE','Plain text file');
 define('_BOOKHASBEENSELECTED','has been selected above');
 define('_BOOKDATABASESERVER','Database server');
@@ -222,7 +221,6 @@ define('_BOOKTOREMOVEIMAGE','To delete this image');
 define('_BOOKCHECKHERE','tick this box');
 define('_BOOKTOLOADIMAGE','To change the image use the image upload below');
 define('_BOOKIFWANTSEARCHINMAINPAGE','If ticked a search box will appear in the main page. ');
-define('_BOOKADMINEMAIL','Webmaster\'s e-mail');
 define('_BOOKTHEPAGEHSBEENREMOVED','The page has been deleted');
 define('_BOOKEDITVALIDATEPAGE','Edition/approval page');
 define('_BOOKHASBEENAPROVED','Your article has been added to the book... ');
@@ -272,7 +270,6 @@ define('_BOOKIFYOUANADMIN','If you are an administrator of this book and you thi
 define('_BOOKYOUCANNOW','Now you can');
 define('_BOOKLOGGINFAIL','Log in failed');
 define('_BOOKSELECTDBERROR','Error in database selection');
-define('_BOOKSELECTDBERROR','Wrong function! ');
 define('_BOOKTHEREISNOTCONNECTION','There is no connection! ');
 define('_BOOKNOTRESULTS','No results! ');
 define('_BOOKWRONGREQUEST','Wrong request! ');

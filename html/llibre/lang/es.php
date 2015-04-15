@@ -219,7 +219,6 @@ define('_BOOKIFWANTSEARCHINMAINPAGE','Si se señala aparecerá un cuadro de búsque
 define('_BOOKINITMESSAGEFRONTPAGE','Mensaje de entrada');
 define('_BOOKADMINCONFIG','Configuraciones del Administrador');
 define('_BOOKMESSAGEABOUTWEBMASTER','Mensaje sobre el Webmaster');
-define('_BOOKADMINEMAIL','E-mail del administrador');
 define('_BOOKTHEPAGEHSBEENREMOVED','La página ha sido borrada');
 define('_BOOKEDITVALIDATEPAGE','PÁGINA DE EDICIÓN/APROBACIÓN');
 define('_BOOKTHANKYOU','Gracias!');
@@ -271,7 +270,6 @@ define('_BOOKCOULDNOTBEFOUND','no se encontró en la base de datos de usuarios');
 define('_BOOKIFYOUANADMIN','Si es un administrador de este libro y cree que deberí estar en esta base de datos le rogamos lo comunique al superusuario en');
 define('_BOOKLOGGINFAIL','Intento de conexión fallido');
 define('_BOOKSELECTDBERROR','Error al seleccionar la base de datos');
-define('_BOOKSELECTDBERROR','Función equivocada!');
 define('_BOOKTHEREISNOTCONNECTION','No hay conexión!');
 define('_BOOKNOTRESULTS','No hay resultados!');
 define('_BOOKWRONGREQUEST','La petición no funcionó!');

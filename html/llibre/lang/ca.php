@@ -33,7 +33,7 @@ define('_BOOKURLINITPAGE','URL de la pàgina d\'inici');
 define('_BOOKADMINPASSWORD','Contrasenya d\'administració');
 define('_BOOKADMINLOGINAECRET','Aquesta contrasenya no ha de ser coneguda per ningú més que no sigui l\'administrador/a del sistema. Només pot contenir números i lletres. No pot tenir ni espais ni caràcters, com !”#·$.');
 define('_BOOKADMINPASSWORDAGAIN','Contrasenya (una altra vegada)');
-define('_BOOKADMINEMAIL','Correu electrònic de l\'administrador/a');
+define('_BOOKADMINEMAIL','Adreça electrònica de l\'administrador/a');
 define('_BOOKADMINEMAILINFO','És útil per rebre notificacions, pèrdues de contrasenyes, etc.');
 define('_BOOKFULLPATH','Ruta completa a MyScrapbook');
 define('_BOOKFULLPATHINFO','Aquesta és la ruta completa cap a MyScrapbook. No la confonguis amb la ruta httpd');
@@ -100,7 +100,6 @@ define('_BOOKNEXT','Següent');
 define('_BOOKNEWINSTALL','Instal·lació nova');
 
 
-define('_BOOKADMINEMAIL','Adreça electrònica de l\'administrador/a');
 define('_BOOKPLAINTEXTFILE','Arxius de text pla');
 define('_BOOKHASBEENSELECTED','ha estat seleccionat a dalt');
 define('_BOOKDATABASESERVER','Servidor de base de dades');
@@ -222,7 +221,6 @@ define('_BOOKTOREMOVEIMAGE','Per esborrar aquesta imatge');
 define('_BOOKCHECKHERE','marca aquesta casella');
 define('_BOOKTOLOADIMAGE','Per canviar la imatge, fes ús del botó <strong>Navega...</strong>');
 define('_BOOKIFWANTSEARCHINMAINPAGE','Si marques aquesta casella, apareixerà un quadre de cerca a la pàgina principal del llibre');
-define('_BOOKADMINEMAIL','Adreça electrònica de l\'administrador/a');
 define('_BOOKTHEPAGEHSBEENREMOVED','La pàgina ha estat esborrada');
 define('_BOOKEDITVALIDATEPAGE','Pàgina d\'edició/aprovació');
 define('_BOOKHASBEENAPROVED','El teu article ha estat afegit al llibre. ');
@@ -272,7 +270,6 @@ define('_BOOKIFYOUANADMIN','Si creus que hauries de poder accedir a aquest llibr
 define('_BOOKYOUCANNOW','Ara pots');
 define('_BOOKLOGGINFAIL','L\'intent de connexió ha fallat');
 define('_BOOKSELECTDBERROR','S\'ha produït un error en seleccionar la base de dades');
-define('_BOOKSELECTDBERROR','Funció equivocada');
 define('_BOOKTHEREISNOTCONNECTION','No hi ha connexió');
 define('_BOOKNOTRESULTS','No hi ha resultats');
 define('_BOOKWRONGREQUEST','La petició no ha funcionat');
