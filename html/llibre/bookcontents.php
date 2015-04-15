@@ -41,6 +41,7 @@ $result = $mydatabase->select($query);
 $top_r = $result[0];
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />

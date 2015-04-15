@@ -31,11 +31,12 @@ if( (md5($prefix.$password_admin) == $mypass) && ($whattodo == "reorderchapters"
 }
 ?>
 
-<link rel="stylesheet" href="themes/<?php echo $theme;?>/style.css" type="text/css">
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1" />
 	<title></title>
+    <link rel="stylesheet" href="themes/<?php echo $theme;?>/style.css" type="text/css">
 </head>
 <body background="themes/<?php echo $theme;?>/images/bkbook.gif" bgcolor="#ffffff" text="#664411" link="#996633" vlink="#996633">
 	<center>
