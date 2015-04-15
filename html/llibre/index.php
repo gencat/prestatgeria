@@ -27,7 +27,7 @@ $rightframe = $leftframe = 'bookcontents.php';
 
 
 // frames 
-if($page == ""){
+if(!isset($page) || ($page == '')) {
 	$openingpage = "true";
 	$leftframe = "open1.php";
 	$lefttop = 'themes/'.$theme.'/1a.html';

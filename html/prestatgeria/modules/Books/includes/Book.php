@@ -62,7 +62,7 @@ class Book {
      * @return:	book object
      */
     private static function DOMNode2book($bookNode) {
-        $book = new Book();
+        $book = new Book('','','','','','','','','','','','');
 
         // id
         $nodes = $bookNode->getElementsByTagName('id');
@@ -157,7 +157,7 @@ class Book {
 
             Loader::RequireOnce("modules/Books/includes/Chapter.php");
 
-            $chapter = new Chapter();
+            $chapter = new Chapter('','','','','','','','','','','','');
 
             $chapter->DOMNode2chapter($chapterNode);
 

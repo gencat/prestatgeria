@@ -1356,10 +1356,12 @@ class Books_Controller_User extends Zikula_AbstractController {
         // import book images
         Loader::RequireOnce('modules/Books/includes/utils.php');
 
-        copydir($tmp . '/book_images', ModUtil::getVar('Books', 'serverImageFolder') . '/' . $schoolCode . '_' . $bookId);
+        $image_folder = ModUtil::getVar('Books', 'serverImageFolder');
 
-        chmod($image_folder . $schoolCode . '_' . $bookId, 0777);
-        chmod($image_folder . $schoolCode . '_' . $bookId . '/.thumbs', 0777);
+        copydir($tmp . '/book_images', $image_folder . '/' . $schoolCode . '_' . $bookId);
+
+        chmod($image_folder . '/' . $schoolCode . '_' . $bookId, 0777);
+        chmod($image_folder . '/' . $schoolCode . '_' . $bookId . '/.thumbs', 0777);
 
         Loader::loadClass('FileUtil');
         FileUtil::deldir($tmp);

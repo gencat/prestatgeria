@@ -376,7 +376,7 @@ class Chapter {
 
             Loader::RequireOnce("modules/Books/includes/Page.php");
 
-            $page = new Page();
+            $page = new Page('','','','','','','','','');
 
             $page->DOMNode2page($pageNode);
 

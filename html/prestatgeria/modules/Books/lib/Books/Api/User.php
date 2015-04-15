@@ -1700,7 +1700,7 @@ class Books_Api_User extends Zikula_AbstractApi {
 
             // _words
 
-            $chapterId = DBUtil::getInsertId();
+            $chapterId = mysql_insert_id($connect);
 
             foreach ($chapter->getPages() as $key => $page) {
                 $sql = "INSERT INTO " . $prefix . "_words (

@@ -17,9 +17,12 @@ require "functions.php";
 
 //Select the file with the lang strings
 include("lang/".$lang.'.php');
+if (!isset($mypass)) {
+    $mypass = '';
+}
 if( (md5($prefix.$password_admin) == $mypass) && ($whattodo == "reorderchapters")){
-	while (list($key, $val) = each($HTTP_POST_VARS)) {
-		$array = split("__",$key);
+    while (list($key, $val) = each($_POST)) {
+        $array = explode('__', $key);
 		if($array[0] == "ordernum") {
 			$query = "UPDATE ".$prefix."_contents set ordernum='$val' WHERE recno='$array[1]' ";
 			$mydatabase->sql_query($query);
