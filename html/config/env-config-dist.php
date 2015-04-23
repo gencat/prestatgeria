@@ -2,10 +2,10 @@
 
 global $presta;
 
-$presta['dbhost'] = '';
-$presta['dbname'] = '';
-$presta['dbuser'] = '';
-$presta['dbpass'] = '';
+$presta['dbhost'] = 'localhost';
+$presta['dbname'] = 'presta';
+$presta['dbuser'] = 'root';
+$presta['dbpass'] = 'agora';
 
 $booksBaseURL = 'http://agora/prestatgeria'; // URL de l'aplicació
-$dirroot = '/srv/www/prestatgeria/html'; // Directori de l'aplicació (sense barra final)
+$dirroot = '/dades/prestatgeria/html'; // Directori de l'aplicació (sense barra final)
