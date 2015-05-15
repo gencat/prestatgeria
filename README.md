@@ -42,9 +42,9 @@ Installation
 
     Create the following soft links:
 	
-		* $HOME/html/centres => $HOME/centres/
-		* $HOME/html/prestatgeria/ztemp => $HOME/ztemp/
-		* $HOME/html/pmf/templates_c => $HOME/templates_c/
+	* $HOME/html/centres => $HOME/centres/
+	* $HOME/html/prestatgeria/ztemp => $HOME/ztemp/
+	* $HOME/html/pmf/templates_c => $HOME/templates_c/
         * $HOME/html/pmf/images => $HOME/images/
         * $HOME/html/rss => $HOME/rss/
 
@@ -53,20 +53,17 @@ Installation
 
     The following directories must be writeable by Apache
 
-		* $HOME/centres/        - Books images
-		* $HOME/ztemp/          - Zikula temporary files
-		* $HOME/templates_c/	- FAQ temporary files
-		* $HOME/images/         - FAQ images
-		* $HOME/rss/            - Books RSS
+	* $HOME/centres/        - Books images
+	* $HOME/ztemp/          - Zikula temporary files
+	* $HOME/templates_c/	- FAQ temporary files
+	* $HOME/images/         - FAQ images
+	* $HOME/rss/            - Books RSS
 	
 	
 4.-	Configuration
 
     * Rename $HOME/html/.htaccess-dist to $HOME/html/.htaccess and set the value of RewriteBase
     * Rename $HOME/html/env-config.php.dist to $HOME/html/env-config.php and set values
-    * Rename $HOME/html/config_books.php.dist to $HOME/html/config_books.php and set values
-    * Rename $HOME/html/pmf/inc/connecta.inc.dist to $HOME/html/pmf/inc/connecta.inc and set values
-    * Rename $HOME/html/pmf/inc/sessio.inc.dist to $HOME/html/pmf/inc/sessio.inc and set values
 
 
 5.- Install CMS Zikula			
