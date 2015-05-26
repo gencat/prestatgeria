@@ -938,7 +938,7 @@ class Books_Api_User extends Zikula_AbstractApi {
      * creates a book
      * @author:	Francesc Bassas i Bullich & Albert Pérez Monfort
      * @param:	$args
-     * @return:	
+     * @return:
      */
     public function createBook($args) {
         // argument check
@@ -1070,7 +1070,7 @@ class Books_Api_User extends Zikula_AbstractApi {
 			) VALUES (
 				'" . mysql_real_escape_string($tllibre) . "',
 				'" . mysql_real_escape_string($site_path) . "llibre.php?fisbn=" . $prefix . "',
-				'" . mysql_real_escape_string($mailxtec) . "',				
+				'" . mysql_real_escape_string($mailxtec) . "',
 				'" . mysql_real_escape_string($pass) . "',
 				'" . mysql_real_escape_string($descllibre) . "',
 				'" . mysql_real_escape_string($abouttext) . "',
@@ -1122,7 +1122,6 @@ class Books_Api_User extends Zikula_AbstractApi {
 
         // get book from database
         $bookrecord = DBUtil::selectObjectByID('books', $bookId, 'bookId');
-
         if ($bookrecord === false) {
             return LogUtil::registerError(_GETFAILED);
         }
@@ -1145,10 +1144,19 @@ class Books_Api_User extends Zikula_AbstractApi {
 
         $sql = 'SELECT site_title, opentext, openimage, abouttext, adminemail, showsearch, lang, theme, html_editor ' .
                 'FROM ' . $prefix . '_config';
-
         $rsBook = mysql_query($sql, $connect);
         Loader::RequireOnce("modules/Books/includes/Book.php");
+
+
+        //XTEC ************ MODIFICAT - Modified in order to get data from array in associative way
+        //2015.05.25 @author - Josep Caballero
+        $row = mysql_fetch_assoc($rsBook);
+        //************ ORIGINAL
+        /*
         $row = mysql_fetch_row($rsBook);
+        */
+        //************ FI
+
         $book = new Book($bookId,
                         $bookrecord['schoolCode'],
                         $row['site_title'],
@@ -1238,7 +1246,7 @@ class Books_Api_User extends Zikula_AbstractApi {
      * imports a book
      * @author:	Francesc Bassas i Bullich
      * @param:	$args	array with the path to the file to import, the schoolCode, the admin username and their password
-     * @return:	
+     * @return:
      */
     public function importBook($args) {
         // argument check
@@ -1343,7 +1351,7 @@ class Books_Api_User extends Zikula_AbstractApi {
 			) VALUES (
 				'" . mysql_real_escape_string($book->getBookTitle()) . "',
 				'" . mysql_real_escape_string($site_path) . "llibre.php?fisbn=" . $prefix . "',
-				'" . mysql_real_escape_string($username) . "',				
+				'" . mysql_real_escape_string($username) . "',
 				'" . mysql_real_escape_string($password) . "',
 				'" . mysql_real_escape_string($book->getOverview()) . "',
 				'" . mysql_real_escape_string($book->getImage()) . "',
@@ -1487,10 +1495,10 @@ class Books_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-     * 
+     *
      * @author:	Francesc Bassas i Bullich
      * @param:	$args
-     * @return:	
+     * @return:
      */
     public function insertBookRow($args) {
         // argument check
@@ -1549,10 +1557,10 @@ class Books_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-     * 
+     *
      * @author:	Francesc Bassas i Bullich
      * @param:	$args
-     * @return:	
+     * @return:
      */
     public function insertBookTables($args) {
         // argument check
@@ -1639,7 +1647,7 @@ class Books_Api_User extends Zikula_AbstractApi {
 			) VALUES (
 				'" . mysql_real_escape_string($book->getBookTitle()) . "',
 				'" . mysql_real_escape_string($site_path) . "llibre.php?fisbn=" . $prefix . "',
-				'" . mysql_real_escape_string($username) . "',				
+				'" . mysql_real_escape_string($username) . "',
 				'" . mysql_real_escape_string($password) . "',
 				'" . mysql_real_escape_string($book->getOverview()) . "',
 				'" . mysql_real_escape_string($book->getImage()) . "',
@@ -1909,7 +1917,7 @@ class Books_Api_User extends Zikula_AbstractApi {
 				recno			int(10)			NOT NULL auto_increment,
 				site_title		varchar(100)	NOT NULL default '',
 				site_home		varchar(255)	NOT NULL default '',
-				myname			varchar(12)		NOT NULL default '',			
+				myname			varchar(12)		NOT NULL default '',
 				mypass			varchar(40)		NOT NULL default '',
 				loggedin		char(1)			NOT NULL default 'N',
 				opentext		text			NOT NULL,
@@ -2038,9 +2046,9 @@ class Books_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-     * changes URLImageFolder 
+     * changes URLImageFolder
      * @author:	Francesc Bassas i Bullich
-     * @param:	$args	
+     * @param:	$args
      */
     public function changeURLImageFolder($args) {
         // argument check
@@ -2081,7 +2089,7 @@ class Books_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-     * Update the book main properties in table config 
+     * Update the book main properties in table config
      * @author:	Albert Pérez Monfort
      * @param:	The book properties that are stored in the book table config
      * @return: True if success and false otherwise
@@ -2152,7 +2160,7 @@ class Books_Api_User extends Zikula_AbstractApi {
             return LogUtil::registerPermissionError();
         }
 
-        //check if there are diferences 
+        //check if there are diferences
         if ($args['oldValue'] != $args['newValue']) {
             $oldValue = explode('#', $args['oldValue']);
             $newValue = explode('#', $args['newValue']);

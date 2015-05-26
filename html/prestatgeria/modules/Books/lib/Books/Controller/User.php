@@ -147,7 +147,7 @@ class Books_Controller_User extends Zikula_AbstractController {
         }
         return false;
     }
-    
+
     /**
      * Displays the information sheet of a book.
      * @author:     Albert Pérez Monfort (aperezm@xtec.cat)
@@ -933,7 +933,7 @@ class Books_Controller_User extends Zikula_AbstractController {
                 $myname = $bookAdminName;
                 $mypass = $bookSettings['mypass'];
             } else {
-                // for security reasons check if the user is the owner. Avoid that user changes the administrator ilegaly 
+                // for security reasons check if the user is the owner. Avoid that user changes the administrator ilegaly
                 if ($isOwner) {
                     $newBookAdminName = $bookAdminName;
                     $bookAdminName = '';
@@ -1130,7 +1130,7 @@ class Books_Controller_User extends Zikula_AbstractController {
 
         $book->replaceImageFolder($bookSoftwareUri . '/centres/' . $book->getSchoolCode() . '_' . $book->getBookId() . '/', 'images/');
 
-        // save the book as epub file	
+        // save the book as epub file
         global $ZConfig;
         $epub_dir = substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/') + 1) . $ZConfig['System']['temp'] . '/books/export/epub/' . 'book' . $bookId . '/';
         $filepath = $book->book2epub($epub_dir);
@@ -1244,10 +1244,15 @@ class Books_Controller_User extends Zikula_AbstractController {
 
         global $ZConfig;
         $path = $ZConfig['System']['temp'] . '/books/export/xml/' . $bookId . '/';
-
-        mkdir($path);
-        chmod($path, 0777);
-
+        //XTEC ************ MODIFICAT - avoid  readdir throw a warning
+        //2015.05.27 @author - Josep Caballero
+         if(!is_dir($path)) {
+           mkdir($path);
+         }
+         chmod($path, 0777);
+         //************ ORIGINAL
+         /*mkdir($path);
+         chmod($path, 0777);*/
         if (!$book->book2xml($path . 'book.xml')) {
             return LogUtil::registerError($this->__("No s'ha pogut exportar el llibre"));
         }

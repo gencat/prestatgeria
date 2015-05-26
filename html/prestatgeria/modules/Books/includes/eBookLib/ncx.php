@@ -10,22 +10,22 @@ class ncx {
     private $head; // Contains metadata
 	private $docTitle; // The title of the document, presented as text and, optionally, in audio or image renderings, for presentation to the reader.
 	private $navMap; // Container for primary navigation information
-	
+
 	private $playOrder = 1;
-	
+
 	public function getNcxPath(){return $this->ncx;}
-	
-	public function setNcxPath($path){$this->ncx = $path;}	
-	public function setVersion($version){$this->version = $version;}	
+
+	public function setNcxPath($path){$this->ncx = $path;}
+	public function setVersion($version){$this->version = $version;}
 	public function setXmlns($xmlns){$this->xmlns = $xmlns;}
-	
+
 	public function addMeta($name,$content){
 		$meta = new meta();
 		$meta->setName($name);
 		$meta->setContent($content);
 		$this->head[] = $meta;
 	}
-	
+
 	public function setDocTitle($docTitle){$this->docTitle = $docTitle;}
 
 	public function addNavPoint($id,$navLabel,$content,$innerNavPoints){
@@ -35,13 +35,27 @@ class ncx {
 		$this->playOrder += 1;
 		$navPoint->setNavLabel($navLabel);
 		$navPoint->setContent($content);
-		foreach ($innerNavPoints as $innerNavPoint){
-			$navPoint->addInnerNavPoint($innerNavPoint->getId(), $innerNavPoint->getNavLabel(), $innerNavPoint->getContent(),$this->playOrder);
-			$this->playOrder += 1;
-		}
+
+                //XTEC ************ MODIFICAT - Check if is array to avoid warnings
+                //2015.05.25 @author - Josep Caballero
+                 if (is_array($innerNavPoints)) {
+                    foreach ($innerNavPoints as $innerNavPoint){
+                        $navPoint->addInnerNavPoint($innerNavPoint->getId(), $innerNavPoint->getNavLabel(), $innerNavPoint->getContent(),$this->playOrder);
+                        $this->playOrder += 1;
+                    }
+                }
+                //************ ORIGINAL
+                /*
+                foreach ($innerNavPoints as $innerNavPoint){
+                        $navPoint->addInnerNavPoint($innerNavPoint->getId(), $innerNavPoint->getNavLabel(), $innerNavPoint->getContent(),$this->playOrder);
+                        $this->playOrder += 1;
+                    }
+                */
+                //************ FI
+
 		$this->navMap[] = $navPoint;
 	}
-	
+
  	public function writeNCX(){
 		foreach ($this->head as $meta) {
 			$head .= $meta->writeMeta();
@@ -62,7 +76,7 @@ class ncx {
 					"\t</navMap>\n" .
 				"</ncx>\n")
 				;
- 	}		
+ 	}
 }
 
 /**
@@ -72,18 +86,18 @@ class meta
 {
     private $name;
     private $content;
-	
-	public function getName(){return $this->name;}	
+
+	public function getName(){return $this->name;}
 	public function getContent(){return $this->content;}
-	
+
 	public function setName($name){
 		$this->name = $name;
 	}
-	
+
 	public function setContent($content){
 		$this->content = $content;
 	}
-	
+
  	public function writeMeta(){
  		return "\t\t<meta name=\"" . $this->getName() . "\" content=\"" . $this->getContent() . "\"/>\n";
  	}
@@ -99,17 +113,17 @@ class navPoint
 	private $navLabel;
 	private $content;
 	private $innerNavPoints;
-	
-	public function getId(){return $this->id;}	
-	public function getPlayOrder(){return $this->playOrder;}	
+
+	public function getId(){return $this->id;}
+	public function getPlayOrder(){return $this->playOrder;}
 	public function getNavLabel(){return $this->navLabel;}
 	public function getContent(){return $this->content;}
-	
+
 	public function setId($id){$this->id = $id;}
 	public function setPlayOrder($playOrder){$this->playOrder = $playOrder;}
 	public function setNavLabel($navLabel){$this->navLabel = $navLabel;}
 	public function setContent($content){$this->content = $content;}
-	
+
 	public function addInnerNavPoint($id,$navLabel,$content,$playOrder){
 		$navPoint = new navPoint();
 		$navPoint->setId($id);
@@ -118,11 +132,22 @@ class navPoint
 		$navPoint->setContent($content);
 		$this->innerNavPoints[] = $navPoint;
 	}
-	
+
 	public function writeNavPoint(){
-		foreach ($this->innerNavPoints as $navPoint) {
-			$innerNavPoints .=	$navPoint->writeNavPoint();
-		}
+                //XTEC ************ MODIFICAT - Check if is array to avoid warnings
+                //2015.05.25 @author - Josep Caballero
+                if(is_array($this->innerNavPoints)){
+                    foreach ($this->innerNavPoints as $navPoint) {
+			$innerNavPoints .= $navPoint->writeNavPoint();
+                    }
+                }
+                //************ ORIGINAL
+                /*
+                foreach ($this->innerNavPoints as $navPoint) {
+			$innerNavPoints .= $navPoint->writeNavPoint();
+                    }
+                */
+                //************ FI
 		return "\t\t<navPoint id=\"" . $this->getId() . "\" playOrder=\"" . $this->getPlayOrder() . "\">\n" .
 					"\t\t\t<navLabel>\n" .
 						"\t\t\t\t<text>" . $this->getNavLabel() . "</text>\n" .

@@ -411,7 +411,7 @@ class Book {
     /**
      * saves the book object as epub file in the specified path
      * @author:	Francesc Bassas i Bullich
-     * @param:	
+     * @param:
      * @return:	returns true on success or false on failure
      */
     public function book2epub($filename) {
@@ -466,7 +466,6 @@ class Book {
 
             $ebook->addContentFile($chapterpath . ($i + 1) . '.xhtml', 'chapter' . ($i + 1), 'application/xhtml+xml');
             $spine[] = 'chapter' . ($i + 1);
-
             foreach ($chapter->getPages() as $j => $page) {
                 $fp = fopen($chapterpath . ($i + 1) . ($j + 1) . '.xhtml', 'wb');
                 $config = array('indent' => TRUE, 'output-xhtml' => TRUE, 'wrap' => 200);
@@ -506,7 +505,7 @@ class Book {
     /**
      * saves the book object as SCORM file in the specified path
      * @author:	Francesc Bassas i Bullich
-     * @param:	
+     * @param:
      * @return:	returns true on success or false on failure
      */
     public function book2scorm($path, $filename) {
@@ -543,10 +542,10 @@ class Book {
     }
 
     /**
-     * 
+     *
      * @author:	Francesc Bassas i Bullich
-     * @param:	
-     * @return:	
+     * @param:
+     * @return:
      */
     private function book2imsmanifest($path, $filename) {
         $dom = new DOMDocument('1.0', 'UTF-8');
@@ -773,10 +772,10 @@ class Book {
     }
 
     /**
-     * 
+     *
      * @author:	Francesc Bassas i Bullich
-     * @param:	
-     * @return:	
+     * @param:
+     * @return:
      */
     private function book2metadata($path, $filename, $entry) {
         $dom = new DOMDocument('1.0', 'UTF-8');
@@ -1172,10 +1171,10 @@ class Book {
     }
 
     /**
-     * 
+     *
      * @author:	Francesc Bassas i Bullich
-     * @param:	
-     * @return:	
+     * @param:
+     * @return:
      */
     public function replaceImageFolder($original_folder, $new_folder) {
         foreach ($this->chapters as $i => $chapter) {

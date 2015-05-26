@@ -607,8 +607,18 @@ class ebookWrite {
     private function existInManifest($item) {
         $pass = false;
         foreach ($this->ebookData->manifestData as $manId) {
-            if ($item == (string) $manId->id)
-                $pass = true;
+            //XTEC ************ MODIFICAT - Needs to check element and child element
+            //2015.05.25 @author - Josep Caballero
+            if ($item ==  $manId){
+                 $pass = true;
+              }else if ($item ==  $manId->id){
+                  $pass = true;
+              }
+            //************ ORIGINAL
+            /*
+            /*if ($item == (string) $manId->id)
+                $pass = true;*/
+            //************ FI
         }
         return $pass;
     }
@@ -1657,7 +1667,7 @@ class ebookWrite {
     }
 
     /**
-     * 
+     *
      */
     public function addTocElement($id, $text, $content, $innerTocElements, $level = 1) {
         $this->ebookData->ncx->addNavPoint($id, $text, $content, $innerTocElements);

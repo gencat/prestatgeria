@@ -88,7 +88,7 @@ class ebook{
 		$this->ebookWritter->setDcTitle($title, $index);
 		$this->ebookData->ncx->setDocTitle($title);
 		if($this->useSessions){
-			$_SESSION['data'] = serialize($this->ebookData);
+            $_SESSION['data'] = serialize($this->ebookData);
 		}
 	}
 
@@ -682,10 +682,10 @@ class ebook{
 	public function removeContentFile($manId){
 		return $this->ebookWritter->removeContentFile($manId);
 	}
-	
+
 	/**
-	 * 
-	 */	
+	 *
+	 */
 	public function addTocElement($id, $text, $content, $level = 1){
 		return $this->ebookWritter->addTocElement($id,$text,$content,$level);
 	}
@@ -808,6 +808,6 @@ class ebook{
 			session_destroy();
 		}
 	}
-	
+
 }
 ?>
