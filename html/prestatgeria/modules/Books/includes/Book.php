@@ -15,6 +15,7 @@ class Book {
     private $htmlEditor;
     private $descriptors;
     private $chapters = array();
+    	
 
     function __construct($bookId, $schoolCode, $bookTitle, $overview, $image, $about, $adminEmail, $showSearch, $lang, $theme, $htmlEditor, $descriptors) {
         $this->bookId = $bookId;
@@ -37,7 +38,7 @@ class Book {
      * @param:	filename	path to the xml file
      * @return:	book object on success or false on failure
      */
-    public static function xml2book($filename) {
+    public static function xml2book($filename) {        
         $doc = new DOMDocument();
 
         if (!$doc->load($filename)) {
@@ -63,7 +64,6 @@ class Book {
      */
     private static function DOMNode2book($bookNode) {
         $book = new Book('','','','','','','','','','','','');
-
         // id
         $nodes = $bookNode->getElementsByTagName('id');
         $node = $nodes->item(0);
@@ -84,7 +84,7 @@ class Book {
         $value = $node->nodeValue;
 
         $book->setBookTitle($value);
-
+      
         // overview
         $nodes = $bookNode->getElementsByTagName('overview');
         $node = $nodes->item(0);
@@ -176,7 +176,7 @@ class Book {
     }
 
     public function getBookTitle() {
-        return $this->bookTitle;
+        return $this->bookTitle;        
     }
 
     public function getOverview() {
@@ -305,7 +305,7 @@ class Book {
      * @param:	bookpath	path to the destination folder
      * @return:	true on success or false on failure
      */
-    public function book2html($bookpath) {
+    public function book2html($bookpath) {        
         if (!mkdir($bookpath)) {
             return false;
         }
@@ -394,7 +394,7 @@ class Book {
      * @param:	filename	path to the file
      * @return:	returns true on success or false on failure
      */
-    public function book2xml($filename) {
+    public function book2xml($filename) {        
         $dom = new DOMDocument('1.0', 'UTF-8');
 
         $dom->formatOutput = true;
@@ -418,15 +418,15 @@ class Book {
         if (!mkdir($filename)) {
             return false;
         }
-
+        
         Loader::RequireOnce("modules/Books/includes/eBookLib/ebook.php");
         $ebook = new ebook();
-        $ebook->setDcTitle($this->bookTitle);
+        $ebook->setDcTitle($this->bookTitle);        
         $ebook->setDcCreator($this->getAdminEmail());
         $ebook->setDcCreatorAttrib('Role', 'aut');
         $ebook->setDcLanguage($this->lang);
         $ebook->setDcIdentifier('laprestatgeria_' . $this->getBookId());
-
+        
         // book overview
         if ($this->overview) {
             $fp = fopen($filename . 'overview.xhtml', 'wb');
@@ -449,7 +449,7 @@ class Book {
         foreach ($this->chapters as $i => $chapter) {
             $chapterpath = $filename . 'chapter' . ($i + 1) . '/';
             mkdir($chapterpath);
-
+            
             // chapter overview
             $fp = fopen($chapterpath . ($i + 1) . '.xhtml', 'wb');
             $config = array('indent' => TRUE, 'output-xhtml' => TRUE, 'wrap' => 200);
@@ -463,11 +463,10 @@ class Book {
             $tidy->cleanRepair();
             fwrite($fp, $tidy);
             fclose($fp);
-
+            
             $ebook->addContentFile($chapterpath . ($i + 1) . '.xhtml', 'chapter' . ($i + 1), 'application/xhtml+xml');
             $spine[] = 'chapter' . ($i + 1);
-
-            foreach ($chapter->getPages() as $j => $page) {
+            foreach ($chapter->getPages() as $j => $page) {                 
                 $fp = fopen($chapterpath . ($i + 1) . ($j + 1) . '.xhtml', 'wb');
                 $config = array('indent' => TRUE, 'output-xhtml' => TRUE, 'wrap' => 200);
                 $strimg = '';
@@ -480,7 +479,7 @@ class Book {
                 $tidy->cleanRepair();
                 fwrite($fp, $tidy);
                 fclose($fp);
-
+          
                 $ebook->addContentFile($chapterpath . ($i + 1) . ($j + 1) . '.xhtml', 'page' . ($i + 1) . ($j + 1), 'application/xhtml+xml');
                 $navPoint = new navPoint();
                 $navPoint->setId('page' . ($i + 1) . ($j + 1));
