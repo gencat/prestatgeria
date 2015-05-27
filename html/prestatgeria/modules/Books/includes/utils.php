@@ -9,7 +9,8 @@
 	function copydir($dirsource,$dirdest)
 	{
             //XTEC ************ MODIFICAT - avoid  readdir throw a warning if null param given.It breaks exportation
-            //2015.05.25 @author - Josep Caballero
+            //2015.05.27 @author - Josep Caballero
+            clearstatcache();
             if(is_dir($dirsource)) {
 		$dir_handle=opendir($dirsource);
             }else{
@@ -19,8 +20,7 @@
             
             while($file=readdir($dir_handle)) {
                     if($file!="." && $file!="..") {
-                            if(!is_dir($dirsource."/".$file)) copy ($dirsource."/".$file, $dirdest. "/" .$file);
-                            else copydir($dirsource."/".$file, $dirdest."/".$file);
+                            if(!is_dir($dirsource)) copy ($dirsource."/".$file, $dirdest. "/" .$file);
                     }
             } 
             closedir($dir_handle); 
