@@ -81,6 +81,10 @@ if ($action == "doit"){
             $missatge_html .='<br /><br />'._BOOKNEWENTRYTITLE.':<strong> '.$title.'</strong>';
             $missatge_html .='<br /><br />'._BOOKPLEASENOTREPLY;
             $missatge_html .='<br /><br />'._BOOKTHEMAINUSER;
+            //XTEC ************ AFEGIT - Converts  from  iso-8858-1 to utf-8
+            //2015.05.28 @author -Josep Caballero
+            $missatge_html = iconv('ISO-8859-1', 'UTF-8', $missatge_html);
+            //************ FI
 
 //            $missatge_pla = _BOOKDEAR.'\n\n'._BOOKAUTOMATICMSG;
 //            $missatge_pla .='\n\n'._BOOKNEWENTRYTITLE.": ".$title;
