@@ -264,7 +264,7 @@ define('_BOOKEMAILSENDTO','S\'ha enviat un correu electrònic a');
 define('_BOOKWITHTHEENTRYINFO','amb la informació per connectar-se.');
 define('_BOOKTHEEMAILHASBEENSENDED','S\'ha fet una sol·licitud per recuperar la contrasenya per accedir al llibre.');
 define('_BOOKBELOWISTHELOGGININFO','Aquí sota hi ha la informació per connectar-te. Si apareix més d\'una adreça, és que tens adreces múltiples');
-define('_BOOKSORRYTHEEMAILADDRESS','Ho semtim però l\'adreça de correu electrònic');
+define('_BOOKSORRYTHEEMAILADDRESS','Ho sentim però l\'adreça de correu electrònic');
 define('_BOOKCOULDNOTBEFOUND','no s\'ha trobat a la base de dades d\'usuaris.');
 define('_BOOKIFYOUANADMIN','Si creus que hauries de poder accedir a aquest llibre, et preguem que ho comuniquis a l\'administrador/a, a:');
 define('_BOOKYOUCANNOW','Ara pots');
