@@ -421,7 +421,7 @@ class Book {
 
         Loader::RequireOnce("modules/Books/includes/eBookLib/ebook.php");
         $ebook = new ebook();
-        $ebook->setDcTitle($this->bookTitle);
+        $ebook->setDcTitle(utf8_decode($this->bookTitle));
         $ebook->setDcCreator($this->getAdminEmail());
         $ebook->setDcCreatorAttrib('Role', 'aut');
         $ebook->setDcLanguage($this->lang);
