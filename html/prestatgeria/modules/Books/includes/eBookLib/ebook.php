@@ -84,12 +84,12 @@ class ebook{
 	 * @param $title The title to be set. If you want set more then one send an array.
 	 * @param $index if there is more then one instance of this item, specify it and that item will be edited.
 	 */
-	public function setDcTitle($title, $index = null){
+	public function setDcTitle($title, $index = null){                
 		$this->ebookWritter->setDcTitle($title, $index);
 		$this->ebookData->ncx->setDocTitle($title);
 		if($this->useSessions){
-			$_SESSION['data'] = serialize($this->ebookData);
-		}
+                    $_SESSION['data'] = serialize($this->ebookData);
+		}                
 	}
 
 	/**

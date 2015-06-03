@@ -1103,7 +1103,7 @@ class Books_Controller_User extends Zikula_AbstractController {
     public function getEpubBook($args) {
         // bookId
         $bookId = FormUtil::getPassedValue('bookId', isset($args['bookId']) ? $args['bookId'] : null, 'GET');
-
+        
         // argument check
         if ($bookId == null || !is_numeric($bookId)) {
             return LogUtil::registerError(_MODARGSERROR);
@@ -1122,7 +1122,7 @@ class Books_Controller_User extends Zikula_AbstractController {
         Loader::RequireOnce("modules/Books/includes/Book.php");
 
         $book = ModUtil::apiFunc('Books', 'user', 'getBookById', array('bookId' => $bookId));
-
+        
         if (!$book)
             return LogUtil::registerError($this->__("No s'ha pogut exportar el llibre"));
 
@@ -1244,10 +1244,15 @@ class Books_Controller_User extends Zikula_AbstractController {
 
         global $ZConfig;
         $path = $ZConfig['System']['temp'] . '/books/export/xml/' . $bookId . '/';
-
-        mkdir($path);
-        chmod($path, 0777);
-
+        //XTEC ************ MODIFICAT - avoid  readdir throw a warning 
+        //2015.05.27 @author - Josep Caballero
+         if(!is_dir($path)) {
+           mkdir($path);
+         }
+         chmod($path, 0777);
+         //************ ORIGINAL
+         /*mkdir($path);
+         chmod($path, 0777);*/
         if (!$book->book2xml($path . 'book.xml')) {
             return LogUtil::registerError($this->__("No s'ha pogut exportar el llibre"));
         }

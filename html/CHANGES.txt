@@ -7,6 +7,7 @@ Changes in progress
 ---------------------------------------------------------------------------------------
 - Fixed deprecated errors on set_magic_quotes_runtime
 - Added opcache control script
+- Fixed bugs in export Epub, Export XML, import XML .
 
 
 

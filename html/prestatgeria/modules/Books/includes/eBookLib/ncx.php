@@ -35,11 +35,30 @@ class ncx {
 		$this->playOrder += 1;
 		$navPoint->setNavLabel($navLabel);
 		$navPoint->setContent($content);
-		foreach ($innerNavPoints as $innerNavPoint){
-			$navPoint->addInnerNavPoint($innerNavPoint->getId(), $innerNavPoint->getNavLabel(), $innerNavPoint->getContent(),$this->playOrder);
-			$this->playOrder += 1;
-		}
-		$this->navMap[] = $navPoint;
+                
+                //XTEC ************ MODIFICAT - Check if is array to avoid warnings
+                //2015.05.25 @author - Josep Caballero
+                 if (is_array($innerNavPoints)) {
+                    foreach ($innerNavPoints as $innerNavPoint){                    
+                        $navPoint->addInnerNavPoint($innerNavPoint->getId(), $innerNavPoint->getNavLabel(), $innerNavPoint->getContent(),$this->playOrder);
+                        $this->playOrder += 1;
+                    }
+                }	
+                //************ ORIGINAL
+                /*
+                foreach ($innerNavPoints as $innerNavPoint){                    
+                        $navPoint->addInnerNavPoint($innerNavPoint->getId(), $innerNavPoint->getNavLabel(), $innerNavPoint->getContent(),$this->playOrder);
+                        $this->playOrder += 1;
+                    }
+                */
+                //************ FI
+
+
+                
+
+
+               	
+		$this->navMap[] = $navPoint;               
 	}
 	
  	public function writeNCX(){
@@ -120,9 +139,20 @@ class navPoint
 	}
 	
 	public function writeNavPoint(){
-		foreach ($this->innerNavPoints as $navPoint) {
-			$innerNavPoints .=	$navPoint->writeNavPoint();
-		}
+                //XTEC ************ MODIFICAT - Check if is array to avoid warnings
+                //2015.05.25 @author - Josep Caballero
+                if(is_array($this->innerNavPoints)){
+                    foreach ($this->innerNavPoints as $navPoint) {
+			$innerNavPoints .= $navPoint->writeNavPoint();
+                    }
+                }
+                //************ ORIGINAL
+                /*
+                foreach ($this->innerNavPoints as $navPoint) {
+			$innerNavPoints .= $navPoint->writeNavPoint();
+                    }
+                */
+                //************ FI
 		return "\t\t<navPoint id=\"" . $this->getId() . "\" playOrder=\"" . $this->getPlayOrder() . "\">\n" .
 					"\t\t\t<navLabel>\n" .
 						"\t\t\t\t<text>" . $this->getNavLabel() . "</text>\n" .

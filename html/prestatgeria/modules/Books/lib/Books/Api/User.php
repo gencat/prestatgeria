@@ -1122,7 +1122,6 @@ class Books_Api_User extends Zikula_AbstractApi {
 
         // get book from database
         $bookrecord = DBUtil::selectObjectByID('books', $bookId, 'bookId');
-
         if ($bookrecord === false) {
             return LogUtil::registerError(_GETFAILED);
         }
@@ -1143,12 +1142,22 @@ class Books_Api_User extends Zikula_AbstractApi {
         // set prefix for the tables of the book
         $prefix = $bookrecord['schoolCode'] . '_' . $bookId;
 
-        $sql = 'SELECT site_title, opentext, openimage, abouttext, adminemail, showsearch, lang, theme, html_editor ' .
+        $sql = 'SELECT site_title,  opentext, openimage, abouttext, adminemail, showsearch, lang, theme, html_editor ' .
                 'FROM ' . $prefix . '_config';
-
         $rsBook = mysql_query($sql, $connect);
         Loader::RequireOnce("modules/Books/includes/Book.php");
+        
+        
+        //XTEC ************ MODIFICAT - Modified in order to get data from array in associative way
+        //2015.05.25 @author - Josep Caballero
+        $row = mysql_fetch_assoc($rsBook);
+        //************ ORIGINAL
+        /*
         $row = mysql_fetch_row($rsBook);
+        */
+        //************ FI
+
+        
         $book = new Book($bookId,
                         $bookrecord['schoolCode'],
                         $row['site_title'],
@@ -1161,7 +1170,6 @@ class Books_Api_User extends Zikula_AbstractApi {
                         $row['theme'],
                         $row['html_editor'],
                         $bookrecord['bookDescript']);
-
         // get chapters
         $sql = 'SELECT recno, name, openimage, opentext, permissions, notifyemail, entriespage, showname, showemail, showurl, showimage, formatpage ' .
                 'FROM ' . $prefix . '_contents ' .

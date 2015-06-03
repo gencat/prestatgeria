@@ -607,8 +607,18 @@ class ebookWrite {
     private function existInManifest($item) {
         $pass = false;
         foreach ($this->ebookData->manifestData as $manId) {
-            if ($item == (string) $manId->id)
-                $pass = true;
+            //XTEC ************ MODIFICAT - Needs to check element and child element 
+            //2015.05.25 @author - Josep Caballero
+            if ($item ==  $manId){
+                 $pass = true; 
+              }else if ($item ==  $manId->id){
+                  $pass = true; 
+              }
+            //************ ORIGINAL
+            /*
+            /*if ($item == (string) $manId->id)
+                $pass = true;*/
+            //************ FI 
         }
         return $pass;
     }
@@ -1511,7 +1521,7 @@ class ebookWrite {
      * */
     public function setSpine($spineId, $index = null) {
         if (is_array($spineId)) {
-            //varify that all the spine items exist in the manifest.
+            //varify that all the spine items exist in the manifest.       
             foreach ($spineId as $id) {
                 if (!$this->existInManifest($id))
                     trigger_error("" . $id . " does not exist in the manifest.", E_USER_ERROR);
