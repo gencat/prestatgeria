@@ -44,14 +44,14 @@ if($action == "search"){
 			$message .= "username: ".$myname." \n<br> ";
 			$message .= "password: ".$password_admin_t." \n<br> ";
 		}
-		$contactemail  = $adminemail;
-		$headers = "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-		$headers .= "From: ".$adminemail." <".$adminemail.">\r\n";
+//		$contactemail  = $adminemail;
+//		$headers = "MIME-Version: 1.0\r\n";
+//		$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+//		$headers .= "From: ".$adminemail." <".$adminemail.">\r\n";
 		$subject = _BOOKLOSTPASSWORD;
-		$headers .= "To: <".$email.">\r\n";
+//		$headers .= "To: <".$email.">\r\n";
 				
-        $mailconf = getEmailParamsFromZikula();
+        $mailconf = getEmailParamsFromZikula($mydatabase);
 
         $mailsender = new mailsender(
                 $mailconf['idApp'],
@@ -73,9 +73,15 @@ if($action == "search"){
                 );
 		
 		//Indiquem l'adreça del destinatari
-		$adr_desti = $top_r['notifyemail'];
+		//$adr_desti = $top_r['notifyemail'];
 		$msg->set_to($adminemail);			
-			
+
+        //XTEC ************ AFEGIT - Converts  from iso-8858-1 to utf-8
+        //2015.05.28 @Josep Caballero
+        $subject = iconv('ISO-8859-1', 'UTF-8', $subject);
+        $message = iconv('ISO-8859-1', 'UTF-8', $message);
+        //************ FI
+
 		//Asignem assumpte i cos del missatge
 		$msg->set_subject($subject);
 		$msg->set_bodyContent($message);
@@ -91,14 +97,13 @@ if($action == "search"){
 //				$intents = $intents + 1;
 //			}			
 		?>
-		<HTML>
-		<HEAD>
+		<html>
+		<head>
 		    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-			<TITLE></TITLE>
-		</HEAD>
+		</head>
 		<body bgcolor="#000000" background="themes/<?php echo $theme;?>/images/bkbook.gif" bgcolor="#ffffff" text="#664411" link="#996633" vlink="#996633" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0">
 			<br><br>
-			<?php echo _BOOKEMAILSENDTO;?> <?php echo $email;?> <?php echo _BOOKWITHTHEENTRYINFO;?>
+			<?php echo _BOOKEMAILSENDTO;?> <?php echo $adminemail;?> <?php echo _BOOKWITHTHEENTRYINFO;?>
 			<br><br><a href="login.php"><?php echo _BOOKHERETOLOGININ;?></a>
 		</body>
 		</html>
