@@ -1234,6 +1234,15 @@ class Books_Controller_User extends Zikula_AbstractController {
         Loader::RequireOnce('modules/Books/includes/Book.php');
 
         $book = ModUtil::apiFunc('Books', 'user', 'getBookById', array('bookId' => $bookId));
+        //XTEC ************ AFEGIT - Avoid export a book without chapters
+        //2015.06.04 @author - Josep Caballero
+        $arrayChapters=array_filter($book->getChapters());
+        if (empty($arrayChapters)) {
+            LogUtil::registerError('No es pot exportar un llibre sense capítols');
+            header("location:index.php");
+            die();
+        }
+        //************ FI
 
         if (!book)
             return LogUtil::registerError($this->__("No s'ha pogut exportar el llibre"));
@@ -1366,6 +1375,12 @@ class Books_Controller_User extends Zikula_AbstractController {
         copydir($tmp . '/book_images', $image_folder . '/' . $schoolCode . '_' . $bookId);
 
         chmod($image_folder . '/' . $schoolCode . '_' . $bookId, 0777);
+        //XTEC ************ AFEGIT - Avoid warning creating folder
+        //2015.06.04 @author - Josep
+        if(!is_dir($image_folder . '/' . $schoolCode . '_' . $bookId . '/.thumbs')){
+            mkdir($image_folder . '/' . $schoolCode . '_' . $bookId . '/.thumbs');
+        }
+        //************ FI
         chmod($image_folder . '/' . $schoolCode . '_' . $bookId . '/.thumbs', 0777);
 
         Loader::loadClass('FileUtil');
