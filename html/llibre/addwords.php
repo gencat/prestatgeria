@@ -190,8 +190,9 @@ if ($action == "doit"){
 
         //XTEC MULTIBOOKS
         if($approved=='Y'){
-            include_once ('../config/config_books.php');
-            include_once ('../config/xtecAPI.php');
+            include_once '../config/config_books.php';
+            include_once dirname(dirname(__FILE__)) . '/prestatgeria/config/config.php';
+            include_once '../config/xtecAPI.php';
             $book=explode('_',$prefix);
             $editLastEntryBook = editLastEntryBook($book[1]);
 

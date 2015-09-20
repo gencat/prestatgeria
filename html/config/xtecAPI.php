@@ -1,13 +1,5 @@
 <?php
 
-if (file_exists('../prestatgeria/config/config.php')) {
-    // Regular access
-    include_once '../prestatgeria/config/config.php';
-} else {
-    // Access from file manager
-    include_once '../../../../prestatgeria/config/config.php';
-}
-
 //Connect to data base
 function connect($db) {
     global $ZConfig;

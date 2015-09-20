@@ -199,7 +199,8 @@ if($errors == ""){
 	}
 	$mydatabase->sql_query($query);
 	//XTEC MULTIBOOKS
-		include_once('../config/xtecAPI.php');
+        include_once dirname(dirname(__FILE__)) . '/prestatgeria/config/config.php';
+		include_once '../config/xtecAPI.php';
         $book = explode('_',$prefix);
 		$editBook=editBook($book[1], $title, $lang_form);
 	//XTEC END?>

@@ -37,8 +37,9 @@ if ($what == _BOOKDELETE || $what1 == _BOOKDELETE){
 	$mydatabase->sql_query($query);
 	print _BOOKTHEPAGEHSBEENREMOVED;
 	//XTEC MULTIBOOKS
-        include('../config/config_books.php');
-		include_once('../config/xtecAPI.php');
+        include '../config/config_books.php';
+        include_once dirname(dirname(__FILE__)) . '/prestatgeria/config/config.php';
+		include_once '../config/xtecAPI.php';
 		$book=explode('_',$prefix);
        	//get schoolId
 	    $school = getSchool($book[0]);
@@ -170,8 +171,9 @@ if (($what == _BOOKUPDATE) || ($what == _BOOKVALIDATE) || ($what1 == _BOOKUPDATE
 	$mydatabase->sql_query($query);
 	print _BOOKPAGEUPDATEDRELOAD;
     //XTEC MULTIBOOKS
-        include('../config/config_books.php');
-		include_once('../config/xtecAPI.php');
+        include '../config/config_books.php';
+        include_once dirname(dirname(__FILE__)) . '/prestatgeria/config/config.php';
+		include_once '../config/xtecAPI.php';
 		$book=explode('_',$prefix);
         //$editLastEntryBook = editLastEntryBook($book[0]);
        	//get schoolId

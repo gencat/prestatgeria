@@ -1,7 +1,8 @@
 <?php
 
-include('../config/xtecAPI.php');
-include('../config/config_books.php');
+include_once dirname(dirname(__FILE__)) . '/prestatgeria/config/config.php';
+include_once dirname(dirname(__FILE__)) . '/config/xtecAPI.php';
+include_once dirname(dirname(__FILE__)) . '/config/config_books.php';
 
 //get book fisn
 $prefix = (isset($_GET['fisbn'])) ? $_GET['fisbn'] : '';

@@ -221,7 +221,8 @@ $IMConfig['allow_new_dir'] = false;
 * DEFAULT: for demo purposes we turn this off.
 */
 
-include_once('../../../../config/xtecAPI.php');
+include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/prestatgeria/config/config.php';
+include_once '../../../../config/xtecAPI.php';
 
 $userName=checkSession();
 include_once('../../../config.php');

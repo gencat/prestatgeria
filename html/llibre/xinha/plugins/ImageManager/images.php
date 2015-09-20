@@ -10,7 +10,8 @@ require_once('config.inc.php');
 require_once('ddt.php');
 require_once('Classes/ImageManager.php');
 
-include_once('../../../../config/xtecAPI.php');
+include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/prestatgeria/config/config.php';
+include_once '../../../../config/xtecAPI.php';
 
 $userName=checkSession();
 include_once('../../../config.php');
