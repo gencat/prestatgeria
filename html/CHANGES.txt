@@ -5,12 +5,18 @@ development home at https://github.com/projectestac/prestatgeria
 
 Changes in progress
 ---------------------------------------------------------------------------------------
+
+
+
+v15.09.25
+-------------------------------------------------------------
 - Fixed deprecated errors on set_magic_quotes_runtime
 - Added opcache control script
 - Fixed bugs in export Epub, Export XML, import XML.
 - Fixed conversion from iso ISO-8859-1 to utf-8 in mail sending
 - Abort exportation when chapters are empty and warn user
 - Create a thumbs directory if it doesn't exist
+
 
 v15.04.17
 -------------------------------------------------------------
