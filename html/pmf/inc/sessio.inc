@@ -14,3 +14,6 @@ session_start();
 if (!isset($_SESSION['validat']) ) {
     $_SESSION['validat'] = 0;
 }
+
+// @aginard: Fixes PHP E_STRICT error when uploading images in PMF application
+error_reporting(0);
