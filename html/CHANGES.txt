@@ -6,7 +6,7 @@ development home at https://github.com/projectestac/prestatgeria
 Changes in progress
 ---------------------------------------------------------------------------------------
 - PMF: Fixed PHP E_STRICT error when uploading images
-
+- apc.php: Removed script
 
 
 v15.09.25
