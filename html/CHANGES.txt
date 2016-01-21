@@ -7,6 +7,8 @@ Changes in progress
 ---------------------------------------------------------------------------------------
 - PMF: Fixed PHP E_STRICT error when uploading images
 - apc.php: Removed script
+- Activated https login
+- Mailer: Updated submodule
 
 
 v15.09.25
