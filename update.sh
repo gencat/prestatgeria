@@ -87,7 +87,7 @@ then
 fi
 
 #El tercer paràmetre només es posa si el repositori és nostre per poder-hi escriure
-gitcheckout "html/prestatgeria/modules/XtecMailer/includes/mailer" "master" "git@github.com:projectestac/mailer.git"
+gitcheckout "html/prestatgeria/modules/XtecMailer/includes/mailer" "FMO" "git@github.com:projectestac/mailer.git"
 gitcheckout "html/testlib" "master" "git@github.com:projectestac/testlib_PHP.git"
 
 echo "Garbage collecting..."
