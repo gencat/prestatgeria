@@ -9,6 +9,7 @@ Changes in progress
 - apc.php: Removed script
 - Activated https login
 - Mailer: Updated submodule
+- testapp: Updated submodule. Protected phpinfo with password
 
 
 v15.09.25

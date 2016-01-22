@@ -49,4 +49,31 @@ passthru("du -skh $dirroot/pmf/images/"); echo '<br /><br />';
 passthru("ls -l $dirroot/pmf/templates_c"); echo '<br />';
 passthru("du -skh $dirroot/pmf/templates_c/"); echo '<br /><br />';
 
-test_server();
+// Show phpinfo only if previously logged
+if (!isset($_SESSION['logged']) && ($_SESSION['logged'] != true)) {
+    global $agora;
+    define('ADMIN_USERNAME', 'testapp');
+    if (file_exists('../config/config-restricted.php')) {
+        include_once('../config/config-restricted.php');
+        define('ADMIN_PASSWORD', $agora['opcache']['password']);
+    } elseif (file_exists('../config-restricted.php')) {
+        include_once('../config-restricted.php');
+        define('ADMIN_PASSWORD', $agora['opcache']['password']);
+    }
+    if (isset($_POST['user']) && isset($_POST['pass']) && $_POST['user'] == ADMIN_USERNAME && $_POST['pass'] == ADMIN_PASSWORD) {
+        $_SESSION['logged'] = true;
+        test_server();
+    } else {
+        echo '
+            <h3>Log in to view PHP info</h3>
+            <form method="post" action="testapp.php">
+                Username: <input name="user" type="text" />
+                &nbsp;&nbsp;&nbsp;
+                Password: <input name="pass" type="password" />
+                <input type="submit" />
+            </form>
+        ';
+    }
+} else {
+    test_server();
+}
