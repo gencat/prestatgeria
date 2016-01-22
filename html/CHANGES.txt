@@ -5,6 +5,11 @@ development home at https://github.com/projectestac/prestatgeria
 
 Changes in progress
 ---------------------------------------------------------------------------------------
+
+
+
+v16.01.25
+-------------------------------------------------------------
 - PMF: Fixed PHP E_STRICT error when uploading images
 - apc.php: Removed script
 - Activated https login
