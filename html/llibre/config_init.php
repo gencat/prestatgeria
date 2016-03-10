@@ -21,10 +21,10 @@ $using_save_mode = ini_get('safe_mode');
 // It is better if you turn on register globals. 
 $register_globals = ini_get('register_globals');
 if($register_globals == 0){
-  extract($HTTP_GET_VARS);
-  extract($HTTP_POST_VARS);
-  extract($HTTP_COOKIE_VARS);    
-  foreach($HTTP_POST_FILES as $key => $value) {
+  extract($_GET);
+  extract($_POST);
+  extract($_COOKIE);    
+  foreach($_FILES as $key => $value) {
 	${$key.'_name'} = $value['name'];
 	${$key.'_size'} = $value['size'];
 	${$key.'_type'} = $value['type'];

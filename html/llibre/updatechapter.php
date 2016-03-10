@@ -157,9 +157,9 @@ if(md5($prefix.$password_admin) != $mypass){
 		$query = "UPDATE ".$prefix."_contents set permissions='$permissions' WHERE recno='$recno'";
 		$mydatabase->sql_query($query);
 
-		 // update user permissions.
-		while (list($key, $val) = each($HTTP_POST_VARS)) {                   
-			$array = split("_",$key);
+        // update user permissions.
+		while (list($key, $val) = each($_POST)) {                   
+			$array = explode('_',$key);
 			if( ($array[0] == "myaccess") && (($val != "")) ){
 				$query = "UPDATE ".$prefix."_access set myaccess='$val' WHERE recno='$array[1]' ";
 				$mydatabase->sql_query($query);
@@ -265,9 +265,9 @@ if(md5($prefix.$password_admin) != $mypass){
 		$mydatabase->sql_query($query);
   
 		// update user permissions.
-		while (list($key, $val) = each($HTTP_POST_VARS)) {
-			$array = split("_",$key);
-			if( ($array[0] == "myaccess") && (($val != "")) ){
+		while (list($key, $val) = each($_POST)) {
+			$array = explode('_', $key);
+            if( ($array[0] == "myaccess") && (($val != "")) ){
 				$query = "UPDATE ".$prefix."_access set myaccess='$val' WHERE recno='$array[1]' ";
 				$mydatabase->sql_query($query);
 			}
