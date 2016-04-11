@@ -5,6 +5,10 @@ development home at https://github.com/projectestac/prestatgeria
 
 Changes in progress
 ---------------------------------------------------------------------------------------
+
+
+v16.04.12
+-------------------------------------------------------------
 - works.php: Added check for data directory
 - Fixed update of permissions in book local users
 
