@@ -6,6 +6,9 @@ development home at https://github.com/projectestac/prestatgeria
 Changes in progress
 ---------------------------------------------------------------------------------------
 
+v20.10.23
+-------------------------------------------------------------
+- Comented code Provide https login using BigIP because not work in production index.php
 
 v16.11.21
 -------------------------------------------------------------
