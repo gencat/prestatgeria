@@ -299,15 +299,31 @@ class System
      */
     public static function getBaseUrl()
     {
+
         $server = self::serverGetVar('HTTP_HOST');
 
+        // XTEC ************ MODIFICAT - Get correct protocol
+        // 2020.11.02 @nacho
+
+        //************ ORIGINAL
         // IIS sets HTTPS=off
-        $https = self::serverGetVar('HTTPS', 'off');
+        /*$https = self::serverGetVar('HTTPS');
         if ($https != 'off') {
             $proto = 'https://';
         } else {
             $proto = 'http://';
+        }*/
+
+        if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on'
+                || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+        {
+            $proto = 'https://';
         }
+        else {
+            $proto = 'http://';
+        }
+        //************ FI
 
         $path = self::getBaseUri();
 
