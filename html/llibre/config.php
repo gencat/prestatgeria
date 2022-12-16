@@ -5,7 +5,7 @@ include_once dirname(dirname(__FILE__)) . '/config/xtecAPI.php';
 include_once dirname(dirname(__FILE__)) . '/config/config_books.php';
 
 //get book fisn
-$prefix = (isset($_GET['fisbn'])) ? $_GET['fisbn'] : '';
+$prefix = filter_var(isset($_GET['fisbn']) ? $_GET['fisbn'] : '', FILTER_SANITIZE_STRING);
 
 //Separem el prefix de la identita del llibre
 $book = explode('_', $prefix);
@@ -49,6 +49,8 @@ if ($register_globals == 0) {
         ${$key} = $value['tmp_name'];
     }
 }
+
+$section = filter_var($section, FILTER_SANITIZE_NUMBER_INT);
 
 $installed = true;
 
